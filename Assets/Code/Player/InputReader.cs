@@ -7,7 +7,7 @@ public class InputReader : MonoBehaviour
 {
     private Vector2 mousePosition;
     private bool leftMouseInput;
-
+    
     public void MousePosition(InputAction.CallbackContext context)
     {
         mousePosition = Camera.main.ScreenToWorldPoint(context.ReadValue<Vector2>());
