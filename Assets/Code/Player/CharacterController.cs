@@ -6,6 +6,7 @@ public class CharacterController : MonoBehaviour
 {
     private Rigidbody2D rb;
     private InputReader inputReader;
+    private SpriteRenderer sprite;
     Vector2 movementVector = Vector2.zero;
     Vector2 oldMousePosition = Vector2.zero;    
     bool changedPosition = false;
@@ -15,6 +16,7 @@ public class CharacterController : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        sprite = GetComponent<SpriteRenderer>();
         inputReader = GetComponent<InputReader>();
     }
 
@@ -37,6 +39,14 @@ public class CharacterController : MonoBehaviour
                 changedPosition = true;
             }
             rb.AddForce(movementVector * speed);
+            if (movementVector.x < 0f)
+            {
+                sprite.flipX = true;
+            }
+            else
+            {
+                sprite.flipX = false;
+            }
             Vector2 angleComparer = movementVector.y > 0 ? Vector2.right : Vector2.left;
             rb.rotation = Vector2.SignedAngle(Vector2.right, movementVector) - 90;
         }
