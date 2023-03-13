@@ -5,13 +5,8 @@ using UnityEngine;
 public class MapGenerator : MonoBehaviour
 {
     // Start is called before the first frame update
-    void Start()
+    public static int[,] GenerateMap(int mapWidth, int mapHeight, int roomCount, int minBottomWidth, int maxBottomWidth)
     {
-        int mapWidth = 9;
-        int mapHeight = 5;
-        int roomCount = 16;
-        int minBottomWidth = 1;
-        int maxBottomWidth = 2;
 
         bool[,] map = generateMapShape(mapWidth, mapHeight, roomCount,
                                         minBottomWidth, maxBottomWidth);
@@ -21,6 +16,7 @@ public class MapGenerator : MonoBehaviour
         }
         int[,] fancyMap = generateMapFromShape(map);
         drawMap(fancyMap);
+        return fancyMap;
     }
 
     // Update is called once per frame
@@ -28,7 +24,7 @@ public class MapGenerator : MonoBehaviour
     {
 
     }
-    bool[,] generateMapShape(int mapWidth, int mapHeight,
+    static bool[,] generateMapShape(int mapWidth, int mapHeight,
                      int roomCount, int minBottomWidth, int maxBottomWidth)
     {
         bool[,] map = new bool[mapHeight, mapWidth];
@@ -79,7 +75,7 @@ public class MapGenerator : MonoBehaviour
         
         return map;
     }
-    int getDeadEndCount(bool[,] map)
+    static int getDeadEndCount(bool[,] map)
     {
         int deadEndCount = 0;
         int mapWidth = map.GetLength(1);
@@ -113,7 +109,7 @@ public class MapGenerator : MonoBehaviour
         }
         return deadEndCount;
     }
-    int[,] generateMapFromShape(bool[,] map)
+    static int[,] generateMapFromShape(bool[,] map)
     {
         //0 = SEINÄ
 
@@ -325,7 +321,7 @@ public class MapGenerator : MonoBehaviour
         }
         return newMap;
     }
-    void drawMap(int [,] map)
+    static void drawMap(int [,] map)
     {
         string line = "";
         for (int i = 0; i < map.GetLength(0); i++) {
