@@ -60,6 +60,6 @@ public class EnemyMovement : MonoBehaviour
 
     private void OnCollisionEnter2D()
     {
-        Destroy(Player);
+      //  Destroy(Player);
     }
 }
