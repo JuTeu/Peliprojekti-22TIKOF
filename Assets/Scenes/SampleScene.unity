@@ -360,6 +360,7 @@ GameObject:
   - component: {fileID: 580889692}
   - component: {fileID: 580889691}
   - component: {fileID: 580889690}
+  - component: {fileID: 580889693}
   m_Layer: 0
   m_Name: shark
   m_TagString: Untagged
@@ -441,7 +442,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 580889687}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fd24d7539e87ca845bfbab3f1bdfc22e, type: 3}
   m_Name: 
@@ -487,6 +488,18 @@ CapsuleCollider2D:
   m_Offset: {x: 0.0087647885, y: -0.006028968}
   m_Size: {x: 0.67068005, y: 0.30643332}
   m_Direction: 1
+--- !u!114 &580889693
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 580889687}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbe6e597d743f6f40a9c167c4b50d4e4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &599447279
 GameObject:
   m_ObjectHideFlags: 0
@@ -588,7 +601,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 674621153}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -29.95, y: -0.05, z: 0}
+  m_LocalPosition: {x: -27.56, y: -0.06, z: 0}
   m_LocalScale: {x: 2.724997, y: 2.8007765, z: 2.3461018}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -619,7 +632,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 865733527}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -22.74, y: -0.03, z: 0}
+  m_LocalPosition: {x: -25.81, y: -0.05, z: 0}
   m_LocalScale: {x: 2.724997, y: 2.8007765, z: 2.3461018}
   m_ConstrainProportionsScale: 0
   m_Children: []
