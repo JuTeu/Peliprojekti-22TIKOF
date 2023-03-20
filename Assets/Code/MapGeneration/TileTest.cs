@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using UnityEngine.SceneManagement;
 //using MapGenerator;
 
 public class TileTest : MonoBehaviour
@@ -9,9 +10,21 @@ public class TileTest : MonoBehaviour
     [SerializeField] private Tilemap rooms;
     [SerializeField] private Tilemap map;
     [SerializeField] private Vector2 startRoomPosition;
+    Tilemap roomssssssssss;
     // Start is called before the first frame update
     void Start()
     {
+        StartCoroutine(BuildMap("SampleRooms"));
+    }
+    IEnumerator BuildMap(string rooms)
+    {
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(rooms, LoadSceneMode.Additive);
+        while (!asyncLoad.isDone)
+        {
+            yield return null;
+        }
+        GameObject toimi = GameObject.Find("Rooms");
+        roomssssssssss = toimi.GetComponent<Tilemap>();
         int mapWidth = 9;
         int mapHeight = 5;
         int roomCount = 16;
@@ -28,7 +41,7 @@ public class TileTest : MonoBehaviour
                 PlaceRoom(j, i * -1, generatedMap[i, j]);
             }
         }
-
+        SceneManager.UnloadSceneAsync(rooms);
         int huone = Random.Range(0, 15);
         map.RefreshAllTiles();
     }
@@ -36,7 +49,7 @@ public class TileTest : MonoBehaviour
     {
         BoundsInt roomPosition = new BoundsInt(new Vector3Int(12 * x + ((int) startRoomPosition.x / 2), 12 * y + ((int) startRoomPosition.y), 0), size: new Vector3Int(12, 12, 1));
         BoundsInt roomSelection = new BoundsInt(new Vector3Int(0, 12 * tile + tile, 0), size: new Vector3Int(12, 12, 1));
-        TileBase[] room = rooms.GetTilesBlock(roomSelection);
+        TileBase[] room = roomssssssssss.GetTilesBlock(roomSelection);
         map.SetTilesBlock(roomPosition, room);
     }
     // Update is called once per frame
