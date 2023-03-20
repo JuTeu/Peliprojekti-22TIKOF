@@ -1,30 +1,43 @@
 using System.Collections;
 using System.Collections.Generic;
+using System;
 using UnityEngine;
 
-public class MapGenerator : MonoBehaviour
+public class MapGenerator
 {
-    // Start is called before the first frame update
-    public static int[,] GenerateMap(int mapWidth, int mapHeight, int roomCount, int minBottomWidth, int maxBottomWidth)
+    private int[,] mapArray = new int[,] {};
+    private int deadEndCount = 0;
+    private List<int[]> deadEndPositions = new List<int[]>();
+    
+    public int[,] GetMap()
     {
-
+        return mapArray;
+    }
+    public int GetDeadEndCount()
+    {
+        return deadEndCount;
+    }
+    public List<int[]> GetDeadEndPositions()
+    {
+        return deadEndPositions;
+    }
+    public void GenerateMap(int mapWidth, int mapHeight, int roomCount, int minBottomWidth, int maxBottomWidth)
+    {
+        if (mapArray.Length > 0)
+        {
+            Array.Clear(mapArray, 0, mapArray.Length - 1);
+        }
         bool[,] map = generateMapShape(mapWidth, mapHeight, roomCount,
                                         minBottomWidth, maxBottomWidth);
-        while (getDeadEndCount(map) < 4) {
+        while (deadEndCount < 4) {
             map = generateMapShape(mapWidth, mapHeight, roomCount,
                                    minBottomWidth, maxBottomWidth);
         }
         int[,] fancyMap = generateMapFromShape(map);
         drawMap(fancyMap);
-        return fancyMap;
+        mapArray = fancyMap;
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-    static bool[,] generateMapShape(int mapWidth, int mapHeight,
+    bool[,] generateMapShape(int mapWidth, int mapHeight,
                      int roomCount, int minBottomWidth, int maxBottomWidth)
     {
         bool[,] map = new bool[mapHeight, mapWidth];
@@ -49,9 +62,9 @@ public class MapGenerator : MonoBehaviour
                     currentRoomCount++;
                     map[carverPos[0], carverPos[1]] = true;
                 }
-                direction = (int) (Random.Range(0, 2));
+                direction = (int) (UnityEngine.Random.Range(0, 2));
                 int mapSize = direction == 1 ? mapWidth : mapHeight;
-                carverPos[direction] = (Random.Range(0, 2)) < 1
+                carverPos[direction] = (UnityEngine.Random.Range(0, 2)) < 1
                                        ? carverPos[direction] - 1
                                        : carverPos[direction] + 1;
                 
@@ -72,15 +85,12 @@ public class MapGenerator : MonoBehaviour
             }
 
         } while (!validBottom);
-        
-        return map;
-    }
-    static int getDeadEndCount(bool[,] map)
-    {
-        int deadEndCount = 0;
-        int mapWidth = map.GetLength(1);
-        int mapHeight = map.GetLength(0);
-
+        int newDeadEndCount = 0;
+        /*if (deadEndPositions.Length > 0)
+        {
+            Array.Clear(deadEndPositions, 0, deadEndPositions.Length - 1);
+        }*/
+        deadEndPositions.Clear();
         for (int i = 0; i < mapHeight - 1; i++) {
             for (int j = 0; j < mapWidth; j++) {
                 int openSide = 0;
@@ -102,12 +112,14 @@ public class MapGenerator : MonoBehaviour
                         openSide = map[i + 1, j] ? openSide + 1 : openSide;
                     }
                     if (openSide <= 1) {
-                        deadEndCount++;
+                        deadEndPositions.Add(new int[2] {i, j});
+                        newDeadEndCount++;
                     }
                 }
             }
         }
-        return deadEndCount;
+        deadEndCount = newDeadEndCount;
+        return map;
     }
     static int[,] generateMapFromShape(bool[,] map)
     {

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
-using static MapGenerator;
+//using MapGenerator;
 
 public class TileTest : MonoBehaviour
 {
@@ -17,7 +17,9 @@ public class TileTest : MonoBehaviour
         int roomCount = 16;
         int minBottomWidth = 1;
         int maxBottomWidth = 2;
-        int[,] generatedMap = MapGenerator.GenerateMap(mapWidth, mapHeight, roomCount, minBottomWidth, maxBottomWidth);
+        MapGenerator mapGenerator = new MapGenerator();
+        mapGenerator.GenerateMap(mapWidth, mapHeight, roomCount, minBottomWidth, maxBottomWidth);
+        int[,] generatedMap = mapGenerator.GetMap();
         
         for (int i = 0; i < generatedMap.GetLength(0); i++)
         {
