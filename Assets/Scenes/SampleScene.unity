@@ -668,7 +668,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 319a4496b7a0d224cb059ed152978726, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rooms: {fileID: 1969889290}
   map: {fileID: 1044587584}
   startRoomPosition: {x: -109, y: -30}
 --- !u!4 &977277823
