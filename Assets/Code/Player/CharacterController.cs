@@ -54,5 +54,31 @@ public class CharacterController : MonoBehaviour
         {
             changedPosition = false;
         }
+
+        DevCamToggle();
+    }
+
+    bool preventDoubleInputK = false;
+    void DevCamToggle()
+    {
+        if (preventDoubleInputK && inputReader.GetK())
+        {
+            CameraMovement cameraObject = GameObject.Find("Main Camera").GetComponent<CameraMovement>();
+            if (cameraObject.devCam)
+            {
+                cameraObject.devCam = false;
+            }
+            else
+            {
+                cameraObject.devCam = true;
+            }
+            Debug.Log("Kehittäjä kamera: " + cameraObject.devCam);
+            preventDoubleInputK = false;
+        }
+        else if (!inputReader.GetK())
+        {
+            preventDoubleInputK = true;
+        }
+
     }
 }

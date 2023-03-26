@@ -8,6 +8,8 @@ public class MapGenerator
     private int[,] mapArray = new int[,] {};
     private int deadEndCount = 0;
     private List<int[]> deadEndPositions = new List<int[]>();
+    private int startRoomXPosition = 0;
+    private int endRoomXPosition = 0;
     
     public int[,] GetMap()
     {
@@ -35,6 +37,8 @@ public class MapGenerator
         }
         int[,] fancyMap = generateMapFromShape(map);
         drawMap(fancyMap);
+
+
         mapArray = fancyMap;
     }
     bool[,] generateMapShape(int mapWidth, int mapHeight,
@@ -47,11 +51,13 @@ public class MapGenerator
                               && mapHeight + minBottomWidth - 1 <= roomCount 
                               && roomCount < mapWidth * mapHeight -
                               (mapWidth - maxBottomWidth) + 1 ? false : true;
+        int bottomRoomCount = 0;
+        startRoomXPosition = mapWidth / 2;
         do {
             int[] carverPos = {0, mapWidth / 2};
             int currentRoomCount = 0;
             int direction = 0;
-            int bottomRoomCount = 0;
+            bottomRoomCount = 0;
             for (int i = 0; i < mapHeight; i++) {
                 for (int j = 0; j < mapWidth; j++) {
                     map[i, j] = false;
@@ -85,13 +91,30 @@ public class MapGenerator
             }
 
         } while (!validBottom);
+
+        if (bottomRoomCount > 0)
+        {
+            bool endRoomFound = false;
+            int endRoomFoundIterations = 0;
+            while (!endRoomFound)
+            {
+                int endRoom = startRoomXPosition + (int)(((int)(endRoomFoundIterations / 2)) * Mathf.Pow(-1, endRoomFoundIterations));
+                endRoomFoundIterations++;
+                if (map[mapHeight - 1, endRoom] == true)
+                {
+                    endRoomXPosition = endRoom;
+                    endRoomFound = true;
+                }
+            }
+        }
+
         int newDeadEndCount = 0;
         /*if (deadEndPositions.Length > 0)
         {
             Array.Clear(deadEndPositions, 0, deadEndPositions.Length - 1);
         }*/
         deadEndPositions.Clear();
-        for (int i = 0; i < mapHeight - 1; i++) {
+        for (int i = 0; i < mapHeight; i++) {
             for (int j = 0; j < mapWidth; j++) {
                 int openSide = 0;
                 if (map[i, j] == true) {
@@ -111,7 +134,7 @@ public class MapGenerator
                     if (!bottom) {
                         openSide = map[i + 1, j] ? openSide + 1 : openSide;
                     }
-                    if (openSide <= 1) {
+                    if (openSide <= 1 && !(i == 0 && j == startRoomXPosition) && !(i == mapHeight - 1 && j == endRoomXPosition)) {
                         deadEndPositions.Add(new int[2] {i, j});
                         newDeadEndCount++;
                     }
