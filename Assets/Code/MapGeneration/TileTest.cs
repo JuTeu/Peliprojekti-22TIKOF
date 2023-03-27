@@ -21,7 +21,6 @@ public class TileTest : MonoBehaviour
     Tilemap rooms;
     Camera mainCamera;
 
-    // Start is called before the first frame update
     void Start()
     {
         mainCamera = Camera.main;
@@ -90,7 +89,6 @@ public class TileTest : MonoBehaviour
         map.RefreshAllTiles();
         //map.CompressBounds();
         GameManager.levelBounds = map.localBounds;
-        Debug.Log(GameManager.levelBounds);
         float cameraHeight = mainCamera.orthographicSize;
         float cameraWidth = cameraHeight * mainCamera.aspect;
         float cameraMinX = GameManager.levelBounds.min.x + cameraWidth;
@@ -98,11 +96,9 @@ public class TileTest : MonoBehaviour
         float cameraMinY = GameManager.levelBounds.min.y + cameraHeight;
         // Tää ei toimi niinkuin sen pitäisi jos tän yrittää tehdä kunnolla. Kentän yläraja pysyy aina samana niin ihan sama, kovakoodaan sen.
         float cameraMaxY = -18 - cameraHeight;
-        //cameraMaxY = GameManager.levelBounds.extents.y + GameManager.levelBounds.min.y + cameraHeight * 3;
         CameraMovement cameraObject = GameObject.Find("Main Camera").GetComponent<CameraMovement>();
         cameraObject.cameraBounds = new Bounds();
         cameraObject.cameraBounds.SetMinMax(new Vector3(cameraMinX, cameraMinY, -10), new Vector3(cameraMaxX, cameraMaxY, -10));
-        Debug.Log(cameraObject.cameraBounds);
     }
     void PlaceRoom(int x, int y, int tile)
     {
