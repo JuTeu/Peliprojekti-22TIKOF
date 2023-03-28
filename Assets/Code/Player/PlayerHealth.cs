@@ -1,26 +1,35 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerHealth : MonoBehaviour
 {
-    public int health;    //mittaa pelaajan nykyista healthia
-    public int maxHealth = 10;  //paljonko max health on
+    public Image healthBar;
+    public float healthAmount = 100f;    
+  
 
     // Start is called before the first frame update
     void Start()
     {
-        health = maxHealth;  //pelin alussa taytyy tietenkin olla max health
+       
     }
 
-    public void TakeDamage(int amount) //tata funktioo kutsutaan aina kun pelaaja ottaa damagee. Amount = kuinka paljon damagee
+    public void TakeDamage(float damage) 
     {
-        health -= amount;
-        if(health <= 0)          //jos health on alle 0, pelaaja tuhotaan
+        healthAmount -= damage;
+        healthBar.fillAmount = healthAmount / 100f;
+        if(healthAmount <= 0)         
         {
             Destroy (gameObject);            
         }
     }
+    public void Heal(float healingAmount)
+    {
+        healthAmount += healingAmount;
+        healthAmount = Mathf.Clamp(healthAmount, 0, 100);
 
+        healthBar.fillAmount = healthAmount / 100f;
+    }
 
 }
