@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c5fb90b21219243489728a7cff9110f9, type: 3}
+  m_Name: QuestionData
+  m_EditorClassIdentifier: 
+  questions:
+  - questionInfo: "Ty\xF6haastattelussa kysyt\xE4\xE4n heikkouksiasi, mit\xE4 vastaat?"
+    options:
+    - "Vastaan ettei heikkouksia ole. Olen t\xE4ydellinen ty\xF6ntekij\xE4."
+    - "Mietin pitk\xE4\xE4n, panikoin ja en keksi mit\xE4\xE4n. "
+    - Vastaan kattavasti ja rehellisesti, koska valmistauduin kysymyksiin aiemmin.
+    correctAns: Vastaan kattavasti ja rehellisesti, koska valmistauduin kysymyksiin
+      aiemmin.
+  - questionInfo: "Pomo kysyy, haluatko palkkasi verottomana. Mit\xE4 vastaat?"
+    options:
+    - "Vastaan \u201CSe sopii hyvin\u201D. "
+    - "Vastaan \u201CEi k\xE4y!\u201D ja ilmoitan veroviranomaisille."
+    - "Hetken mietinn\xE4n j\xE4lkeen kielt\xE4ydyn ja j\xE4t\xE4n asian siihen. "
+    correctAns: "Vastaan \u201CEi k\xE4y!\u201D ja ilmoitan veroviranomaisille."
+  - questionInfo: "Saat t\xF6it\xE4. Mit\xE4 sinun t\xE4ytyy muistaa ty\xF6sopimusta
+      allekirjoittaessa?"
+    options:
+    - "Nimi \xE4kki\xE4 paperiin ja kotiin pelaamaan nitee "
+    - "Tarkastan, ett\xE4 palkkani on varmasti kelvollinen. "
+    - "Luen sopimuksen l\xE4pi huolellisesti ja tarkastan ehdot."
+    correctAns: "Luen sopimuksen l\xE4pi huolellisesti ja tarkastan ehdot."
