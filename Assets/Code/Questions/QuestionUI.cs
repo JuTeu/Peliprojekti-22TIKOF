@@ -9,6 +9,7 @@ public class QuestionUI : MonoBehaviour
     [SerializeField] private QuestionManager questionManager;
     [SerializeField] private TextMeshProUGUI questionText;
     [SerializeField] private List<Button> options;
+    [SerializeField] private Color correctCol, wrongCol, normalCol;
 
     private Question question;
     private bool answered;
@@ -34,6 +35,7 @@ public class QuestionUI : MonoBehaviour
         {
             options[i].GetComponentInChildren<TextMeshProUGUI>().text = answerList[i];
             options[i].name = answerList[i];
+            options[i].image.color = normalCol;
         }
         answered = false;
     }
@@ -44,6 +46,15 @@ public class QuestionUI : MonoBehaviour
         {
             answered=true;
             bool val = questionManager.Answer(btn.name);
+
+            if(val)
+            {
+                btn.image.color = correctCol;
+            }
+            else
+            {
+                btn.image.color = wrongCol;
+            }
         }
     }
 }
