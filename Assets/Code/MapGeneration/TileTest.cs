@@ -43,6 +43,7 @@ public class TileTest : MonoBehaviour
             minBottomWidth = 1;
             maxBottomWidth = 2;
         }
+        GameManager.roomsSceneNoLongerLoaded = false;
         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(roomsScene, LoadSceneMode.Additive);
         while (!asyncLoad.isDone)
         {
@@ -85,7 +86,12 @@ public class TileTest : MonoBehaviour
                 PlaceRoom(j, i * -1, generatedMap[i, j]);
             }
         }
-        SceneManager.UnloadSceneAsync(roomsScene);
+        asyncLoad = SceneManager.UnloadSceneAsync(roomsScene);
+        while (!asyncLoad.isDone)
+        {
+            yield return null;
+        }
+        GameManager.roomsSceneNoLongerLoaded = true;
         map.RefreshAllTiles();
         //map.CompressBounds();
         GameManager.levelBounds = map.localBounds;
