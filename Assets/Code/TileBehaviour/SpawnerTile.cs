@@ -18,7 +18,6 @@ public class SpawnerTile : Tile
         {
 #endif
 
-        Debug.Log("Wautsi!!!");
         Vector3 prefabPosition = tilemap.GetComponent<Tilemap>().CellToWorld(position);
         prefabPosition.x += 0.5f;
         prefabPosition.y += 0.5f;
