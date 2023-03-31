@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 guid: a9e4d37a7cf010f4190d9cfc6265162f
+=======
+guid: 474e1b4d0293f9f5fb04cce6ffcf1cc0
+>>>>>>> f427b0a (Nyt on toimiva pakastin)
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -113,6 +117,21 @@ TextureImporter:
     overridden: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+<<<<<<< HEAD
+=======
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+>>>>>>> f427b0a (Nyt on toimiva pakastin)
   spriteSheet:
     serializedVersion: 2
     sprites: []

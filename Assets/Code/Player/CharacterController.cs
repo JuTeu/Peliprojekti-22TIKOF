@@ -23,6 +23,7 @@ public class CharacterController : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        if (!GameManager.playerInControl) return;
         if (inputReader.GetLeftMouse())
         {
             //transform.position = Vector2.MoveTowards(transform.position, inputReader.GetMousePosition(), speed * Time.fixedDeltaTime);

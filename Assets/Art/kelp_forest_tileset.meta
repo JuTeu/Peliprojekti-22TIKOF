@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 guid: 4b158915462e7f244b77d431f394972d
+=======
+guid: a2c86247e1e6e6bb4850b883dda9356c
+>>>>>>> f427b0a (Nyt on toimiva pakastin)
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}
