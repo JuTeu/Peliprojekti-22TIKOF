@@ -22,6 +22,14 @@ public class QuestionManager : MonoBehaviour
         selectedQuestion = questions[val];
 
         questionUI.SetQuestion(selectedQuestion);
+        if (GameManager.newQuestion)
+        {
+            GameManager.newQuestion = false;
+        }
+        else
+        {
+            GameManager.CloseQuestionMenu();
+        }
     }
 
     public bool Answer(string answered)
@@ -31,11 +39,13 @@ public class QuestionManager : MonoBehaviour
         if(answered == selectedQuestion.correctAns)
         {
             correctAns = true;
+            GameManager.correctAnswers++;
         }
         else
         {
 
         }
+        GameManager.questionsAnswered++;
 
         Invoke("SelectQuestion", 0.4f);
 

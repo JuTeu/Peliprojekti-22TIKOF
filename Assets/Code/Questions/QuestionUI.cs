@@ -14,7 +14,6 @@ public class QuestionUI : MonoBehaviour
     private Question question;
     private bool answered;
 
-    // Start is called before the first frame update
     void Awake()
     {
         for(int i = 0; i < options.Count; i++)

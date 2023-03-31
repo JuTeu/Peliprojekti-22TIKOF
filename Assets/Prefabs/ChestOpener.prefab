@@ -261,6 +261,7 @@ MonoBehaviour:
   Chest: {fileID: 2834168805101078181}
   ChestAnimated: {fileID: 2834168806621896374}
   Paper: {fileID: 2834168804719802148}
+  QuestionBG: {fileID: 0}
 --- !u!1 &2834168806621896374
 GameObject:
   m_ObjectHideFlags: 0
