@@ -92,6 +92,7 @@ public class RefrigeratorBehaviour : MonoBehaviour
             GetComponent<SpriteRenderer>().sprite = bodyOff;
             door.transform.RotateAround(hinge, Vector3.up, 25f);
             playerEntered = false;
+            playerRigidbody.velocity = new Vector2(0.1f, 0.1f);
             GameManager.playerInControl = true;
             effectSprite.color = new Color(1f, 1f, 1f, 0f);
             doorSprite.sortingOrder = -1;
