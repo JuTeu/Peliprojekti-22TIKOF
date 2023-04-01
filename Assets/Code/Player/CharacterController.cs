@@ -8,8 +8,10 @@ public class CharacterController : MonoBehaviour
     private InputReader inputReader;
     private SpriteRenderer sprite;
     Vector2 movementVector = Vector2.zero;
-    Vector2 oldMousePosition = Vector2.zero;    
-    bool changedPosition = false;
+    Vector2 oldPosition = Vector2.zero;    
+    private bool changedPosition = false;
+    private bool touchReleased = false;
+    private bool stoppedBecauseButton = false;
     [SerializeField] float speed = 1;
 
     // Start is called before the first frame update
@@ -20,22 +22,36 @@ public class CharacterController : MonoBehaviour
         inputReader = GetComponent<InputReader>();
     }
 
-    // Update is called once per frame
+    Vector2 GetPressedPosition()
+    {
+        return inputReader.GetMousePosition();
+    }
+
+    bool GetBeingPressed()
+    {
+        return inputReader.GetLeftMouse();
+    }
+
     void FixedUpdate()
     {
         if (!GameManager.playerInControl) return;
-        if (inputReader.GetLeftMouse())
+
+
+        if (GetBeingPressed())
         {
-            //transform.position = Vector2.MoveTowards(transform.position, inputReader.GetMousePosition(), speed * Time.fixedDeltaTime);
-            
-            if (oldMousePosition != inputReader.GetMousePosition())
+            if (touchReleased && CheckIfPauseButtonIsBeingPressed()) stoppedBecauseButton = true;
+            else if (touchReleased) stoppedBecauseButton = false;
+            touchReleased = false;
+            if (stoppedBecauseButton) return;
+
+            if (oldPosition != GetPressedPosition())
             {
                 changedPosition = false;
-                oldMousePosition = inputReader.GetMousePosition();
+                oldPosition = GetPressedPosition();
             }
             if (!changedPosition)
             {
-                movementVector = inputReader.GetMousePosition() - rb.position;
+                movementVector = GetPressedPosition() - rb.position;
                 movementVector = movementVector.normalized;
                 changedPosition = true;
             }
@@ -54,9 +70,15 @@ public class CharacterController : MonoBehaviour
         else
         {
             changedPosition = false;
+            touchReleased = true;
         }
 
         DevCamToggle();
+    }
+    bool CheckIfPauseButtonIsBeingPressed()
+    {
+        // En tiedä miten tämä pitäisi tehdä...
+        return false;
     }
 
     bool preventDoubleInputK = false;

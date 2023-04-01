@@ -43,6 +43,7 @@ public class RefrigeratorBehaviour : MonoBehaviour
             playerHealth = player.GetComponent<PlayerHealth>();
             playerEntered = true;
             GameManager.playerInControl = false;
+            GameManager.EnablePauseButton(false);
         }
     }
     void FixedUpdate()
@@ -94,6 +95,7 @@ public class RefrigeratorBehaviour : MonoBehaviour
             playerEntered = false;
             playerRigidbody.velocity = new Vector2(0.1f, 0.1f);
             GameManager.playerInControl = true;
+            GameManager.EnablePauseButton(true);
             effectSprite.color = new Color(1f, 1f, 1f, 0f);
             doorSprite.sortingOrder = -1;
         }

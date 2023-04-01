@@ -20,6 +20,7 @@ public class TileTest : MonoBehaviour
     [SerializeField] private Vector2 startRoomPosition;
     Tilemap rooms;
     Camera mainCamera;
+    int chestRoomTotal = 0;
 
     void Start()
     {
@@ -28,6 +29,7 @@ public class TileTest : MonoBehaviour
     }
     IEnumerator BuildMap(int mapNum)
     {
+        chestRoomTotal = 0;
         string roomsScene = "SampleRooms";
         int mapWidth = 9;
         int mapHeight = 5;
@@ -94,6 +96,8 @@ public class TileTest : MonoBehaviour
         GameManager.roomsSceneNoLongerLoaded = true;
         map.RefreshAllTiles();
         //map.CompressBounds();
+
+        GameObject.Find("PaperCount").GetComponent<UIPaperCount>().SetTotalPapers(chestRoomTotal);
         GameManager.levelBounds = map.localBounds;
         float cameraHeight = mainCamera.orthographicSize;
         float cameraWidth = cameraHeight * mainCamera.aspect;
@@ -126,6 +130,7 @@ public class TileTest : MonoBehaviour
             //roomSelection = new BoundsInt(new Vector3Int(0, 0, 0), size: new Vector3Int(12, 12, 1));
             randomNumber = Random.Range(0, chestRooms[tile].Count);
             roomSelection = new BoundsInt(new Vector3Int(12 * chestRooms[tile][randomNumber] + chestRooms[tile][randomNumber], 12 * tile + tile, 0), size: new Vector3Int(12, 12, 1));
+            chestRoomTotal++;
         }
         else
         {

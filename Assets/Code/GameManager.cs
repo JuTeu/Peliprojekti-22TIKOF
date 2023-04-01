@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -23,11 +24,35 @@ public class GameManager : MonoBehaviour
     {
         playerInControl = false;
         newQuestion = true;
+        EnablePauseButton(false);
         SceneManager.LoadSceneAsync("QuestionMenu", LoadSceneMode.Additive);
     }
+
     public static void CloseQuestionMenu()
     {
         playerInControl = true;
+        EnablePauseButton(true);
         SceneManager.UnloadSceneAsync("QuestionMenu");
+        GameObject.Find("PaperCount").GetComponent<UIPaperCount>().CollectedPapers(1);
+    }
+
+    public void OpenPauseMenu()
+    {
+        playerInControl = false;
+        EnablePauseButton(false);
+        SceneManager.LoadSceneAsync("PauseMenu", LoadSceneMode.Additive);
+    }
+
+    public static void ClosePauseMenu()
+    {
+        playerInControl = true;
+        EnablePauseButton(true);
+        SceneManager.UnloadSceneAsync("PauseMenu");
+    }
+
+    public static void EnablePauseButton(bool toggle)
+    {
+        //GameObject.Find("PauseButton").GetComponent<EnableDisableChild>().Enable(toggle);
+        GameObject.Find("PauseButton").GetComponent<Button>().interactable = toggle;
     }
 }

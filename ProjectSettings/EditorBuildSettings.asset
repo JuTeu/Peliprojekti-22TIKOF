@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/QuestionMenu.unity
     guid: 613415db4651a9638ab60ac9cbecbac1
+  - enabled: 1
+    path: Assets/Scenes/PauseMenu.unity
+    guid: f10b8460f08a015bbbe6527f020bef65
   m_configObjects: {}
