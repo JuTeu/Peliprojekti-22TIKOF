@@ -46,6 +46,8 @@ public class QuestionManager : MonoBehaviour
 
         }
         GameManager.questionsAnswered++;
+        GameManager.questionsAnsweredTotal++;
+        GameObject.Find("PaperCount").GetComponent<UIPaperCount>().CollectedPapers(1);
 
         Invoke("SelectQuestion", 0.4f);
 

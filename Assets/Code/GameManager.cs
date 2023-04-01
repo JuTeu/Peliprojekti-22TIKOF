@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour
     public static bool roomsSceneNoLongerLoaded = true;
     public static bool playerInControl = true;
     public static int chestsInLevel = 0;
-    public static int questionsAnswered = 0;
+    public static int questionsAnswered, questionsAnsweredTotal = 0;
     public static int correctAnswers = 0;
     public static bool newQuestion;
 
@@ -33,7 +33,6 @@ public class GameManager : MonoBehaviour
         playerInControl = true;
         EnablePauseButton(true);
         SceneManager.UnloadSceneAsync("QuestionMenu");
-        GameObject.Find("PaperCount").GetComponent<UIPaperCount>().CollectedPapers(1);
     }
 
     public void OpenPauseMenu()
