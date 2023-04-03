@@ -18,10 +18,16 @@ public class SpawnerTile : Tile
         {
 #endif
 
-        Vector3 prefabPosition = tilemap.GetComponent<Tilemap>().CellToWorld(position);
-        prefabPosition.x += 0.5f;
-        prefabPosition.y += 0.5f;
-        Instantiate(prefab, prefabPosition, Quaternion.identity);
+        if (tilemap.GetTile(position) != null)
+        {
+            Vector3 prefabPosition = tilemap.GetComponent<Tilemap>().CellToWorld(position);
+            prefabPosition.x += 0.5f;
+            prefabPosition.y += 0.5f;
+            Instantiate(prefab, prefabPosition, Quaternion.identity);
+            //tilemap.GetComponent<Tilemap>().SetTile(position, null);
+            GameManager.spawnerTiles.Add(position);
+        }
+        
 
 #if UNITY_EDITOR
         }

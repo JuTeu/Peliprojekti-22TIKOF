@@ -33,6 +33,13 @@ public class MapGeneratorGameObject : MonoBehaviour
     }
     IEnumerator BuildMap(int mapNum)
     {
+        GameObject[] spawnedObjects = GameObject.FindGameObjectsWithTag("SpawnedObject");
+        foreach(GameObject spawnedObject in spawnedObjects)
+        {
+            GameObject.Destroy(spawnedObject);
+            Debug.Log("AAA");
+        }
+
         chestRoomTotal = 0;
         string roomsScene = "SampleRooms";
         int mapWidth = 9;
@@ -100,6 +107,13 @@ public class MapGeneratorGameObject : MonoBehaviour
         GameManager.roomsSceneNoLongerLoaded = true;
         map.RefreshAllTiles();
         //map.CompressBounds();
+
+        List<Vector3Int> spawnerTiles = GameManager.spawnerTiles;
+        for (int i = 0; i < GameManager.spawnerTiles.Count; i++)
+        {
+            map.SetTile(GameManager.spawnerTiles[i], null);
+        }
+        GameManager.spawnerTiles.Clear();
 
         GameObject.Find("PaperCount").GetComponent<UIPaperCount>().SetTotalPapers(chestRoomTotal);
         GameManager.levelBounds = map.localBounds;
