@@ -444,7 +444,7 @@ GameObject:
   - component: {fileID: 3059774747567265980}
   m_Layer: 0
   m_Name: Refrigerator
-  m_TagString: Untagged
+  m_TagString: SpawnedObject
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

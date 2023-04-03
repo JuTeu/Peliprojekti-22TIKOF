@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
     public static int questionsAnswered, questionsAnsweredTotal = 0;
     public static int correctAnswers = 0;
     public static bool newQuestion;
+    public static List<Vector3Int> spawnerTiles = new List<Vector3Int>();
 
     void Awake()
     {
@@ -51,7 +52,7 @@ public class GameManager : MonoBehaviour
 
     public static void GenerateMap(int mapNum)
     {
-        GameObject.Find("");
+        GameObject.Find("MapGenerator").GetComponent<MapGeneratorGameObject>().GenerateMap(mapNum);
     }
     public static void EnablePauseButton(bool toggle)
     {

@@ -197,7 +197,7 @@ GameObject:
   - component: {fileID: 2834168805937610379}
   m_Layer: 0
   m_Name: ChestOpener
-  m_TagString: Chest
+  m_TagString: SpawnedObject
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

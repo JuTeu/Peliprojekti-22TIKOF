@@ -25,6 +25,7 @@ public class PauseMenuBehaviour : MonoBehaviour
     public void RegenMap()
     {
         Debug.Log("Wautsi");
+        GameManager.GenerateMap(-1);
     }
     void FixedUpdate()
     {
