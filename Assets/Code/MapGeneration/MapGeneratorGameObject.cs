@@ -112,7 +112,6 @@ public class MapGeneratorGameObject : MonoBehaviour
         for (int i = 0; i < GameManager.spawnerTiles.Count; i++)
         {
             map.SetTile(GameManager.spawnerTiles[i], null);
-            Debug.Log("A");
         }
         GameManager.spawnerTiles.Clear();
 
