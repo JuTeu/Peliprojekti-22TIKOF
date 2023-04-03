@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Tilemaps;
 using UnityEngine.SceneManagement;
 
-public class TileTest : MonoBehaviour
+public class MapGeneratorGameObject : MonoBehaviour
 {
     const int ice = 0;
     const int kelp = 1;
@@ -25,7 +25,11 @@ public class TileTest : MonoBehaviour
     void Start()
     {
         mainCamera = Camera.main;
-        StartCoroutine(BuildMap(-1));
+        GenerateMap(-1);
+    }
+    public void GenerateMap(int mapNum)
+    {
+        StartCoroutine(BuildMap(mapNum));
     }
     IEnumerator BuildMap(int mapNum)
     {

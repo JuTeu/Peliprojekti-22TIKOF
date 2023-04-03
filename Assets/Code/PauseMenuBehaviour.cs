@@ -22,6 +22,10 @@ public class PauseMenuBehaviour : MonoBehaviour
         sequence = 0f;
     }
 
+    public void RegenMap()
+    {
+        Debug.Log("Wautsi");
+    }
     void FixedUpdate()
     {
         if (!sequenceStopped && !exiting)

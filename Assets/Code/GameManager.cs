@@ -49,6 +49,10 @@ public class GameManager : MonoBehaviour
         SceneManager.UnloadSceneAsync("PauseMenu");
     }
 
+    public static void GenerateMap(int mapNum)
+    {
+        GameObject.Find("");
+    }
     public static void EnablePauseButton(bool toggle)
     {
         //GameObject.Find("PauseButton").GetComponent<EnableDisableChild>().Enable(toggle);
