@@ -24,7 +24,6 @@ public class SpawnerTile : Tile
             prefabPosition.x += 0.5f;
             prefabPosition.y += 0.5f;
             Instantiate(prefab, prefabPosition, Quaternion.identity);
-            //tilemap.GetComponent<Tilemap>().SetTile(position, null);
             GameManager.spawnerTiles.Add(position);
         }
         

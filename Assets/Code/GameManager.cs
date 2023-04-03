@@ -53,6 +53,12 @@ public class GameManager : MonoBehaviour
     public static void GenerateMap(int mapNum)
     {
         GameObject.Find("MapGenerator").GetComponent<MapGeneratorGameObject>().GenerateMap(mapNum);
+        GameObject.Find("Background").GetComponent<BackgroundManager>().ChangeBackground(mapNum);
+
+        /*if (mapNum == -1)
+        GameObject.Find("Background").GetComponent<BackgroundManager>().ChangeBackground(0);
+        else
+        GameObject.Find("Background").GetComponent<BackgroundManager>().ChangeBackground(4);*/
     }
     public static void EnablePauseButton(bool toggle)
     {

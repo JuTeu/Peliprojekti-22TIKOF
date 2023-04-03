@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class PauseMenuBehaviour : MonoBehaviour
 {
@@ -9,6 +10,10 @@ public class PauseMenuBehaviour : MonoBehaviour
     private bool sequenceStopped = false;
     private bool exiting = false;
     private RectTransform rt;
+
+    private int levelNum = -1;
+    [SerializeField] private TextMeshProUGUI devLevelText;
+
     void Start()
     {
         rt = GetComponent<RectTransform>();
@@ -25,7 +30,46 @@ public class PauseMenuBehaviour : MonoBehaviour
     public void RegenMap()
     {
         Debug.Log("Wautsi");
-        GameManager.GenerateMap(-1);
+        GameManager.GenerateMap(levelNum);
+    }
+
+    public void SceneNumber()
+    {
+        if (levelNum == -1)
+        {
+            levelNum = 0;
+            devLevelText.text = "ice";
+        }
+        else if (levelNum == 0)
+        {
+            levelNum = 1;
+            devLevelText.text = "kelp";
+        }
+        else if (levelNum == 1)
+        {
+            levelNum = 2;
+            devLevelText.text = "seabed";
+        }
+        else if (levelNum == 2)
+        {
+            levelNum = 3;
+            devLevelText.text = "shallow";
+        }
+        else if (levelNum == 3)
+        {
+            levelNum = 4;
+            devLevelText.text = "deep";
+        }
+        else if (levelNum == 4)
+        {
+            levelNum = 5;
+            devLevelText.text = "abyss";
+        }
+        else
+        {
+            levelNum = -1;
+            devLevelText.text = "sample";
+        }
     }
     void FixedUpdate()
     {

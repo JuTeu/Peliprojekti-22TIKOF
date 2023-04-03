@@ -23,7 +23,7 @@ public class MapGenerator
     {
         return deadEndPositions;
     }
-    public void GenerateMap(int mapWidth, int mapHeight, int roomCount, int minBottomWidth, int maxBottomWidth)
+    public void GenerateMap(int mapWidth, int mapHeight, int roomCount, int minBottomWidth, int maxBottomWidth, int minDeadEnds)
     {
         if (mapArray.Length > 0)
         {
@@ -31,7 +31,7 @@ public class MapGenerator
         }
         bool[,] map = generateMapShape(mapWidth, mapHeight, roomCount,
                                         minBottomWidth, maxBottomWidth);
-        while (deadEndCount < 4) {
+        while (deadEndCount < minDeadEnds) {
             map = generateMapShape(mapWidth, mapHeight, roomCount,
                                    minBottomWidth, maxBottomWidth);
         }

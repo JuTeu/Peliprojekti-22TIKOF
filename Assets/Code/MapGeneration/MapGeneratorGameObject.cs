@@ -18,6 +18,7 @@ public class MapGeneratorGameObject : MonoBehaviour
     List<int[]> deadEndPositions = new List<int[]>();
     [SerializeField] private Tilemap map;
     [SerializeField] private Vector2 startRoomPosition;
+    [SerializeField] private SpriteRenderer bg1, bg2;
     Tilemap rooms;
     Camera mainCamera;
     int chestRoomTotal = 0;
@@ -37,7 +38,6 @@ public class MapGeneratorGameObject : MonoBehaviour
         foreach(GameObject spawnedObject in spawnedObjects)
         {
             GameObject.Destroy(spawnedObject);
-            Debug.Log("AAA");
         }
 
         chestRoomTotal = 0;
@@ -47,7 +47,8 @@ public class MapGeneratorGameObject : MonoBehaviour
         int roomCount = 16;
         int minBottomWidth = 1;
         int maxBottomWidth = 2;
-        if(mapNum == ice)
+        int minDeadEnds = 4;
+        if (mapNum == ice)
         {
             roomsScene = "IceRooms";
             mapWidth = 9;
@@ -55,6 +56,37 @@ public class MapGeneratorGameObject : MonoBehaviour
             roomCount = 16;
             minBottomWidth = 1;
             maxBottomWidth = 2;
+            minDeadEnds = 4;
+
+        }
+        else if (mapNum == kelp)
+        {
+            roomsScene = "KelpRooms";
+            mapWidth = 9;
+            mapHeight = 5;
+            roomCount = 16;
+            minBottomWidth = 1;
+            maxBottomWidth = 2;
+            minDeadEnds = 4;
+
+        }
+        else if (mapNum == seabed)
+        {
+            //todo
+        }
+        else if (mapNum == shallow)
+        {
+            //todo
+        }
+        else if (mapNum == deep)
+        {
+            roomsScene = "DeepRooms";
+            mapWidth = 9;
+            mapHeight = 8;
+            roomCount = 20;
+            minBottomWidth = 1;
+            maxBottomWidth = 2;
+            minDeadEnds = 7;
         }
         GameManager.roomsSceneNoLongerLoaded = false;
         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(roomsScene, LoadSceneMode.Additive);
@@ -89,7 +121,7 @@ public class MapGeneratorGameObject : MonoBehaviour
             }
         }
         MapGenerator mapGenerator = new MapGenerator();
-        mapGenerator.GenerateMap(mapWidth, mapHeight, roomCount, minBottomWidth, maxBottomWidth);
+        mapGenerator.GenerateMap(mapWidth, mapHeight, roomCount, minBottomWidth, maxBottomWidth, minDeadEnds);
         int[,] generatedMap = mapGenerator.GetMap();
         deadEndPositions = mapGenerator.GetDeadEndPositions();
         for (int i = 0; i < generatedMap.GetLength(0); i++)
