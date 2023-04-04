@@ -10,6 +10,8 @@ public class GameManager : MonoBehaviour
     public static Bounds levelBounds;
     public static bool roomsSceneNoLongerLoaded = true;
     public static bool playerInControl = true;
+    public static bool playerIsInvulnerable = false;
+    public static bool playerClipping = true;
     public static int chestsInLevel = 0;
     public static int questionsAnswered, questionsAnsweredTotal = 0;
     public static int correctAnswers = 0;
@@ -60,9 +62,16 @@ public class GameManager : MonoBehaviour
         else
         GameObject.Find("Background").GetComponent<BackgroundManager>().ChangeBackground(4);*/
     }
+
     public static void EnablePauseButton(bool toggle)
     {
         //GameObject.Find("PauseButton").GetComponent<EnableDisableChild>().Enable(toggle);
         GameObject.Find("PauseButton").GetComponent<Button>().interactable = toggle;
+    }
+
+    public static void PlayerClipping(bool toggle)
+    {
+        GameObject.FindWithTag("Player").GetComponent<Collider2D>().isTrigger = !toggle;
+        playerClipping = toggle;
     }
 }

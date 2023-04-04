@@ -202,7 +202,7 @@ Transform:
   m_GameObject: {fileID: 48060930}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -32.912823, y: -6.1556435, z: 0.16189402}
-  m_LocalScale: {x: 4, y: 4, z: 1}
+  m_LocalScale: {x: 5, y: 5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1666559381}
@@ -317,7 +317,7 @@ Transform:
   m_GameObject: {fileID: 312503632}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -32.51282, y: -4.6556435, z: 0.16189402}
-  m_LocalScale: {x: 3, y: 3, z: 1}
+  m_LocalScale: {x: 4, y: 4, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1666559381}
@@ -494,7 +494,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -1, y: 1}
+  m_AnchoredPosition: {x: -2, y: 2}
   m_SizeDelta: {x: 150, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &450674481
@@ -4389,6 +4389,10 @@ MonoBehaviour:
   deepCaveBackground1: {fileID: 21300000, guid: 20dd755424fc82943be7388318c0e126, type: 3}
   deepCaveBackground2: {fileID: 21300000, guid: 5bac643f6fbfbf74d90dfdc3a5611d9e, type: 3}
   deepCaveBackground3: {fileID: 21300000, guid: 1a78a7608e5bc5f4b9bff1f2efa9e66b, type: 3}
+  kelpBackground1: {fileID: 21300000, guid: 0f4d8dae6b22aef58b882cd263ecacbc, type: 3}
+  kelpBackground2: {fileID: 21300000, guid: becf997ec3d8869e1a950d0d37686fd4, type: 3}
+  kelpBackground3: {fileID: 21300000, guid: 28550a567653c08c694674a933cab736, type: 3}
+  kelpBackground4: {fileID: 21300000, guid: d0634f108ffe585ae9e642f3bc1c9d75, type: 3}
 --- !u!1 &1736041976
 GameObject:
   m_ObjectHideFlags: 0
@@ -4416,7 +4420,7 @@ Transform:
   m_GameObject: {fileID: 1736041976}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -32.51282, y: -4.6556435, z: 0.16189402}
-  m_LocalScale: {x: 2, y: 2, z: 1}
+  m_LocalScale: {x: 3, y: 3, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1666559381}

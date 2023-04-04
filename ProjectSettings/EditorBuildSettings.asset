@@ -20,4 +20,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/KelpRooms.unity
     guid: cb754aa75d58fe64dacb807e2ec376af
+  - enabled: 1
+    path: Assets/Scenes/DeepRooms.unity
+    guid: c00674bfa77793b42aa1794d08be8633
+  - enabled: 1
+    path: Assets/Scenes/IceRooms.unity
+    guid: bb9b11c3ea9fde242a66a8ba31a21576
   m_configObjects: {}

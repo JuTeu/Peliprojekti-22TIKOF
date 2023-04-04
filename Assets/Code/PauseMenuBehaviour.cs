@@ -7,17 +7,22 @@ public class PauseMenuBehaviour : MonoBehaviour
 {
     private float sequence = 0f;
     private float exponentialSequence = 0f;
-    private bool sequenceStopped = false;
-    private bool exiting = false;
+    private bool sequenceStopped, exiting = false;
     private RectTransform rt;
-
+    
+    private bool clipping = GameManager.playerClipping;
+    private bool invlunerablity = GameManager.playerIsInvulnerable;
     private int levelNum = -1;
-    [SerializeField] private TextMeshProUGUI devLevelText;
+    [SerializeField] private TextMeshProUGUI devLevelText, devClipText, devInvulnerabilityText;
 
     void Start()
     {
         rt = GetComponent<RectTransform>();
         rt.anchoredPosition = new Vector2(-1000, 0);
+        if (clipping == false)
+        {
+            devClipText.text = "noclip = TRUE";
+        }
     }
     
     public void Close()
@@ -29,7 +34,7 @@ public class PauseMenuBehaviour : MonoBehaviour
 
     public void RegenMap()
     {
-        Debug.Log("Wautsi");
+        Debug.Log("Generoidaan karttaa...");
         GameManager.GenerateMap(levelNum);
     }
 
@@ -71,6 +76,39 @@ public class PauseMenuBehaviour : MonoBehaviour
             devLevelText.text = "sample";
         }
     }
+
+    public void ToggleClipping()
+    {
+        if (clipping)
+        {
+            devClipText.text = "Noclip = TRUE";
+            clipping = false;
+            GameManager.PlayerClipping(false);
+        }
+        else
+        {
+            devClipText.text = "Noclip = FALSE";
+            clipping = true;
+            GameManager.PlayerClipping(true);
+        }
+    }
+
+    public void ToggleInvulnerability()
+    {
+        if (invlunerablity)
+        {
+            devInvulnerabilityText.text = "Haavoittumaton = FALSE";
+            invlunerablity = false;
+            GameManager.playerIsInvulnerable = false;
+        }
+        else
+        {
+            devInvulnerabilityText.text = "Haavoittumaton = TRUE";
+            invlunerablity = true;
+            GameManager.playerIsInvulnerable = true;
+        }
+    }
+
     void FixedUpdate()
     {
         if (!sequenceStopped && !exiting)

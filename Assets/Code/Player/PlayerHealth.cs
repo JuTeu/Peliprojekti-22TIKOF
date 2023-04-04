@@ -12,16 +12,21 @@ public class PlayerHealth : MonoBehaviour
 
     private void Update()
     {
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        /*GameObject player = GameObject.FindGameObjectWithTag("Player");
         if (player != null)
         {
             player.GetComponent<PlayerHealth>().TakeDamage(damagePerSecond * Time.deltaTime);
-        }
+        }*/
+
+        TakeDamage(damagePerSecond * Time.deltaTime);
     }
 
     public void TakeDamage(float damage) 
     {
-        healthAmount -= damage;
+        if (!GameManager.playerIsInvulnerable)
+        {
+            healthAmount -= damage;
+        }
         healthBar.fillAmount = healthAmount / 100f;
         if(healthAmount <= 0)         
         {
