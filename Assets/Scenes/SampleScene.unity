@@ -4955,6 +4955,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthBar: {fileID: 471215836}
   healthAmount: 100
+  damagePerSecond: 1
 --- !u!1 &1949945964
 GameObject:
   m_ObjectHideFlags: 0

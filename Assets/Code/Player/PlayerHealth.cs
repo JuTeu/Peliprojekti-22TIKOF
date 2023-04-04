@@ -7,12 +7,16 @@ public class PlayerHealth : MonoBehaviour
 {
     public Image healthBar;
     public float healthAmount = 100f;    
+    public float damagePerSecond = 1f;
   
 
-    // Start is called before the first frame update
-    void Start()
+    private void Update()
     {
-       
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        if (player != null)
+        {
+            player.GetComponent<PlayerHealth>().TakeDamage(damagePerSecond * Time.deltaTime);
+        }
     }
 
     public void TakeDamage(float damage) 
