@@ -44,6 +44,8 @@ public class EnemyAI : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (GameManager.enemiesPaused) return;
+        
         if(isInChaseRange && isInAttackRange)
         {
             MoveCharacter(movement);

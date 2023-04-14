@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     public static bool playerInControl = true;
     public static bool playerIsInvulnerable = false;
     public static bool playerClipping = true;
+    public static bool enemiesPaused = false;
     public static int chestsInLevel = 0;
     public static int questionsAnswered, questionsAnsweredTotal = 0;
     public static int correctAnswers = 0;
@@ -25,30 +26,34 @@ public class GameManager : MonoBehaviour
 
     public static void OpenQuestionMenu()
     {
-        playerInControl = false;
-        newQuestion = true;
-        EnablePauseButton(false);
+        PauseWorld(true);
         SceneManager.LoadSceneAsync("QuestionMenu", LoadSceneMode.Additive);
+    }
+
+    public static void PauseWorld(bool toggle)
+    {
+        GameObject.FindWithTag("Player").GetComponent<Rigidbody2D>().velocity = new Vector2(0f, 0f);
+        playerInControl = !toggle;
+        playerIsInvulnerable = toggle;
+        enemiesPaused = toggle;
+        EnablePauseButton(!toggle);
     }
 
     public static void CloseQuestionMenu()
     {
-        playerInControl = true;
-        EnablePauseButton(true);
+        PauseWorld(false);
         SceneManager.UnloadSceneAsync("QuestionMenu");
     }
 
     public void OpenPauseMenu()
     {
-        playerInControl = false;
-        EnablePauseButton(false);
+        PauseWorld(true);
         SceneManager.LoadSceneAsync("PauseMenu", LoadSceneMode.Additive);
     }
 
     public static void ClosePauseMenu()
     {
-        playerInControl = true;
-        EnablePauseButton(true);
+        PauseWorld(false);
         SceneManager.UnloadSceneAsync("PauseMenu");
     }
 

@@ -21,7 +21,11 @@ public class PauseMenuBehaviour : MonoBehaviour
         rt.anchoredPosition = new Vector2(-1000, 0);
         if (clipping == false)
         {
-            devClipText.text = "noclip = TRUE";
+            devClipText.text = "Noclip = TRUE";
+        }
+        if (invlunerablity)
+        {
+            devInvulnerabilityText.text = "Haavoittumaton = TRUE";
         }
     }
     

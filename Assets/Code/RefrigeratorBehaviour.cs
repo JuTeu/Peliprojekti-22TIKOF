@@ -42,8 +42,11 @@ public class RefrigeratorBehaviour : MonoBehaviour
             playerRigidbody = player.GetComponent<Rigidbody2D>();
             playerHealth = player.GetComponent<PlayerHealth>();
             playerEntered = true;
-            GameManager.playerInControl = false;
-            GameManager.EnablePauseButton(false);
+            GameManager.PauseWorld(true);
+            /*GameManager.playerInControl = false;
+            GameManager.playerIsInvulnerable = true;
+            GameManager.enemiesPaused = true;
+            GameManager.EnablePauseButton(false);*/
         }
     }
     void FixedUpdate()
@@ -83,10 +86,10 @@ public class RefrigeratorBehaviour : MonoBehaviour
         if (sequence > 2.15f)
         {
             effectSprite.color = new Color(1f, 1f, 1f, Mathf.Sin(32 * sequence) / 2 + 0.5f); 
+            playerHealth.Heal(25 * Time.deltaTime);
         }
         playerRigidbody.rotation = Mathf.MoveTowards(playerRigidbody.rotation, 0f, 600 * Time.deltaTime);
         playerRigidbody.MovePosition(Vector2.MoveTowards(player.transform.position, refrigeratorCentre, 1 * Time.deltaTime));
-        playerHealth.Heal(10 * Time.deltaTime);
 
         if (sequence > 4f)
         {
@@ -94,8 +97,7 @@ public class RefrigeratorBehaviour : MonoBehaviour
             door.transform.RotateAround(hinge, Vector3.up, 25f);
             playerEntered = false;
             playerRigidbody.velocity = new Vector2(0.1f, 0.1f);
-            GameManager.playerInControl = true;
-            GameManager.EnablePauseButton(true);
+            GameManager.PauseWorld(false);
             effectSprite.color = new Color(1f, 1f, 1f, 0f);
             doorSprite.sortingOrder = -1;
         }

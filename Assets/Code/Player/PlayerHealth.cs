@@ -33,6 +33,12 @@ public class PlayerHealth : MonoBehaviour
             Destroy (gameObject);            
         }
     }
+
+    public void TakeDamageFromEnemy()
+    {
+
+    }
+
     public void Heal(float healingAmount)
     {
         healthAmount += healingAmount;
