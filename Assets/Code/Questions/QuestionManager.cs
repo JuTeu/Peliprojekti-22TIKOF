@@ -8,6 +8,7 @@ public class QuestionManager : MonoBehaviour
     [SerializeField] private QuestionData questionData;
     private List<Question> questions;
     private Question selectedQuestion;
+    private bool newQuestion = true;
 
     // Start is called before the first frame update
     void Start()
@@ -22,9 +23,9 @@ public class QuestionManager : MonoBehaviour
         selectedQuestion = questions[val];
 
         questionUI.SetQuestion(selectedQuestion);
-        if (GameManager.newQuestion)
+        if (newQuestion)
         {
-            GameManager.newQuestion = false;
+            newQuestion = false;
         }
         else
         {

@@ -34,6 +34,9 @@ public class MapGeneratorGameObject : MonoBehaviour
     }
     IEnumerator BuildMap(int mapNum)
     {
+        GameManager.questionsAnswered = 0;
+        GameObject.Find("PaperCount").GetComponent<UIPaperCount>().SetCollectedPapers(0);
+
         GameObject[] spawnedObjects = GameObject.FindGameObjectsWithTag("SpawnedObject");
         foreach(GameObject spawnedObject in spawnedObjects)
         {

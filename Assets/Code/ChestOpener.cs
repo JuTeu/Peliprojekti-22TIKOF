@@ -38,8 +38,7 @@ public class ChestOpener : MonoBehaviour
             playerSprite = player.GetComponent<SpriteRenderer>();
             playerSprite.flipX = false;
             playerEntered = true;
-            GameManager.EnablePauseButton(false);
-            GameManager.playerInControl = false;
+            GameManager.PauseWorld(true);
             //GameManager.OpenQuestionMenu();
         }
     }
