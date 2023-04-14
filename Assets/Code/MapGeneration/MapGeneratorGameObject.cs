@@ -19,6 +19,7 @@ public class MapGeneratorGameObject : MonoBehaviour
     [SerializeField] private Tilemap map;
     [SerializeField] private Vector2 startRoomPosition;
     [SerializeField] private SpriteRenderer bg1, bg2;
+    [SerializeField] private Tile levelExit;
     Tilemap rooms;
     Camera mainCamera;
     int chestRoomTotal = 0;
@@ -34,6 +35,7 @@ public class MapGeneratorGameObject : MonoBehaviour
     }
     IEnumerator BuildMap(int mapNum)
     {
+        GameManager.currentFloor = mapNum;
         GameManager.questionsAnswered = 0;
         GameObject.Find("PaperCount").GetComponent<UIPaperCount>().SetCollectedPapers(0);
 
@@ -151,6 +153,7 @@ public class MapGeneratorGameObject : MonoBehaviour
                 PlaceRoom(j, i * -1, generatedMap[i, j]);
             }
         }
+        map.SetTile(new Vector3Int(12 * mapGenerator.GetEndRoomXPosition() + ((int) startRoomPosition.x / 2) + 5, -12 * (generatedMap.GetLength(0) - 1) + ((int) startRoomPosition.y) + 5, 1), levelExit);
         asyncLoad = SceneManager.UnloadSceneAsync(roomsScene);
         while (!asyncLoad.isDone)
         {
@@ -167,6 +170,7 @@ public class MapGeneratorGameObject : MonoBehaviour
         }
         GameManager.spawnerTiles.Clear();
 
+        GameManager.chestsInLevel = chestRoomTotal;
         GameObject.Find("PaperCount").GetComponent<UIPaperCount>().SetTotalPapers(chestRoomTotal);
         GameManager.levelBounds = map.localBounds;
         float cameraHeight = mainCamera.orthographicSize;

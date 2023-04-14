@@ -23,6 +23,8 @@ public class MapGenerator
     {
         return deadEndPositions;
     }
+    public int GetStartRoomXPosition() {return startRoomXPosition;}
+    public int GetEndRoomXPosition() {return endRoomXPosition;}
     public void GenerateMap(int mapWidth, int mapHeight, int roomCount, int minBottomWidth, int maxBottomWidth, int minDeadEnds)
     {
         if (mapArray.Length > 0)
