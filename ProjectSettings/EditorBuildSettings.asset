@@ -9,7 +9,7 @@ EditorBuildSettings:
     path: Assets/Scenes/SampleScene.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
-    path: Assets/Scenes/SampleRooms.unity
+    path: Assets/Scenes/SeabedRooms.unity
     guid: 75d4f8aeb400d0241ab7c8bbdc141647
   - enabled: 1
     path: Assets/Scenes/QuestionMenu.unity
@@ -26,4 +26,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/IceRooms.unity
     guid: bb9b11c3ea9fde242a66a8ba31a21576
+  - enabled: 1
+    path: Assets/Scenes/SampleRooms.unity
+    guid: aabf0d1b593ff454a99eadb4af8ed516
   m_configObjects: {}

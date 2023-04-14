@@ -4699,7 +4699,6 @@ GameObject:
   - component: {fileID: 1819062707}
   - component: {fileID: 1819062706}
   - component: {fileID: 1819062710}
-  - component: {fileID: 1819062711}
   m_Layer: 3
   m_Name: Square
   m_TagString: Player
@@ -4961,19 +4960,6 @@ MonoBehaviour:
   healthBar: {fileID: 471215836}
   healthAmount: 100
   damagePerSecond: 1
---- !u!114 &1819062711
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1819062702}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f26f3d9759015914da19f82c8e3e4b54, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  knockbackForce: 10
 --- !u!1 &1949945964
 GameObject:
   m_ObjectHideFlags: 0
