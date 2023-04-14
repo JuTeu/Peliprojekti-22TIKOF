@@ -75,11 +75,23 @@ public class MapGeneratorGameObject : MonoBehaviour
         }
         else if (mapNum == seabed)
         {
-            //todo
+            roomsScene = "SeabedRooms";
+            mapWidth = 9;
+            mapHeight = 2;
+            roomCount = 7;
+            minBottomWidth = 1;
+            maxBottomWidth = 5;
+            minDeadEnds = 2;
         }
         else if (mapNum == shallow)
         {
-            //todo
+            roomsScene = "ShallowRooms";
+            mapWidth = 9;
+            mapHeight = 5;
+            roomCount = 16;
+            minBottomWidth = 1;
+            maxBottomWidth = 2;
+            minDeadEnds = 4;
         }
         else if (mapNum == deep)
         {
@@ -91,6 +103,11 @@ public class MapGeneratorGameObject : MonoBehaviour
             maxBottomWidth = 2;
             minDeadEnds = 7;
         }
+        else if (mapNum == abyss)
+        {
+            //todo?
+        }
+        map.ClearAllTiles();
         GameManager.roomsSceneNoLongerLoaded = false;
         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(roomsScene, LoadSceneMode.Additive);
         while (!asyncLoad.isDone)
