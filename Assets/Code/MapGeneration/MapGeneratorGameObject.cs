@@ -27,7 +27,7 @@ public class MapGeneratorGameObject : MonoBehaviour
     void Start()
     {
         mainCamera = Camera.main;
-        GenerateMap(-1);
+        //GenerateMap(-1);
     }
     public void GenerateMap(int mapNum)
     {
@@ -153,7 +153,15 @@ public class MapGeneratorGameObject : MonoBehaviour
                 PlaceRoom(j, i * -1, generatedMap[i, j]);
             }
         }
+
         map.SetTile(new Vector3Int(12 * mapGenerator.GetEndRoomXPosition() + ((int) startRoomPosition.x / 2) + 5, -12 * (generatedMap.GetLength(0) - 1) + ((int) startRoomPosition.y) + 5, 1), levelExit);
+        
+        map.SetTile(new Vector3Int(12 * mapGenerator.GetStartRoomXPosition() + ((int) startRoomPosition.x / 2) + 5, 0, 0), null);
+        map.SetTile(new Vector3Int(-1, ((int) startRoomPosition.y) + 11, 0), null);
+        
+        
+        
+        
         asyncLoad = SceneManager.UnloadSceneAsync(roomsScene);
         while (!asyncLoad.isDone)
         {

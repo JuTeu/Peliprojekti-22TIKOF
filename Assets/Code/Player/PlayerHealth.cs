@@ -28,7 +28,7 @@ public class PlayerHealth : MonoBehaviour
 
     public void TakeDamage(float damage) 
     {
-        if (iFrames > 0f) return;
+        if (iFrames > 0f || GameManager.playMode == 1) return;
         if (!GameManager.playerIsInvulnerable)
         {
             healthAmount -= damage;
@@ -36,7 +36,8 @@ public class PlayerHealth : MonoBehaviour
         healthBar.fillAmount = healthAmount / 100f;
         if(healthAmount <= 0)         
         {
-            Destroy (gameObject);            
+            //Destroy (gameObject);
+            GameManager.BeginGame();            
         }
     }
 

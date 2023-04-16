@@ -97,6 +97,11 @@ public class PauseMenuBehaviour : MonoBehaviour
         }
     }
 
+    public void ReturnToSurface()
+    {
+        GameManager.ReturnToSurfaceButton();
+    }
+
     public void ToggleInvulnerability()
     {
         if (invlunerablity)

@@ -31,8 +31,15 @@ public class BackgroundManager : MonoBehaviour
             bg3.SetActive(false);
             bg4.SetActive(true);
 
+            if (bg1s == null)
+            {
+                bg1s = bg1.GetComponent<SpriteRenderer>();
+                bg2s = bg2.GetComponent<SpriteRenderer>();
+                bg3s = bg3.GetComponent<SpriteRenderer>();
+                bg4s = bg4.GetComponent<SpriteRenderer>();
+            }
             bg1s.sortingOrder = -9;
-            bg4s.sortingOrder = -10;
+            bg4s.sortingOrder = -15;
 
             bg1s.color = new Color(1f, 1f, 1f, 0.45f);
             bg4s.color = new Color(1f, 1f, 1f, 1f);

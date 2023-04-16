@@ -32,4 +32,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/ShallowRooms.unity
     guid: 3df19efa7af279c489968ca84c272b4c
+  - enabled: 1
+    path: Assets/Scenes/SurfaceMenu.unity
+    guid: 3229b5701f8a1bca9ab94a29f49c9867
   m_configObjects: {}

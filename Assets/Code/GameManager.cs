@@ -18,12 +18,14 @@ public class GameManager : MonoBehaviour
     public static int correctAnswers = 0;
     public static int currentFloor = 0;
     public static int cameraMode = 0;
+    public static int playMode = 0;
     public static bool newQuestion;
     public static List<Vector3Int> spawnerTiles = new List<Vector3Int>();
 
     void Awake()
     {
         Instance = this;
+        BeginGame();
     }
 
     public static void OpenQuestionMenu()
@@ -59,15 +61,20 @@ public class GameManager : MonoBehaviour
         SceneManager.UnloadSceneAsync("PauseMenu");
     }
 
+    public static void OpenSurfaceMenu()
+    {
+        SceneManager.LoadSceneAsync("SurfaceMenu", LoadSceneMode.Additive);
+    }
+
+    public static void CloseSurfaceMenu()
+    {
+        SceneManager.UnloadSceneAsync("SurfaceMenu");
+    }
+
     public static void GenerateMap(int mapNum)
     {
         GameObject.Find("MapGenerator").GetComponent<MapGeneratorGameObject>().GenerateMap(mapNum);
         GameObject.Find("Background").GetComponent<BackgroundManager>().ChangeBackground(mapNum);
-
-        /*if (mapNum == -1)
-        GameObject.Find("Background").GetComponent<BackgroundManager>().ChangeBackground(0);
-        else
-        GameObject.Find("Background").GetComponent<BackgroundManager>().ChangeBackground(4);*/
     }
 
     public static void EnablePauseButton(bool toggle)
@@ -80,5 +87,26 @@ public class GameManager : MonoBehaviour
     {
         GameObject.FindWithTag("Player").GetComponent<Collider2D>().isTrigger = !toggle;
         playerClipping = toggle;
+    }
+
+    public static void ReturnToSurfaceButton()
+    {
+        ClosePauseMenu();
+        BeginGame();
+    }
+
+    public static void BeginGame()
+    {
+        PauseWorld(true);
+        Camera.main.gameObject.GetComponent<Camera>().orthographicSize = 5f;
+        cameraMode = 1;
+        playMode = 1;
+        Rigidbody2D playerRigidbody = GameObject.FindWithTag("Player").GetComponent<Rigidbody2D>();
+        playerRigidbody.gameObject.GetComponent<PlayerHealth>().Heal(100f);
+        playerRigidbody.rotation = 0f;
+        playerRigidbody.position = new Vector2(-5f, -16.656f);
+        playerRigidbody.gravityScale = 1f;
+        GenerateMap(0);
+        OpenSurfaceMenu();
     }
 }

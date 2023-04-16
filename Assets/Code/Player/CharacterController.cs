@@ -34,6 +34,18 @@ public class CharacterController : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (GameManager.playMode == 0)
+        {
+            UnderWaterMovement();
+        }
+        else if (GameManager.playMode == 1)
+        {
+            //SurfaceMovement();
+        }
+    }
+
+    void UnderWaterMovement()
+    {
         if (!GameManager.playerInControl) return;
 
 
@@ -72,35 +84,49 @@ public class CharacterController : MonoBehaviour
             changedPosition = false;
             touchReleased = true;
         }
-
-        //DevCamToggle();
     }
+
+    void SurfaceMovement()
+    {
+        if (GetBeingPressed())
+        {
+            if (touchReleased && CheckIfPauseButtonIsBeingPressed()) stoppedBecauseButton = true;
+            else if (touchReleased) stoppedBecauseButton = false;
+            touchReleased = false;
+            if (stoppedBecauseButton) return;
+
+            if (oldPosition != GetPressedPosition())
+            {
+                changedPosition = false;
+                oldPosition = GetPressedPosition();
+            }
+            if (!changedPosition)
+            {
+                movementVector = GetPressedPosition() - rb.position;
+                movementVector.y = 0f;
+                movementVector = movementVector.normalized;
+                changedPosition = true;
+            }
+            rb.AddForce(movementVector * speed);
+            if (movementVector.x < 0f)
+            {
+                sprite.flipX = true;
+            }
+            else
+            {
+                sprite.flipX = false;
+            }
+        }
+        else
+        {
+            changedPosition = false;
+            touchReleased = true;
+        }
+    }
+
     bool CheckIfPauseButtonIsBeingPressed()
     {
         // En tiedä miten tämä pitäisi tehdä...
         return false;
     }
-
-    /*bool preventDoubleInputK = false;
-    void DevCamToggle()
-    {
-        if (preventDoubleInputK && inputReader.GetK())
-        {
-            CameraMovement cameraObject = GameObject.Find("Main Camera").GetComponent<CameraMovement>();
-            if (cameraObject.devCam)
-            {
-                cameraObject.devCam = false;
-            }
-            else
-            {
-                cameraObject.devCam = true;
-            }
-            Debug.Log("Kehittäjä kamera: " + cameraObject.devCam);
-            preventDoubleInputK = false;
-        }
-        else if (!inputReader.GetK())
-        {
-            preventDoubleInputK = true;
-        }
-    }*/
 }

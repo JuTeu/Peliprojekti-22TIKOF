@@ -35,6 +35,14 @@ public class CameraMovement : MonoBehaviour
                 Mathf.Clamp(player.position.x, cameraBounds.min.x, cameraBounds.max.x),
                 -15, -10);
         }
+        else if (GameManager.cameraMode == 100)
+        {
+            /*transform.position = new Vector3(
+                Mathf.Clamp(player.position.x, cameraBounds.min.x, cameraBounds.max.x),
+                Mathf.MoveTowards(transform.position.y, cameraBounds.max.y, 20 * Time.deltaTime), -10);*/
+            transform.position = new Vector3(player.position.x, player.position.y, -10);
+            SmoothlyChangeSize(10, 0);
+        }
         else if (GameManager.cameraMode == 101)
         {
             /*targetResolution = 5;
