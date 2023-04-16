@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
     public static int questionsAnswered, questionsAnsweredTotal = 0;
     public static int correctAnswers = 0;
     public static int currentFloor = 0;
+    public static int cameraMode = 0;
     public static bool newQuestion;
     public static List<Vector3Int> spawnerTiles = new List<Vector3Int>();
 

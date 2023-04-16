@@ -432,7 +432,7 @@ MonoBehaviour:
   doorBack: {fileID: 21300000, guid: a230829d102dce16e8fd47b112076511, type: 3}
   bodyOff: {fileID: 21300000, guid: cddd691d8815dc1628dc0f742c6a3a60, type: 3}
   cable: {fileID: 4760213479533635544}
-  cableEnd: {x: 0, y: 0, z: 0}
+  cableEnd: {x: -5.25, y: -16.44, z: 0}
 --- !u!1 &7522479944701947199
 GameObject:
   m_ObjectHideFlags: 0

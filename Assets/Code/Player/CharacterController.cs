@@ -73,7 +73,7 @@ public class CharacterController : MonoBehaviour
             touchReleased = true;
         }
 
-        DevCamToggle();
+        //DevCamToggle();
     }
     bool CheckIfPauseButtonIsBeingPressed()
     {
@@ -81,7 +81,7 @@ public class CharacterController : MonoBehaviour
         return false;
     }
 
-    bool preventDoubleInputK = false;
+    /*bool preventDoubleInputK = false;
     void DevCamToggle()
     {
         if (preventDoubleInputK && inputReader.GetK())
@@ -102,6 +102,5 @@ public class CharacterController : MonoBehaviour
         {
             preventDoubleInputK = true;
         }
-
-    }
+    }*/
 }
