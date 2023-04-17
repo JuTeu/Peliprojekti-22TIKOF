@@ -19,6 +19,7 @@ public class MapGeneratorGameObject : MonoBehaviour
     List<int>[] endRooms = new List<int>[47];
     List<int>[] refrigeratorRooms = new List<int>[47];
     List<int[]> deadEndPositions = new List<int[]>();
+    int startRoomXPosition, endRoomXPosition;
     [SerializeField] private Tilemap map;
     [SerializeField] private Vector2 startRoomPosition;
     [SerializeField] private SpriteRenderer bg1, bg2;
@@ -163,6 +164,8 @@ public class MapGeneratorGameObject : MonoBehaviour
         mapGenerator.GenerateMap(mapWidth, mapHeight, roomCount, minBottomWidth, maxBottomWidth, minDeadEnds);
         int[,] generatedMap = mapGenerator.GetMap();
         deadEndPositions = mapGenerator.GetDeadEndPositions();
+        startRoomXPosition = mapGenerator.GetStartRoomXPosition();
+        endRoomXPosition = mapGenerator.GetEndRoomXPosition();
         for (int i = 0; i < generatedMap.GetLength(0); i++)
         {
             for (int j = 0; j < generatedMap.GetLength(1); j++)
@@ -215,21 +218,30 @@ public class MapGeneratorGameObject : MonoBehaviour
         //BoundsInt roomSelection = new BoundsInt(new Vector3Int(0, 12 * tile + tile, 0), size: new Vector3Int(12, 12, 1));
         BoundsInt roomSelection;
         int randomNumber;
-        bool isChestRoom = false;
+        //0 = regular, 1 = chest, 2 = start, 3 = end
+        int roomType = 0;
         foreach (int[] deadEnd in deadEndPositions)
         {
             if (deadEnd[1] == x && deadEnd[0] == y * -1)
             {
-                isChestRoom = true;
+                roomType = 1;
                 break;
             }
         }
-        if (isChestRoom)
+
+        if (x == startRoomXPosition && y == 0) roomType = 2;
+
+        if (roomType == 1)
         {
             //roomSelection = new BoundsInt(new Vector3Int(0, 0, 0), size: new Vector3Int(12, 12, 1));
             randomNumber = Random.Range(0, chestRooms[tile].Count);
             roomSelection = new BoundsInt(new Vector3Int(12 * chestRooms[tile][randomNumber] + chestRooms[tile][randomNumber], 12 * tile + tile, 0), size: new Vector3Int(12, 12, 1));
             chestRoomTotal++;
+        }
+        else if (roomType == 2)
+        {
+            randomNumber = Random.Range(0, startRooms[tile].Count);
+            roomSelection = new BoundsInt(new Vector3Int(12 * startRooms[tile][randomNumber] + startRooms[tile][randomNumber], 12 * tile + tile, 0), size: new Vector3Int(12, 12, 1));
         }
         else
         {
