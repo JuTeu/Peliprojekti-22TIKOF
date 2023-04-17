@@ -25,6 +25,8 @@ public class MapGeneratorGameObject : MonoBehaviour
     [SerializeField] private Vector2 startRoomPosition;
     [SerializeField] private SpriteRenderer bg1, bg2;
     [SerializeField] private Tile levelExit;
+    [SerializeField] private GameObject seabedObjects, seabedMap;
+
     Tilemap rooms;
     Camera mainCamera;
     int chestRoomTotal = 0;
@@ -123,81 +125,90 @@ public class MapGeneratorGameObject : MonoBehaviour
         {
             yield return null;
         }
-        rooms = GameObject.Find("Rooms").GetComponent<Tilemap>();
-        for (int i = 0; i < 47; i++)
+        if (mapNum != seabed)
         {
-            int nextRoom = 0;
-            string roomType;
-            regularRooms[i] = new List<int>();
-            enemyRooms[i] = new List<int>();
-            chestRooms[i] = new List<int>();
-            startRooms[i] = new List<int>();
-            endRooms[i] = new List<int>();
-            refrigeratorRooms[i] = new List<int>();
-            while (rooms.GetTile(new Vector3Int(12 + 13 * nextRoom, 12 * i + i + 11, 0)) != null)
+            seabedMap.SetActive(false);
+            seabedObjects.SetActive(false);
+            rooms = GameObject.Find("Rooms").GetComponent<Tilemap>();
+            for (int i = 0; i < 47; i++)
             {
-                roomType = rooms.GetTile(new Vector3Int(12 + 13 * nextRoom, 12 * i + i + 11, 0)).name;
-                switch (roomType)
+                int nextRoom = 0;
+                string roomType;
+                regularRooms[i] = new List<int>();
+                enemyRooms[i] = new List<int>();
+                chestRooms[i] = new List<int>();
+                startRooms[i] = new List<int>();
+                endRooms[i] = new List<int>();
+                refrigeratorRooms[i] = new List<int>();
+                while (rooms.GetTile(new Vector3Int(12 + 13 * nextRoom, 12 * i + i + 11, 0)) != null)
                 {
-                    case "regular":
-                        regularRooms[i].Add(nextRoom);
-                        break;
-                    case "enemy":
-                        enemyRooms[i].Add(nextRoom);
-                        break;
-                    case "chest":
-                        chestRooms[i].Add(nextRoom);
-                        break;
-                    case "start":
-                        startRooms[i].Add(nextRoom);
-                        break;
-                    case "end":
-                        endRooms[i].Add(nextRoom);
-                        break;
-                    case "refrigerator":
-                        refrigeratorRooms[i].Add(nextRoom);
-                        break;
+                    roomType = rooms.GetTile(new Vector3Int(12 + 13 * nextRoom, 12 * i + i + 11, 0)).name;
+                    switch (roomType)
+                    {
+                        case "regular":
+                            regularRooms[i].Add(nextRoom);
+                            break;
+                        case "enemy":
+                            enemyRooms[i].Add(nextRoom);
+                            break;
+                        case "chest":
+                            chestRooms[i].Add(nextRoom);
+                            break;
+                        case "start":
+                            startRooms[i].Add(nextRoom);
+                            break;
+                        case "end":
+                            endRooms[i].Add(nextRoom);
+                            break;
+                        case "refrigerator":
+                            refrigeratorRooms[i].Add(nextRoom);
+                            break;
+                    }
+                    nextRoom++;
                 }
-                nextRoom++;
             }
-        }
-        MapGenerator mapGenerator = new MapGenerator();
-        mapGenerator.GenerateMap(mapWidth, mapHeight, roomCount, minBottomWidth, maxBottomWidth, minDeadEnds);
-        int[,] generatedMap = mapGenerator.GetMap();
-        deadEndPositions = mapGenerator.GetDeadEndPositions();
-        startRoomXPosition = mapGenerator.GetStartRoomXPosition();
-        endRoomXPosition = mapGenerator.GetEndRoomXPosition();
-        for (int i = 0; i < generatedMap.GetLength(0); i++)
-        {
-            for (int j = 0; j < generatedMap.GetLength(1); j++)
+            MapGenerator mapGenerator = new MapGenerator();
+            mapGenerator.GenerateMap(mapWidth, mapHeight, roomCount, minBottomWidth, maxBottomWidth, minDeadEnds);
+            int[,] generatedMap = mapGenerator.GetMap();
+            deadEndPositions = mapGenerator.GetDeadEndPositions();
+            startRoomXPosition = mapGenerator.GetStartRoomXPosition();
+            endRoomXPosition = mapGenerator.GetEndRoomXPosition();
+            for (int i = 0; i < generatedMap.GetLength(0); i++)
             {
-                PlaceRoom(j, i * -1, generatedMap[i, j], 0);
+                for (int j = 0; j < generatedMap.GetLength(1); j++)
+                {
+                    PlaceRoom(j, i * -1, generatedMap[i, j], 0);
+                }
             }
-        }
 
-        int enemyRoomsPlaced = 0;
-        for (int i = 0; i < 1000; i++)
+            int enemyRoomsPlaced = 0;
+            for (int i = 0; i < 1000; i++)
+            {
+                if (enemyRoomsPlaced >= enemies) break;
+                int randomX = Random.Range(0, generatedMap.GetLength(1));
+                int randomY = Random.Range(0, generatedMap.GetLength(0));
+                if (PlaceRoom(randomX, randomY * -1, generatedMap[randomY, randomX], 1)) enemyRoomsPlaced++;
+                if (i == 999) Debug.LogError("Kaikkia vihollishuoneita ei pystytty laittamaan...");
+            }
+
+            int refrigeratorRoomsPlaced = 0;
+            for (int i = 0; i < 1000; i++)
+            {
+                if (refrigeratorRoomsPlaced >= refrigerators) break;
+                int randomX = Random.Range(0, generatedMap.GetLength(1));
+                int randomY = Random.Range(0, generatedMap.GetLength(0));
+                if (PlaceRoom(randomX, randomY * -1, generatedMap[randomY, randomX], 2)) refrigeratorRoomsPlaced++;
+                if (i == 999) Debug.LogError("Kaikkia pakastinhuoneita ei pystytty laittamaan...");
+            }
+
+            map.SetTile(new Vector3Int(12 * mapGenerator.GetEndRoomXPosition() + ((int) startRoomPosition.x / 2) + 5, -12 * (generatedMap.GetLength(0) - 1) + ((int) startRoomPosition.y) + 5, 1), levelExit);
+            
+        }
+        else if (mapNum == seabed)
         {
-            if (enemyRoomsPlaced >= enemies) break;
-            int randomX = Random.Range(0, generatedMap.GetLength(1));
-            int randomY = Random.Range(0, generatedMap.GetLength(0));
-            if (PlaceRoom(randomX, randomY * -1, generatedMap[randomY, randomX], 1)) enemyRoomsPlaced++;
-            if (i == 999) Debug.LogError("Kaikkia vihollishuoneita ei pystytty laittamaan...");
+            seabedMap.SetActive(true);
+            seabedObjects.SetActive(true);
         }
-
-        int refrigeratorRoomsPlaced = 0;
-        for (int i = 0; i < 1000; i++)
-        {
-            if (refrigeratorRoomsPlaced >= refrigerators) break;
-            int randomX = Random.Range(0, generatedMap.GetLength(1));
-            int randomY = Random.Range(0, generatedMap.GetLength(0));
-            if (PlaceRoom(randomX, randomY * -1, generatedMap[randomY, randomX], 2)) refrigeratorRoomsPlaced++;
-            if (i == 999) Debug.LogError("Kaikkia pakastinhuoneita ei pystytty laittamaan...");
-        }
-
-        map.SetTile(new Vector3Int(12 * mapGenerator.GetEndRoomXPosition() + ((int) startRoomPosition.x / 2) + 5, -12 * (generatedMap.GetLength(0) - 1) + ((int) startRoomPosition.y) + 5, 1), levelExit);
-        
-        
         
         
         
@@ -219,7 +230,15 @@ public class MapGeneratorGameObject : MonoBehaviour
 
         GameManager.chestsInLevel = chestRoomTotal;
         GameObject.Find("PaperCount").GetComponent<UIPaperCount>().SetTotalPapers(chestRoomTotal);
-        GameManager.levelBounds = map.localBounds;
+        if (mapNum != seabed)
+        {
+            GameManager.levelBounds = map.localBounds;
+        }
+        else if (mapNum == seabed)
+        {
+            GameManager.levelBounds = seabedMap.GetComponent<Tilemap>().localBounds;
+        }
+
         float cameraHeight = mainCamera.orthographicSize;
         float cameraWidth = cameraHeight * mainCamera.aspect;
         float cameraMinX = GameManager.levelBounds.min.x + cameraWidth;
