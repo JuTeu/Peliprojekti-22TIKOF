@@ -15,6 +15,9 @@ public class MapGeneratorGameObject : MonoBehaviour
     List<int>[] regularRooms = new List<int>[47];
     List<int>[] enemyRooms = new List<int>[47];
     List<int>[] chestRooms = new List<int>[47];
+    List<int>[] startRooms = new List<int>[47];
+    List<int>[] endRooms = new List<int>[47];
+    List<int>[] refrigeratorRooms = new List<int>[47];
     List<int[]> deadEndPositions = new List<int[]>();
     [SerializeField] private Tilemap map;
     [SerializeField] private Vector2 startRoomPosition;
@@ -53,6 +56,8 @@ public class MapGeneratorGameObject : MonoBehaviour
         int minBottomWidth = 1;
         int maxBottomWidth = 2;
         int minDeadEnds = 4;
+        int refrigerators = 2;
+        int enemies = 4;
         if (mapNum == ice)
         {
             roomsScene = "IceRooms";
@@ -124,6 +129,9 @@ public class MapGeneratorGameObject : MonoBehaviour
             regularRooms[i] = new List<int>();
             enemyRooms[i] = new List<int>();
             chestRooms[i] = new List<int>();
+            startRooms[i] = new List<int>();
+            endRooms[i] = new List<int>();
+            refrigeratorRooms[i] = new List<int>();
             while (rooms.GetTile(new Vector3Int(12 + 13 * nextRoom, 12 * i + i + 11, 0)) != null)
             {
                 roomType = rooms.GetTile(new Vector3Int(12 + 13 * nextRoom, 12 * i + i + 11, 0)).name;
@@ -137,6 +145,15 @@ public class MapGeneratorGameObject : MonoBehaviour
                         break;
                     case "chest":
                         chestRooms[i].Add(nextRoom);
+                        break;
+                    case "start":
+                        startRooms[i].Add(nextRoom);
+                        break;
+                    case "end":
+                        endRooms[i].Add(nextRoom);
+                        break;
+                    case "refrigerator":
+                        refrigeratorRooms[i].Add(nextRoom);
                         break;
                 }
                 nextRoom++;

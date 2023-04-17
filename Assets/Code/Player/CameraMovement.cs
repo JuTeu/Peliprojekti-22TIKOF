@@ -31,9 +31,10 @@ public class CameraMovement : MonoBehaviour
         }
         else if (GameManager.cameraMode == 1)
         {
-            transform.position = new Vector3(
+            /*transform.position = new Vector3(
                 Mathf.Clamp(player.position.x, cameraBounds.min.x, cameraBounds.max.x),
-                -15, -10);
+                -15, -10);*/
+            transform.position = new Vector3(player.position.x, player.position.y, -10);
         }
         else if (GameManager.cameraMode == 100)
         {
