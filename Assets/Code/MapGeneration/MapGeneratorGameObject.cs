@@ -12,6 +12,7 @@ public class MapGeneratorGameObject : MonoBehaviour
     const int shallow = 3;
     const int deep = 4;
     const int abyss = 5;
+    int mapHeight;
     List<int>[] regularRooms = new List<int>[47];
     List<int>[] enemyRooms = new List<int>[47];
     List<int>[] chestRooms = new List<int>[47];
@@ -52,7 +53,7 @@ public class MapGeneratorGameObject : MonoBehaviour
         chestRoomTotal = 0;
         string roomsScene = "SampleRooms";
         int mapWidth = 9;
-        int mapHeight = 5;
+        mapHeight = 5;
         int roomCount = 16;
         int minBottomWidth = 1;
         int maxBottomWidth = 2;
@@ -170,14 +171,32 @@ public class MapGeneratorGameObject : MonoBehaviour
         {
             for (int j = 0; j < generatedMap.GetLength(1); j++)
             {
-                PlaceRoom(j, i * -1, generatedMap[i, j]);
+                PlaceRoom(j, i * -1, generatedMap[i, j], 0);
             }
+        }
+
+        int enemyRoomsPlaced = 0;
+        for (int i = 0; i < 1000; i++)
+        {
+            if (enemyRoomsPlaced >= enemies) break;
+            int randomX = Random.Range(0, generatedMap.GetLength(1));
+            int randomY = Random.Range(0, generatedMap.GetLength(0));
+            if (PlaceRoom(randomX, randomY * -1, generatedMap[randomY, randomX], 1)) enemyRoomsPlaced++;
+            if (i == 999) Debug.LogError("Kaikkia vihollishuoneita ei pystytty laittamaan...");
+        }
+
+        int refrigeratorRoomsPlaced = 0;
+        for (int i = 0; i < 1000; i++)
+        {
+            if (refrigeratorRoomsPlaced >= refrigerators) break;
+            int randomX = Random.Range(0, generatedMap.GetLength(1));
+            int randomY = Random.Range(0, generatedMap.GetLength(0));
+            if (PlaceRoom(randomX, randomY * -1, generatedMap[randomY, randomX], 2)) refrigeratorRoomsPlaced++;
+            if (i == 999) Debug.LogError("Kaikkia pakastinhuoneita ei pystytty laittamaan...");
         }
 
         map.SetTile(new Vector3Int(12 * mapGenerator.GetEndRoomXPosition() + ((int) startRoomPosition.x / 2) + 5, -12 * (generatedMap.GetLength(0) - 1) + ((int) startRoomPosition.y) + 5, 1), levelExit);
         
-        map.SetTile(new Vector3Int(12 * mapGenerator.GetStartRoomXPosition() + ((int) startRoomPosition.x / 2) + 5, 0, 0), null);
-        map.SetTile(new Vector3Int(-1, ((int) startRoomPosition.y) + 11, 0), null);
         
         
         
@@ -212,13 +231,14 @@ public class MapGeneratorGameObject : MonoBehaviour
         cameraObject.cameraBounds = new Bounds();
         cameraObject.cameraBounds.SetMinMax(new Vector3(cameraMinX, cameraMinY, -10), new Vector3(cameraMaxX, cameraMaxY, -10));
     }
-    void PlaceRoom(int x, int y, int tile)
+    bool PlaceRoom(int x, int y, int tile, int mode)
     {
+        bool successfullyPlaced = true;
         BoundsInt roomPosition = new BoundsInt(new Vector3Int(12 * x + ((int) startRoomPosition.x / 2), 12 * y + ((int) startRoomPosition.y), 0), size: new Vector3Int(12, 12, 1));
         //BoundsInt roomSelection = new BoundsInt(new Vector3Int(0, 12 * tile + tile, 0), size: new Vector3Int(12, 12, 1));
         BoundsInt roomSelection;
         int randomNumber;
-        //0 = regular, 1 = chest, 2 = start, 3 = end
+        //0 = regular, 1 = chest, 2 = start, 3 = end, 4 = enemy, 5 = refrigerator
         int roomType = 0;
         foreach (int[] deadEnd in deadEndPositions)
         {
@@ -230,6 +250,10 @@ public class MapGeneratorGameObject : MonoBehaviour
         }
 
         if (x == startRoomXPosition && y == 0) roomType = 2;
+        if (x == endRoomXPosition && y == -mapHeight + 1) roomType = 3;
+        if (mode > 0 && roomType > 0) return false;
+        if (mode == 1) roomType = 4;
+        if (mode == 2) roomType = 5;
 
         if (roomType == 1)
         {
@@ -243,6 +267,23 @@ public class MapGeneratorGameObject : MonoBehaviour
             randomNumber = Random.Range(0, startRooms[tile].Count);
             roomSelection = new BoundsInt(new Vector3Int(12 * startRooms[tile][randomNumber] + startRooms[tile][randomNumber], 12 * tile + tile, 0), size: new Vector3Int(12, 12, 1));
         }
+        else if (roomType == 3)
+        {
+            randomNumber = Random.Range(0, endRooms[tile].Count);
+            roomSelection = new BoundsInt(new Vector3Int(12 * endRooms[tile][randomNumber] + endRooms[tile][randomNumber], 12 * tile + tile, 0), size: new Vector3Int(12, 12, 1));
+        }
+        else if (roomType == 4)
+        {
+            if (enemyRooms[tile].Count == 0) return false;
+            randomNumber = Random.Range(0, enemyRooms[tile].Count);
+            roomSelection = new BoundsInt(new Vector3Int(12 * enemyRooms[tile][randomNumber] + enemyRooms[tile][randomNumber], 12 * tile + tile, 0), size: new Vector3Int(12, 12, 1));
+        }
+        else if (roomType == 5)
+        {
+            if (refrigeratorRooms[tile].Count == 0) return false;
+            randomNumber = Random.Range(0, refrigeratorRooms[tile].Count);
+            roomSelection = new BoundsInt(new Vector3Int(12 * refrigeratorRooms[tile][randomNumber] + refrigeratorRooms[tile][randomNumber], 12 * tile + tile, 0), size: new Vector3Int(12, 12, 1));
+        }
         else
         {
             randomNumber = Random.Range(0, regularRooms[tile].Count);
@@ -250,5 +291,6 @@ public class MapGeneratorGameObject : MonoBehaviour
         }
         TileBase[] room = rooms.GetTilesBlock(roomSelection);
         map.SetTilesBlock(roomPosition, room);
+        return successfullyPlaced;
     }
 }
