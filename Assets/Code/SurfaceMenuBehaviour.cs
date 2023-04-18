@@ -11,6 +11,7 @@ public class SurfaceMenuBehaviour : MonoBehaviour
     RectTransform hpBar, pauseButton, paperCount;
     Rigidbody2D playerRigidbody;
     SpriteRenderer playerSprite;
+    Animator playerAnimator;
     bool sequenceStopped = false;
     float sequence, exponentialSequence = 0f;
     int menuAnimId = 0;
@@ -28,11 +29,18 @@ public class SurfaceMenuBehaviour : MonoBehaviour
 
         leftButtonB = leftButton.GetComponent<Button>();
         rightButtonB = rightButton.GetComponent<Button>();
-        totalScoreB = totalScore.GetComponent<Button>();
         jumpButtonB = jumpButton.GetComponent<Button>();
         equipmentButtonB = equipmentButton.GetComponent<Button>();
         openShopButtonB = openShopButton.GetComponent<Button>();
         talkButtonB = talkButton.GetComponent<Button>();
+
+        leftButtonB.interactable = false;
+        rightButtonB.interactable = false;
+        jumpButtonB.interactable = false;
+        equipmentButtonB.interactable = false;
+        openShopButtonB.interactable = false;
+        talkButtonB.interactable = false;
+        
 
         leftButtonT.anchoredPosition = new Vector2(-1000, 0);
         rightButtonT.anchoredPosition = new Vector2(1000, 0);
@@ -54,6 +62,8 @@ public class SurfaceMenuBehaviour : MonoBehaviour
         
         playerRigidbody = GameObject.FindWithTag("Player").GetComponent<Rigidbody2D>();
         playerSprite = GameObject.FindWithTag("Player").GetComponent<SpriteRenderer>();
+        playerAnimator = GameObject.FindWithTag("Player").GetComponent<Animator>();
+        playerAnimator.Play("Idle");
         sequence = 12.8f;
     }
 
@@ -112,6 +122,21 @@ public class SurfaceMenuBehaviour : MonoBehaviour
         sequenceStopped = false;
         leftButtonB.interactable = false;
         rightButtonB.interactable = false;
+        if (id == 1 || id == 2 || id == 3)
+        {
+            playerAnimator.Play("Walk");
+        }
+        if (id == 1 || id == 2)
+        {
+            equipmentButtonB.interactable = false;
+            jumpButtonB.interactable = false;
+        }
+        if (id == 3)
+        {
+            equipmentButtonB.interactable = false;
+            openShopButtonB.interactable = false;
+            talkButtonB.interactable = false;
+        }
     }
 
     void MenuIn()
@@ -131,11 +156,16 @@ public class SurfaceMenuBehaviour : MonoBehaviour
             totalScoreT.anchoredPosition = new Vector2(0, -100);
             jumpButtonT.anchoredPosition = new Vector2(0, 200);
             equipmentButtonT.anchoredPosition = new Vector2(0, 50);
+            leftButtonB.interactable = true;
+            rightButtonB.interactable = true;
+            jumpButtonB.interactable = true;
+            equipmentButtonB.interactable = true;
             sequenceStopped = true;
         }
     }
 
     bool playerJumped = false;
+    bool playerJumped2 = false;
 
     void GoToBearMenu()
     {
@@ -159,11 +189,17 @@ public class SurfaceMenuBehaviour : MonoBehaviour
             playerRigidbody.MovePosition(Vector2.MoveTowards(playerRigidbody.position, new Vector2(-10.65f, playerRigidbody.position.y), 5f * Time.deltaTime));
             playerSprite.flipX = currentMenu == 0 ? true : false;
         }
-        if (sequence > 14f)
+        if ((playerRigidbody.position.x < -10.64f && playerSprite.flipX) || 
+            (playerRigidbody.position.x > -10.66f && !playerSprite.flipX)) playerAnimator.Play("Idle");
+        if (sequence > 13.5f)
         {
             currentMenu = 1;
+            playerAnimator.Play("Idle");
             leftButtonB.interactable = true;
             rightButtonB.interactable = true;
+            equipmentButtonB.interactable = true;
+            openShopButtonB.interactable = true;
+            talkButtonB.interactable = true;
             sequenceStopped = true;
         }
     }
@@ -187,14 +223,19 @@ public class SurfaceMenuBehaviour : MonoBehaviour
         }
         if (sequence < 22f)
         {
-            playerRigidbody.MovePosition(Vector2.MoveTowards(playerRigidbody.position, new Vector2(-5f, playerRigidbody.position.y), 5f * Time.deltaTime));
+            playerRigidbody.MovePosition(Vector2.MoveTowards(playerRigidbody.position, new Vector2(-4.5f, playerRigidbody.position.y), 5f * Time.deltaTime));
             playerSprite.flipX = false;
         }
-        if (sequence > 14f)
+        if (playerRigidbody.position.x > -4.51f) playerAnimator.Play("Idle");
+        if (sequence > 13.5f)
         {
             currentMenu = 0;
+            playerAnimator.Play("Idle");
+            jumpButtonT.anchoredPosition = new Vector2(0, 200);
             leftButtonB.interactable = true;
             rightButtonB.interactable = true;
+            equipmentButtonB.interactable = true;
+            jumpButtonB.interactable = true;
             sequenceStopped = true;
         }
     }
@@ -212,20 +253,26 @@ public class SurfaceMenuBehaviour : MonoBehaviour
             equipmentButtonT.anchoredPosition = new Vector2(0, -exponentialSequence / 10 + 50);
         }
 
-        if (sequence < 22f)
+        if (sequence < 10f && playerRigidbody.position.x < -1.99f)
         {
             playerRigidbody.MovePosition(Vector2.MoveTowards(playerRigidbody.position, new Vector2(-2f, playerRigidbody.position.y), 2.5f * Time.deltaTime));
             playerSprite.flipX = false;
         }
+        if (playerRigidbody.position.x > -2.01f && !playerJumped) playerAnimator.Play("Idle");
 
-        if (sequence > 22f && !playerJumped)
+        if (sequence > 10f && !playerJumped)
         {
             playerJumped = true;
-            playerRigidbody.AddForce(new Vector2(3f, 6f), ForceMode2D.Impulse);
+            playerAnimator.Play("Jump");
+        }
+        if (sequence > 42f && !playerJumped2)
+        {
+            playerRigidbody.AddForce(new Vector2(3f, 6.5f), ForceMode2D.Impulse);
             GameManager.PlayerClipping(false);
             GameManager.cameraMode = 100;
+            playerJumped2 = true;
         }
-        if (sequence > 22f)
+        if (sequence > 42f)
         {
             exponentialSequence = Mathf.Pow(2, sequence - 22f);
 
@@ -241,8 +288,8 @@ public class SurfaceMenuBehaviour : MonoBehaviour
             }
         }
 
-        if (sequence > 23.5f && sequence < 29f) playerRigidbody.rotation = Mathf.MoveTowards(playerRigidbody.rotation, -180f, 330 * Time.deltaTime);
-        if (sequence > 42.5f)
+        if (sequence > 43.5f && sequence < 49f) playerRigidbody.rotation = Mathf.MoveTowards(playerRigidbody.rotation, -180f, 330 * Time.deltaTime);
+        if (sequence > 62.5f)
         {
             playerRigidbody.gravityScale = 0f;
             GameManager.PlayerClipping(true);

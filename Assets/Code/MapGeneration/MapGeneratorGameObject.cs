@@ -26,7 +26,7 @@ public class MapGeneratorGameObject : MonoBehaviour
     [SerializeField] private Tile levelExit;
     [SerializeField] private GameObject seabedObjects, seabedMap, seabedMapBackground;
 
-    Tilemap rooms;
+    Tilemap rooms, roomsBackground;
     Camera mainCamera;
     int chestRoomTotal = 0;
 
@@ -118,6 +118,7 @@ public class MapGeneratorGameObject : MonoBehaviour
             //todo?
         }
         map.ClearAllTiles();
+        mapBackground.ClearAllTiles();
         GameManager.roomsSceneNoLongerLoaded = false;
         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(roomsScene, LoadSceneMode.Additive);
         while (!asyncLoad.isDone)
@@ -130,6 +131,7 @@ public class MapGeneratorGameObject : MonoBehaviour
             seabedMapBackground.SetActive(false);
             seabedObjects.SetActive(false);
             rooms = GameObject.Find("Rooms").GetComponent<Tilemap>();
+            roomsBackground = GameObject.Find("RoomsBackground").GetComponent<Tilemap>();
             for (int i = 0; i < 47; i++)
             {
                 int nextRoom = 0;
@@ -310,7 +312,9 @@ public class MapGeneratorGameObject : MonoBehaviour
             roomSelection = new BoundsInt(new Vector3Int(12 * regularRooms[tile][randomNumber] + regularRooms[tile][randomNumber], 12 * tile + tile, 0), size: new Vector3Int(12, 12, 1));
         }
         TileBase[] room = rooms.GetTilesBlock(roomSelection);
+        TileBase[] roomBackground = roomsBackground.GetTilesBlock(roomSelection);
         map.SetTilesBlock(roomPosition, room);
+        mapBackground.SetTilesBlock(roomPosition, roomBackground);
         return successfullyPlaced;
     }
 }

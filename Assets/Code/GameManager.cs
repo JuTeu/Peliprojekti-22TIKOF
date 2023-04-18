@@ -98,13 +98,13 @@ public class GameManager : MonoBehaviour
     public static void BeginGame()
     {
         PauseWorld(true);
-        Camera.main.gameObject.GetComponent<Camera>().orthographicSize = 5f;
+        Camera.main.gameObject.GetComponent<Camera>().orthographicSize = 7.5f;
         cameraMode = 1;
         playMode = 1;
         Rigidbody2D playerRigidbody = GameObject.FindWithTag("Player").GetComponent<Rigidbody2D>();
         playerRigidbody.gameObject.GetComponent<PlayerHealth>().Heal(100f);
         playerRigidbody.rotation = 0f;
-        playerRigidbody.position = new Vector2(-5f, -16.656f);
+        playerRigidbody.position = new Vector2(-4.5f, -16.656f);
         playerRigidbody.gravityScale = 1f;
         GenerateMap(0);
         OpenSurfaceMenu();
