@@ -84364,6 +84364,7 @@ MonoBehaviour:
   kelpBackground3: {fileID: 21300000, guid: 28550a567653c08c694674a933cab736, type: 3}
   kelpBackground4: {fileID: 21300000, guid: d0634f108ffe585ae9e642f3bc1c9d75, type: 3}
   seabedBackground: {fileID: 21300000, guid: 4ed1d472797afc903807abd77debe93d, type: 3}
+  shallowBackground: {fileID: 21300000, guid: 7817e6faf1b2e7e4bad4ed8f26dbe30a, type: 3}
 --- !u!1 &1736041976
 GameObject:
   m_ObjectHideFlags: 0
