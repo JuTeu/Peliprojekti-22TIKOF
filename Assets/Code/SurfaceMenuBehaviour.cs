@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SurfaceMenuBehaviour : MonoBehaviour
 {
     [SerializeField] GameObject leftButton, rightButton, totalScore, jumpButton, equipmentButton, openShopButton, talkButton;
     RectTransform leftButtonT, rightButtonT, totalScoreT, jumpButtonT, equipmentButtonT, openShopButtonT, talkButtonT;
+    Button leftButtonB, rightButtonB, totalScoreB, jumpButtonB, equipmentButtonB, openShopButtonB, talkButtonB;
     RectTransform hpBar, pauseButton, paperCount;
     Rigidbody2D playerRigidbody;
     SpriteRenderer playerSprite;
@@ -23,6 +25,14 @@ public class SurfaceMenuBehaviour : MonoBehaviour
         equipmentButtonT = equipmentButton.GetComponent<RectTransform>();
         openShopButtonT = openShopButton.GetComponent<RectTransform>();
         talkButtonT = talkButton.GetComponent<RectTransform>();
+
+        leftButtonB = leftButton.GetComponent<Button>();
+        rightButtonB = rightButton.GetComponent<Button>();
+        totalScoreB = totalScore.GetComponent<Button>();
+        jumpButtonB = jumpButton.GetComponent<Button>();
+        equipmentButtonB = equipmentButton.GetComponent<Button>();
+        openShopButtonB = openShopButton.GetComponent<Button>();
+        talkButtonB = talkButton.GetComponent<Button>();
 
         leftButtonT.anchoredPosition = new Vector2(-1000, 0);
         rightButtonT.anchoredPosition = new Vector2(1000, 0);
@@ -120,11 +130,20 @@ public class SurfaceMenuBehaviour : MonoBehaviour
         {
             exponentialSequence = Mathf.Pow(2, sequence);
             jumpButtonT.anchoredPosition = new Vector2(0, -exponentialSequence / 10 + 200);
+
+            openShopButtonT.anchoredPosition = new Vector2(-1000 + exponentialSequence / 10, 260);
+            talkButtonT.anchoredPosition = new Vector2(1000 - exponentialSequence / 10, 150);
+
+            if (exponentialSequence > 10000f)
+            {
+                openShopButtonT.anchoredPosition = new Vector2(0, 260);
+                talkButtonT.anchoredPosition = new Vector2(0, 150);
+            }
         }
         if (sequence < 22f)
         {
             playerRigidbody.MovePosition(Vector2.MoveTowards(playerRigidbody.position, new Vector2(-10.65f, -16.6f), 5f * Time.deltaTime));
-            playerSprite.flipX = true;
+            playerSprite.flipX = currentMenu == 0 ? true : false;
         }
         if (sequence > 42.5f)
         {
