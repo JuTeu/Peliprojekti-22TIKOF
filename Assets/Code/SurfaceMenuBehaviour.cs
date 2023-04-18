@@ -4,22 +4,35 @@ using UnityEngine;
 
 public class SurfaceMenuBehaviour : MonoBehaviour
 {
-    [SerializeField] RectTransform leftButton, rightButton, totalScore, jumpButton, equipmentButton;
+    [SerializeField] GameObject leftButton, rightButton, totalScore, jumpButton, equipmentButton, openShopButton, talkButton;
+    RectTransform leftButtonT, rightButtonT, totalScoreT, jumpButtonT, equipmentButtonT, openShopButtonT, talkButtonT;
     RectTransform hpBar, pauseButton, paperCount;
     Rigidbody2D playerRigidbody;
     SpriteRenderer playerSprite;
     bool sequenceStopped = false;
     float sequence, exponentialSequence = 0f;
     int menuAnimId = 0;
+    int currentMenu = 0;
     
     void Start()
     {
-        leftButton.anchoredPosition = new Vector2(-1000, 0);
-        rightButton.anchoredPosition = new Vector2(1000, 0);
-        totalScore.anchoredPosition = new Vector2(0, 1000);
+        leftButtonT = leftButton.GetComponent<RectTransform>();
+        rightButtonT = rightButton.GetComponent<RectTransform>();
+        totalScoreT = totalScore.GetComponent<RectTransform>();
+        jumpButtonT = jumpButton.GetComponent<RectTransform>();
+        equipmentButtonT = equipmentButton.GetComponent<RectTransform>();
+        openShopButtonT = openShopButton.GetComponent<RectTransform>();
+        talkButtonT = talkButton.GetComponent<RectTransform>();
 
-        jumpButton.anchoredPosition = new Vector2(0, -1000);
-        equipmentButton.anchoredPosition = new Vector2(0, -1000);
+        leftButtonT.anchoredPosition = new Vector2(-1000, 0);
+        rightButtonT.anchoredPosition = new Vector2(1000, 0);
+        totalScoreT.anchoredPosition = new Vector2(0, 1000);
+
+        jumpButtonT.anchoredPosition = new Vector2(0, -1000);
+        equipmentButtonT.anchoredPosition = new Vector2(0, -1000);
+
+        openShopButtonT.anchoredPosition = new Vector2(0, -1000);
+        talkButtonT.anchoredPosition = new Vector2(0, -1000);
 
         hpBar = GameObject.Find("HPBar").GetComponent<RectTransform>();
         pauseButton = GameObject.Find("PauseButton").GetComponent<RectTransform>();
@@ -45,6 +58,14 @@ public class SurfaceMenuBehaviour : MonoBehaviour
         DoMenuAnim(1);
     }
 
+    public void PressLeft()
+    {
+        if (currentMenu == 0)
+        {
+            DoMenuAnim(2);
+        }
+    }
+
     void MenuAnimation()
     {
         if (menuAnimId == 0)
@@ -55,11 +76,15 @@ public class SurfaceMenuBehaviour : MonoBehaviour
         {
             StartGameLoop();
         }
+        else if (menuAnimId == 2)
+        {
+            GoToBearMenu();
+        }
     }
 
     void DoMenuAnim(int id)
     {
-        if (id == 1) sequence = 0f;
+        if (id != 0) sequence = 0f;
         exponentialSequence = 0f;
         menuAnimId = id;
         sequenceStopped = false;
@@ -69,35 +94,56 @@ public class SurfaceMenuBehaviour : MonoBehaviour
     {
         sequence += 2 * Time.deltaTime;
         exponentialSequence = Mathf.Pow(2, sequence);
-        leftButton.anchoredPosition = new Vector2(-1000 + exponentialSequence / 10 + 80, 0);
-        rightButton.anchoredPosition = new Vector2(1000 - exponentialSequence / 10 - 80, 0);
-        totalScore.anchoredPosition = new Vector2(0, 1000 - exponentialSequence / 10 - 100);
-        jumpButton.anchoredPosition = new Vector2(0, -1000 + exponentialSequence / 10 + 200);
-        equipmentButton.anchoredPosition = new Vector2(0, -1000 + exponentialSequence / 10 + 50);
+        leftButtonT.anchoredPosition = new Vector2(-1000 + exponentialSequence / 10 + 80, 0);
+        rightButtonT.anchoredPosition = new Vector2(1000 - exponentialSequence / 10 - 80, 0);
+        totalScoreT.anchoredPosition = new Vector2(0, 1000 - exponentialSequence / 10 - 100);
+        jumpButtonT.anchoredPosition = new Vector2(0, -1000 + exponentialSequence / 10 + 200);
+        equipmentButtonT.anchoredPosition = new Vector2(0, -1000 + exponentialSequence / 10 + 50);
 
         if (exponentialSequence > 10000f)
         {
-            leftButton.anchoredPosition = new Vector2(80, 0);
-            rightButton.anchoredPosition = new Vector2(-80, 0);
-            totalScore.anchoredPosition = new Vector2(0, -100);
-            jumpButton.anchoredPosition = new Vector2(0, 200);
-            equipmentButton.anchoredPosition = new Vector2(0, 50);
+            leftButtonT.anchoredPosition = new Vector2(80, 0);
+            rightButtonT.anchoredPosition = new Vector2(-80, 0);
+            totalScoreT.anchoredPosition = new Vector2(0, -100);
+            jumpButtonT.anchoredPosition = new Vector2(0, 200);
+            equipmentButtonT.anchoredPosition = new Vector2(0, 50);
             sequenceStopped = true;
         }
     }
 
     bool playerJumped = false;
+
+    void GoToBearMenu()
+    {
+        sequence += 10 * Time.deltaTime;
+        if (exponentialSequence < 10000f)
+        {
+            exponentialSequence = Mathf.Pow(2, sequence);
+            jumpButtonT.anchoredPosition = new Vector2(0, -exponentialSequence / 10 + 200);
+        }
+        if (sequence < 22f)
+        {
+            playerRigidbody.MovePosition(Vector2.MoveTowards(playerRigidbody.position, new Vector2(-10.65f, -16.6f), 5f * Time.deltaTime));
+            playerSprite.flipX = true;
+        }
+        if (sequence > 42.5f)
+        {
+            currentMenu = 1;
+            sequenceStopped = true;
+        }
+    }
+
     void StartGameLoop()
     {
         sequence += 10 * Time.deltaTime;
         if (exponentialSequence < 10000f)
         {
             exponentialSequence = Mathf.Pow(2, sequence);
-            leftButton.anchoredPosition = new Vector2(-exponentialSequence / 10 + 80, 0);
-            rightButton.anchoredPosition = new Vector2(exponentialSequence / 10 - 80, 0);
-            totalScore.anchoredPosition = new Vector2(0, exponentialSequence / 10 - 100);
-            jumpButton.anchoredPosition = new Vector2(0, -exponentialSequence / 10 + 200);
-            equipmentButton.anchoredPosition = new Vector2(0, -exponentialSequence / 10 + 50);
+            leftButtonT.anchoredPosition = new Vector2(-exponentialSequence / 10 + 80, 0);
+            rightButtonT.anchoredPosition = new Vector2(exponentialSequence / 10 - 80, 0);
+            totalScoreT.anchoredPosition = new Vector2(0, exponentialSequence / 10 - 100);
+            jumpButtonT.anchoredPosition = new Vector2(0, -exponentialSequence / 10 + 200);
+            equipmentButtonT.anchoredPosition = new Vector2(0, -exponentialSequence / 10 + 50);
         }
 
         if (sequence < 22f)
