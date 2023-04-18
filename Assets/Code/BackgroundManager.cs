@@ -102,7 +102,7 @@ public class BackgroundManager : MonoBehaviour
 
             bg1s.color = new Color(1f, 1f, 1f, 1f);
             bg1s.sortingOrder = -10;
-            bg1p.yOffset = 0f;
+            bg1p.yOffset = -10f;
             bg1s.sprite = seabedBackground;
         }
         // shallow
