@@ -33,3 +33,297 @@ MonoBehaviour:
     - "Tarkastan, ett\xE4 palkkani on varmasti kelvollinen. "
     - "Luen sopimuksen l\xE4pi huolellisesti ja tarkastan ehdot."
     correctAns: "Luen sopimuksen l\xE4pi huolellisesti ja tarkastan ehdot."
+  - questionInfo: "Ensimm\xE4inen ty\xF6p\xE4iv\xE4, miten k\xE4ytt\xE4ydyn?"
+    options:
+    - Pysyttelen omissa oloissani ja selaan instagramia.
+    - Olen positiivisella asenteella ja esittelen itseni iloisesti muille.
+    - "Luen sopimuksen l\xE4pi huolellisesti ja tarkastan ehdot."
+    correctAns: Olen positiivisella asenteella ja esittelen itseni iloisesti muille.
+  - questionInfo: "Saan ty\xF6teht\xE4v\xE4n, mutta en ymm\xE4rr\xE4 sit\xE4. Mit\xE4
+      teen?"
+    options:
+    - "Luotan vaistooni ja suoritan ty\xF6teht\xE4v\xE4n niin kuin luulen sen teht\xE4v\xE4n."
+    - Kysyn pomolta uudestaan vaikka hieman nolottaakin.
+    - "P\xE4\xE4t\xE4n antaa asian olla ja kun minulta kysyt\xE4\xE4n, ett\xE4 onko
+      ty\xF6 valmis, kysyn uudestaan."
+    correctAns: Kysyn pomolta uudestaan vaikka hieman nolottaakin.
+  - questionInfo: "Mik\xE4 on t\xE4rkein taito tulevaisuuden ty\xF6el\xE4m\xE4ss\xE4?"
+    options:
+    - "Yhteisty\xF6taidot"
+    - Digitaaliset taidot
+    - Luovuus
+    correctAns: "Yhteisty\xF6taidot"
+  - questionInfo: "Mik\xE4 seuraavista on yksi t\xE4rkeimmist\xE4 ty\xF6ntekij\xE4n
+      velvollisuuksista?"
+    options:
+    - "Ty\xF6aikojen noudattaminen."
+    - Ruokatauko.
+    - "Ekologisesti t\xF6ihin kulkeminen."
+    correctAns: "Ty\xF6aikojen noudattaminen."
+  - questionInfo: "Ty\xF6nantaja haluaa n\xE4hd\xE4 ty\xF6si edistymisen, miten toimit?"
+    options:
+    - "Keskeyt\xE4t tekemisen, ettei ty\xF6nantaja saa selville mit\xE4 olit tekem\xE4ss\xE4."
+    - "Kerrot ty\xF6nantajalle ty\xF6si edistymisest\xE4."
+    - "Piilotat tekem\xE4si ty\xF6n ja v\xE4lttelet ty\xF6nantajaa."
+    correctAns: "Kerrot ty\xF6nantajalle ty\xF6si edistymisest\xE4."
+  - questionInfo: "Saat p\xE4iv\xE4n ty\xF6t valmiiksi 20 minuuttia ennen ty\xF6ajan
+      loppumista. Mit\xE4 kannattaisi tehd\xE4?"
+    options:
+    - 'Menen 20 minuutin mittaiselle kahville. '
+    - Pelaan pasianssia.
+    - "Kertaan tehdyt ty\xF6t ja varmistan etten tehnyt virheit\xE4."
+    correctAns: "Kertaan tehdyt ty\xF6t ja varmistan etten tehnyt virheit\xE4."
+  - questionInfo: "Mit\xE4 lakko tarkoittaa?"
+    options:
+    - "Ty\xF6ntekij\xE4t pid\xE4tt\xE4ytyv\xE4t tekem\xE4st\xE4 t\xF6it\xE4 edist\xE4\xE4kseen
+      sopimuksen synty\xE4 ty\xF6nantajan ja ty\xF6ntekij\xF6iden v\xE4lill\xE4."
+    - "Ty\xF6ntekij\xE4t lopettavat ty\xF6nteon fyysisen rasituksen vuoksi."
+    - 'Se Youtuber. '
+    correctAns: "Ty\xF6ntekij\xE4t pid\xE4tt\xE4ytyv\xE4t tekem\xE4st\xE4 t\xF6it\xE4
+      edist\xE4\xE4kseen sopimuksen synty\xE4 ty\xF6nantajan ja ty\xF6ntekij\xF6iden
+      v\xE4lill\xE4."
+  - questionInfo: "Mik\xE4 on luottamusmiehen teht\xE4v\xE4 ty\xF6paikalla?"
+    options:
+    - "H\xE4neen voi aina luottaa kaikessa. "
+    - "H\xE4n keskustelee muiden ty\xF6ntekij\xF6iden kanssa ja luo luottamusta,
+      jotta saa tietoonsa heid\xE4n yksityisi\xE4 asioita."
+    - "H\xE4n on ty\xF6ntekij\xF6iden edustaja. H\xE4nen teht\xE4v\xE4n\xE4 on valvoa
+      ty\xF6ehtosopimuksien ja ty\xF6lakien noudattamista."
+    correctAns: "H\xE4n on ty\xF6ntekij\xF6iden edustaja. H\xE4nen teht\xE4v\xE4n\xE4
+      on valvoa ty\xF6ehtosopimuksien ja ty\xF6lakien noudattamista."
+  - questionInfo: "Mik\xE4 on TES?"
+    options:
+    - "Ty\xF6ehtosopimus."
+    - "Ty\xF6ntekij\xE4n esimies. "
+    - 'Todella Eeppinen Sivusto (TES). '
+    correctAns: "Ty\xF6ehtosopimus."
+  - questionInfo: "Mik\xE4 on Henkil\xF6kohtainen Palkanosa?"
+    options:
+    - "Palkka, joka maksetaan minulle henkil\xF6kohtaisesti. "
+    - "Palkan osa, jonka suuruus m\xE4\xE4r\xE4ytyy esim. Oman ty\xF6suorituksen
+      perusteella"
+    - "Palkan osa, joka minulle maksetaan aina, vaikka en olisi t\xF6iss\xE4"
+    correctAns: "Palkan osa, jonka suuruus m\xE4\xE4r\xE4ytyy esim. Oman ty\xF6suorituksen
+      perusteella"
+  - questionInfo: "Mik\xE4 on irtisanomissuoja?"
+    options:
+    - "Se, ett\xE4 saan ruhtinaallisen korvauksen, jos minut irtisanotaan."
+    - "Kun menet\xE4n ty\xF6ntekij\xE4n suojani, minut irtisanotaan."
+    - "Ty\xF6nantaja ei voi irtisanoa minua ilman laillista perustetta."
+    correctAns: "Ty\xF6nantaja ei voi irtisanoa minua ilman laillista perustetta."
+  - questionInfo: "Kertyyk\xF6 palkattoman vapaan ajalta vuosilomaa?"
+    options:
+    - "Palkaton vapaa ei yleens\xE4 kerryt\xE4 vuosilomaa."
+    - Tietenkin. Vuosilomaa kertyy 24/7 tilanteesta riippumatta.
+    - "Kyll\xE4, tuplana."
+    correctAns: "Palkaton vapaa ei yleens\xE4 kerryt\xE4 vuosilomaa."
+  - questionInfo: "Mik\xE4 on lain mukaan ty\xF6aikaa?"
+    options:
+    - "Kaikki t\xF6iss\xE4 vietetty aika."
+    - "Ty\xF6h\xF6n k\xE4ytetty aika, ja aika, jonka on ty\xF6paikalla ty\xF6nantajan
+      k\xE4ytett\xE4viss\xE4."
+    - 'Ruokatauko '
+    correctAns: "Ty\xF6h\xF6n k\xE4ytetty aika, ja aika, jonka on ty\xF6paikalla
+      ty\xF6nantajan k\xE4ytett\xE4viss\xE4."
+  - questionInfo: "Mit\xE4 tehd\xE4, jos palkassani on virheit\xE4?"
+    options:
+    - Otan yhteyden viranomaisiin.
+    - "En tee mit\xE4\xE4n, jos palkkaa on maksettu liikaa. "
+    - "Otan yhteytt\xE4 esihenkil\xF6\xF6ni ja pyyd\xE4n palkan oikaisua."
+    correctAns: "Otan yhteytt\xE4 esihenkil\xF6\xF6ni ja pyyd\xE4n palkan oikaisua."
+  - questionInfo: "Milloin ty\xF6ntekij\xE4lle voidaan antaa huomautus?"
+    options:
+    - Vain vakavemmissa tapauksissa.
+    - "Lieviss\xE4 tapauksissa."
+    - Kun sama vakava rike on toistunut jo monta kertaa.
+    correctAns: "Lieviss\xE4 tapauksissa."
+  - questionInfo: "Mink\xE4lainen on m\xE4\xE4r\xE4aikainen ty\xF6suhde?"
+    options:
+    - "Ty\xF6 p\xE4\xE4ttyy ennalta m\xE4\xE4r\xE4ttyn\xE4 ajankohtana"
+    - "Ty\xF6 alkaa ennalta m\xE4\xE4r\xE4ttyn\xE4 ajankohtana"
+    - "Ty\xF6t\xE4 tehd\xE4\xE4n, kunnes sopimus puretaan tai irtisanotaan."
+    correctAns: "Ty\xF6 p\xE4\xE4ttyy ennalta m\xE4\xE4r\xE4ttyn\xE4 ajankohtana"
+  - questionInfo: "Eroavatko osa-aikaisen ty\xF6ntekij\xE4n ty\xF6ehdot kokoaikaisen
+      ty\xF6ehdoista?"
+    options:
+    - "Kyll\xE4, osa-aikaisen ty\xF6ehdot ovat paremmat. "
+    - "Osa-aikaisen ty\xF6ehdot eiv\xE4t eroa kokoaikaisesta."
+    - "Kyll\xE4, osa-aikaisen ty\xF6ehdot ovat huonommat. "
+    correctAns: "Osa-aikaisen ty\xF6ehdot eiv\xE4t eroa kokoaikaisesta."
+  - questionInfo: "Onko oppisopimuskoulutukselle yl\xE4ik\xE4rajaa?"
+    options:
+    - 'Tietenkin. '
+    - 'Ei, paitsi jos koulutettava on zombi. '
+    - Ei.
+    correctAns: Ei.
+  - questionInfo: "Voiko m\xE4\xE4r\xE4aikaisen ty\xF6sopimuksen irtisanoa?"
+    options:
+    - Ei
+    - "Kyll\xE4"
+    - "Kyll\xE4, jos sopimukseen on m\xE4\xE4ritetty\_irtisanomisaika."
+    correctAns: "Kyll\xE4, jos sopimukseen on m\xE4\xE4ritetty\_irtisanomisaika."
+  - questionInfo: "Mit\xE4 tarkoittaa vaihteleva ty\xF6aika?"
+    options:
+    - "Sama kuin vuoroty\xF6. "
+    - "Puolet ty\xF6st\xE4 tehd\xE4\xE4n y\xF6ll\xE4."
+    - "Ty\xF6ntekij\xE4 tekee vaihtelevan m\xE4\xE4r\xE4n ty\xF6tunteja."
+    correctAns: "Ty\xF6ntekij\xE4 tekee vaihtelevan m\xE4\xE4r\xE4n ty\xF6tunteja."
+  - questionInfo: "Mit\xE4 lomauttaminen meinaa?"
+    options:
+    - "P\xE4\xE4sen lomalle valitsemaani kohteeseen ty\xF6nantajan kustannuksella."
+    - "Ty\xF6nteon ja palkanmaksun v\xE4liaikaista keskeytyminen."
+    - "Minulta ev\xE4t\xE4\xE4n vuoden kaikki lomat."
+    correctAns: "Ty\xF6nteon ja palkanmaksun v\xE4liaikaista keskeytyminen."
+  - questionInfo: "Kuuluuko ty\xF6ntekoon aina perehdytys?"
+    options:
+    - "Kyll\xE4, vaikka kyseess\xE4 olisi lyhyt keikkaty\xF6."
+    - 'Ei. '
+    - "Kyll\xE4, paitsi lyhyiss\xE4 ty\xF6suhteissa."
+    correctAns: "Kyll\xE4, vaikka kyseess\xE4 olisi lyhyt keikkaty\xF6."
+  - questionInfo: "Kun teet sunnuntaina t\xF6it\xE4, saatko lis\xE4korvausta?"
+    options:
+    - "Kyll\xE4. 200 prosentilla korotettu palkka"
+    - "Kyll\xE4. 100 prosentilla korotettu palkka."
+    - "En, paitsi mahdolliset ilta-, tai y\xF6lis\xE4t."
+    correctAns: "Kyll\xE4. 100 prosentilla korotettu palkka."
+  - questionInfo: "Mik\xE4 seuraavista EI\_ole palkasta pid\xE4tett\xE4v\xE4 v\xE4hennys?"
+    options:
+    - "Ennakonpid\xE4tys."
+    - "Ty\xF6el\xE4kevakuutusmaksu."
+    - Henkivakuutusmaksu
+    correctAns: Henkivakuutusmaksu
+  - questionInfo: "Mit\xE4 tarkoittaa palkanmaksukausi?"
+    options:
+    - "Sit\xE4 p\xE4iv\xE4\xE4, jolloin palkka maksetaan "
+    - Ajanjaksoa, jolta palkka maksetaan.
+    - "Kausity\xF6ntekij\xE4n palkkaa."
+    correctAns: Ajanjaksoa, jolta palkka maksetaan.
+  - questionInfo: "Miten ty\xF6el\xE4kett\xE4 kerrytet\xE4\xE4n? "
+    options:
+    - "Sit\xE4 kertyy aina tasaisesti 30e/kk"
+    - "Se ansaitaan omalla palkkaty\xF6ll\xE4 tai yritt\xE4misell\xE4."
+    - "Sit\xE4 ei kerry, vaan se on aina vakio. "
+    correctAns: "Se ansaitaan omalla palkkaty\xF6ll\xE4 tai yritt\xE4misell\xE4."
+  - questionInfo: "Tarvitseeko ty\xF6ntekij\xE4 mit\xE4\xE4n syyt\xE4 irtisanoutumiseen? "
+    options:
+    - Ei.
+    - "Kyll\xE4, jokin p\xE4tev\xE4 syy t\xE4ytyy olla."
+    - "Kyll\xE4, mutta vain kun ty\xF6suhde on kest\xE4nyt yli 4 vuotta."
+    correctAns: Ei.
+  - questionInfo: "Ketk\xE4 ty\xF6ntekij\xE4t ovat oikeutettuja ty\xF6terveydenhuoltoon? "
+    options:
+    - Kaikki.
+    - 'Osa-aikaiset. '
+    - 'Koko-aikaiset. '
+    correctAns: Kaikki.
+  - questionInfo: "Saako ty\xF6nantaja valvoa kameralla tiettyj\xE4 ty\xF6ntekij\xF6it\xE4?"
+    options:
+    - Ei.
+    - "Kyll\xE4."
+    - "Vain, jos turvallisuus sit\xE4 vaatii."
+    correctAns: Ei.
+  - questionInfo: "Mit\xE4 teet jos sairastut vaikka pit\xE4isi menn\xE4 t\xF6ihin? "
+    options:
+    - "Ilmoitan asiasta ty\xF6nantajalle."
+    - "J\xE4\xE4n kotiin ilmoittamatta asiasta."
+    - "Tulen sairaana t\xF6ihin."
+    correctAns: "Ilmoitan asiasta ty\xF6nantajalle."
+  - questionInfo: "Miten toimit jos ty\xF6paikkasi ajautuu konkurssiin ja j\xE4\xE4t
+      ilman palkkaa? "
+    options:
+    - "Hyv\xE4ksyn asian ja etsin uutta ty\xF6t\xE4. "
+    - "Vaadin edellist\xE4 ty\xF6nantajaa maksamaan velkansa. "
+    - Haet palkkasi palkkaturvan kautta.
+    correctAns: Haet palkkasi palkkaturvan kautta.
+  - questionInfo: "Mik\xE4 on ty\xF6todistus? "
+    options:
+    - "Todistus, joka kertoo mit\xE4 ty\xF6t\xE4 olet tehnyt ja kuinka kauan."
+    - "Hy\xF6dyt\xF6n asiakirja. "
+    - "Ty\xF6nantajalle j\xE4\xE4v\xE4 todistus palkatuista henkil\xF6ist\xE4. "
+    correctAns: "Todistus, joka kertoo mit\xE4 ty\xF6t\xE4 olet tehnyt ja kuinka
+      kauan."
+  - questionInfo: "Mik\xE4 seuraavista ei ole syy irtisanomiselle? "
+    options:
+    - 'Yrityksen huono rahatilanne. '
+    - "Ty\xF6ntekij\xE4n jatkuva my\xF6h\xE4stely."
+    - Raskaus.
+    correctAns: Raskaus.
+  - questionInfo: "Miten ty\xF6ntekij\xE4 voi irtisanoutua ty\xF6suhteesta? "
+    options:
+    - "J\xE4\xE4m\xE4ll\xE4 pois t\xF6ist\xE4. "
+    - 'Juoksemalla pakoon. '
+    - "Ilmoittamalla ty\xF6nantajalle."
+    correctAns: "Ilmoittamalla ty\xF6nantajalle."
+  - questionInfo: "Mihin voit turvautua jos el\xE4kkeesi j\xE4\xE4 liian pieneksi? "
+    options:
+    - "Voit saada kansanel\xE4kett\xE4."
+    - "Sinun pit\xE4\xE4 menn\xE4 t\xF6ihin"
+    - "Koitat selvit\xE4 sill\xE4 m\xE4\xE4r\xE4ll\xE4 mit\xE4 olet saanut. "
+    correctAns: "Voit saada kansanel\xE4kett\xE4."
+  - questionInfo: "Mik\xE4 on lain mukaan korkein s\xE4\xE4nn\xF6llinen ty\xF6aika? "
+    options:
+    - 8 tuntia.
+    - '7 tuntia.  '
+    - '10 tuntia. '
+    correctAns: 8 tuntia.
+  - questionInfo: "Mit\xE4 tarkoittaa nollatuntity\xF6? "
+    options:
+    - "Ty\xF6nantajan ei ole pakko antaa ty\xF6ntekij\xE4lle ollenkaan tunteja."
+    - "Ty\xF6 jota ei tehd\xE4 ollenkaan."
+    - "Ty\xF6 jota tehd\xE4\xE4n aina vain alle tunti. "
+    correctAns: "Ty\xF6nantajan ei ole pakko antaa ty\xF6ntekij\xE4lle ollenkaan
+      tunteja."
+  - questionInfo: "Mill\xE4 aikav\xE4lill\xE4 tehd\xE4\xE4n y\xF6ty\xF6t\xE4? "
+    options:
+    - "23:00 \u2013 6:00."
+    - '9:00 - 0:00. '
+    - "3:00 \u2013 6:00. "
+    correctAns: "23:00 \u2013 6:00."
+  - questionInfo: "Mit\xE4 on ylity\xF6? "
+    options:
+    - "Ylip\xE4\xE4sem\xE4tt\xF6m\xE4n raskasta ty\xF6t\xE4."
+    - "Ylempiarvoista ty\xF6t\xE4. "
+    - "S\xE4\xE4nn\xF6llisen ajan lis\xE4ksi teht\xE4v\xE4\xE4 ty\xF6t\xE4."
+    correctAns: "S\xE4\xE4nn\xF6llisen ajan lis\xE4ksi teht\xE4v\xE4\xE4 ty\xF6t\xE4."
+  - questionInfo: "Mit\xE4 tarkoittaa opintovapaa? "
+    options:
+    - "Vapaata ty\xF6st\xE4, jotta voi keskitty\xE4 opiskeluun."
+    - 'Vapaus opiskelusta. '
+    - "Kouluttamatonta henkil\xF6\xE4. "
+    correctAns: "Vapaata ty\xF6st\xE4, jotta voi keskitty\xE4 opiskeluun."
+  - questionInfo: "Milloin ty\xF6ntekij\xE4 voidaan lomauttaa?"
+    options:
+    - "Kun ei ole tarpeeksi t\xF6it\xE4 tarjolla."
+    - Milloin tahansa.
+    - "Kun ty\xF6suhde on irtisanottu. "
+    correctAns: "Kun ei ole tarpeeksi t\xF6it\xE4 tarjolla."
+  - questionInfo: "Mik\xE4 m\xE4\xE4ritt\xE4\xE4 lepotaukojen pituuden?"
+    options:
+    - "Ty\xF6aikalaki."
+    - "Ty\xF6ntekij\xE4. "
+    - "Ty\xF6nantaja. "
+    correctAns: "Ty\xF6aikalaki."
+  - questionInfo: "Mit\xE4 on vuosiloma?"
+    options:
+    - "Ty\xF6tunneista kertyv\xE4\xE4 lomaa."
+    - Palkatonta lomaa.
+    - "Ty\xF6ntekij\xE4n oma-aloitteista vapaata."
+    correctAns: "Ty\xF6tunneista kertyv\xE4\xE4 lomaa."
+  - questionInfo: "Mit\xE4 tapahtuu irtisanomisajalla? "
+    options:
+    - "Teet t\xF6it\xE4 normaalisti ja saat palkkaa."
+    - "Olet pois t\xF6ist\xE4 etk\xE4 my\xF6sk\xE4\xE4n saa palkkaa. "
+    - "Olet t\xF6iss\xE4 mutta et saa palkkaa. "
+    correctAns: "Teet t\xF6it\xE4 normaalisti ja saat palkkaa."
+  - questionInfo: "Mit\xE4 ty\xF6suojeluviranomainen tekee? "
+    options:
+    - "Valvoo, ett\xE4 ty\xF6nantajat noudattavat ty\xF6lains\xE4\xE4d\xE4nt\xF6\xE4."
+    - "Suojelee ty\xF6tiloja. "
+    - 'Suojelee asiakirjoja. '
+    correctAns: "Valvoo, ett\xE4 ty\xF6nantajat noudattavat ty\xF6lains\xE4\xE4d\xE4nt\xF6\xE4."
+  - questionInfo: "Mik\xE4 seuraavista ei ole ty\xF6paikkakiusaamista? "
+    options:
+    - "Ilke\xE4 ja pilkkaava puhe."
+    - 'Uhkailu. '
+    - "Erilaiset mielipiteet ja n\xE4kemykset."
+    correctAns: "Erilaiset mielipiteet ja n\xE4kemykset."
