@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class CameraParallax : MonoBehaviour
 {
-    [SerializeField] float speed = 0.5f;
-    [SerializeField] float yOffset;
+    [SerializeField] public float speed = 0.5f;
+    public float yOffset = -20f;
     [SerializeField] GameObject cam;
     private Transform tr;
 

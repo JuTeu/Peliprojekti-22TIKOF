@@ -5,8 +5,9 @@ using UnityEngine;
 public class BackgroundManager : MonoBehaviour
 {
     [SerializeField] private GameObject bg1, bg2, bg3, bg4;
-    [SerializeField] private Sprite iceberg, iceBackground, deepCaveBackground1, deepCaveBackground2, deepCaveBackground3, kelpBackground1, kelpBackground2, kelpBackground3, kelpBackground4;
+    [SerializeField] private Sprite iceberg, iceBackground, deepCaveBackground1, deepCaveBackground2, deepCaveBackground3, kelpBackground1, kelpBackground2, kelpBackground3, kelpBackground4, seabedBackground;
     private SpriteRenderer bg1s, bg2s, bg3s, bg4s;
+    private CameraParallax bg1p, bg2p, bg3p, bg4p;
     // Start is called before the first frame update
     void Start()
     {
@@ -14,6 +15,11 @@ public class BackgroundManager : MonoBehaviour
         bg2s = bg2.GetComponent<SpriteRenderer>();
         bg3s = bg3.GetComponent<SpriteRenderer>();
         bg4s = bg4.GetComponent<SpriteRenderer>();
+
+        bg1p = bg1.GetComponent<CameraParallax>();
+        bg2p = bg2.GetComponent<CameraParallax>();
+        bg3p = bg3.GetComponent<CameraParallax>();
+        bg4p = bg4.GetComponent<CameraParallax>();
     }
 
     // Update is called once per frame
@@ -37,7 +43,18 @@ public class BackgroundManager : MonoBehaviour
                 bg2s = bg2.GetComponent<SpriteRenderer>();
                 bg3s = bg3.GetComponent<SpriteRenderer>();
                 bg4s = bg4.GetComponent<SpriteRenderer>();
+
+                bg1p = bg1.GetComponent<CameraParallax>();
+                bg2p = bg2.GetComponent<CameraParallax>();
+                bg3p = bg3.GetComponent<CameraParallax>();
+                bg4p = bg4.GetComponent<CameraParallax>();
             }
+
+            bg1p.yOffset = -20f;
+            bg2p.yOffset = -20f;
+            bg3p.yOffset = -20f;
+            bg4p.yOffset = -20f;
+
             bg1s.sortingOrder = -9;
             bg4s.sortingOrder = -15;
 
@@ -60,6 +77,11 @@ public class BackgroundManager : MonoBehaviour
             bg3s.sortingOrder = -8;
             bg4s.sortingOrder = -7;
 
+            bg1p.yOffset = -20f;
+            bg2p.yOffset = -20f;
+            bg3p.yOffset = -20f;
+            bg4p.yOffset = -20f;
+
             bg1s.color = new Color(1f, 1f, 1f, 1f);
             bg2s.color = new Color(1f, 1f, 1f, 1f);
             bg3s.color = new Color(1f, 1f, 1f, 1f);
@@ -73,7 +95,15 @@ public class BackgroundManager : MonoBehaviour
         // seabed
         else if (mapNum == 2)
         {
+            bg1.SetActive(true);
+            bg2.SetActive(false);
+            bg3.SetActive(false);
+            bg4.SetActive(false);
 
+            bg1s.color = new Color(1f, 1f, 1f, 1f);
+            bg1s.sortingOrder = -10;
+            bg1p.yOffset = 0f;
+            bg1s.sprite = seabedBackground;
         }
         // shallow
         else if (mapNum == 3)
@@ -92,6 +122,11 @@ public class BackgroundManager : MonoBehaviour
             bg2s.sortingOrder = -9;
             bg3s.sortingOrder = -8;
             bg4s.sortingOrder = -7;
+
+            bg1p.yOffset = -20f;
+            bg2p.yOffset = -20f;
+            bg3p.yOffset = -20f;
+            bg4p.yOffset = -20f;
 
             bg1s.color = new Color(0.3f, 0.3f, 0.3f, 1f);
             bg2s.color = new Color(1f, 1f, 1f, 1f);
