@@ -76,6 +76,14 @@ public class SurfaceMenuBehaviour : MonoBehaviour
         }
     }
 
+    public void PressRight()
+    {
+        if (currentMenu == 1)
+        {
+            DoMenuAnim(3);
+        }
+    }
+
     void MenuAnimation()
     {
         if (menuAnimId == 0)
@@ -90,6 +98,10 @@ public class SurfaceMenuBehaviour : MonoBehaviour
         {
             GoToBearMenu();
         }
+        else if (menuAnimId == 3)
+        {
+            GoToHole();
+        }
     }
 
     void DoMenuAnim(int id)
@@ -98,6 +110,8 @@ public class SurfaceMenuBehaviour : MonoBehaviour
         exponentialSequence = 0f;
         menuAnimId = id;
         sequenceStopped = false;
+        leftButtonB.interactable = false;
+        rightButtonB.interactable = false;
     }
 
     void MenuIn()
@@ -142,12 +156,45 @@ public class SurfaceMenuBehaviour : MonoBehaviour
         }
         if (sequence < 22f)
         {
-            playerRigidbody.MovePosition(Vector2.MoveTowards(playerRigidbody.position, new Vector2(-10.65f, -16.6f), 5f * Time.deltaTime));
+            playerRigidbody.MovePosition(Vector2.MoveTowards(playerRigidbody.position, new Vector2(-10.65f, playerRigidbody.position.y), 5f * Time.deltaTime));
             playerSprite.flipX = currentMenu == 0 ? true : false;
         }
-        if (sequence > 42.5f)
+        if (sequence > 14f)
         {
             currentMenu = 1;
+            leftButtonB.interactable = true;
+            rightButtonB.interactable = true;
+            sequenceStopped = true;
+        }
+    }
+
+    void GoToHole()
+    {
+        sequence += 10 * Time.deltaTime;
+        if (exponentialSequence < 10000f)
+        {
+            exponentialSequence = Mathf.Pow(2, sequence);
+
+            jumpButtonT.anchoredPosition = new Vector2(0, -1000 + exponentialSequence / 10 + 200);
+
+            openShopButtonT.anchoredPosition = new Vector2(-exponentialSequence / 10, 260);
+            talkButtonT.anchoredPosition = new Vector2(exponentialSequence / 10, 150);
+
+            if (exponentialSequence > 10000f)
+            {
+                jumpButtonT.anchoredPosition = new Vector2(0, 200);
+            }
+        }
+        if (sequence < 22f)
+        {
+            playerRigidbody.MovePosition(Vector2.MoveTowards(playerRigidbody.position, new Vector2(-5f, playerRigidbody.position.y), 5f * Time.deltaTime));
+            playerSprite.flipX = false;
+        }
+        if (sequence > 14f)
+        {
+            currentMenu = 0;
+            leftButtonB.interactable = true;
+            rightButtonB.interactable = true;
             sequenceStopped = true;
         }
     }
@@ -167,7 +214,7 @@ public class SurfaceMenuBehaviour : MonoBehaviour
 
         if (sequence < 22f)
         {
-            playerRigidbody.MovePosition(Vector2.MoveTowards(playerRigidbody.position, new Vector2(-2f, -16.6f), 2.5f * Time.deltaTime));
+            playerRigidbody.MovePosition(Vector2.MoveTowards(playerRigidbody.position, new Vector2(-2f, playerRigidbody.position.y), 2.5f * Time.deltaTime));
             playerSprite.flipX = false;
         }
 
