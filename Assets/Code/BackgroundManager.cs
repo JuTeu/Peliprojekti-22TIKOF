@@ -108,7 +108,26 @@ public class BackgroundManager : MonoBehaviour
         // shallow
         else if (mapNum == 3)
         {
+            bg1.SetActive(true);
+            bg2.SetActive(true);
+            bg3.SetActive(false);
+            bg4.SetActive(true);
 
+            bg1s.sortingOrder = -10;
+            bg2s.sortingOrder = -9;
+            bg4s.sortingOrder = -7;
+
+            bg1p.yOffset = -20f;
+            bg2p.yOffset = -20f;
+            bg4p.yOffset = -20f;
+
+            bg1s.color = new Color(1f, 1f, 1f, 1f);
+            bg2s.color = new Color(0.3f, 0.3f, 0.3f, 0.3f);
+            bg4s.color = new Color(0.3f, 0.3f, 0.3f, 0.3f);
+
+            bg1s.sprite = shallowBackground;
+            bg2s.sprite = deepCaveBackground2;
+            bg4s.sprite = iceBackground;
         }
         // deep
         else if (mapNum == 4)
