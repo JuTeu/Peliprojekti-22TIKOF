@@ -21,11 +21,10 @@ public class MapGeneratorGameObject : MonoBehaviour
     List<int>[] refrigeratorRooms = new List<int>[47];
     List<int[]> deadEndPositions = new List<int[]>();
     int startRoomXPosition, endRoomXPosition;
-    [SerializeField] private Tilemap map;
+    [SerializeField] private Tilemap map, mapBackground;
     [SerializeField] private Vector2 startRoomPosition;
-    [SerializeField] private SpriteRenderer bg1, bg2;
     [SerializeField] private Tile levelExit;
-    [SerializeField] private GameObject seabedObjects, seabedMap;
+    [SerializeField] private GameObject seabedObjects, seabedMap, seabedMapBackground;
 
     Tilemap rooms;
     Camera mainCamera;
@@ -128,6 +127,7 @@ public class MapGeneratorGameObject : MonoBehaviour
         if (mapNum != seabed)
         {
             seabedMap.SetActive(false);
+            seabedMapBackground.SetActive(false);
             seabedObjects.SetActive(false);
             rooms = GameObject.Find("Rooms").GetComponent<Tilemap>();
             for (int i = 0; i < 47; i++)
@@ -207,6 +207,7 @@ public class MapGeneratorGameObject : MonoBehaviour
         else if (mapNum == seabed)
         {
             seabedMap.SetActive(true);
+            seabedMapBackground.SetActive(true);
             seabedObjects.SetActive(true);
         }
         
