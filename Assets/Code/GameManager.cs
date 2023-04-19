@@ -89,6 +89,11 @@ public class GameManager : MonoBehaviour
         playerClipping = toggle;
     }
 
+    public static void ChangeLightSize(float size, float targetSize, float speed)
+    {
+        GameObject.Find("DarknessAndLight").GetComponent<DarknessBehaviour>().ChangeLight(size, targetSize, speed);
+    }
+
     public static void ReturnToSurfaceButton()
     {
         ClosePauseMenu();
@@ -107,6 +112,7 @@ public class GameManager : MonoBehaviour
         playerRigidbody.position = new Vector2(-4.5f, -16.656f);
         playerRigidbody.gravityScale = 1f;
         GenerateMap(0);
+        ChangeLightSize(0, 1000, 10);
         OpenSurfaceMenu();
     }
 }

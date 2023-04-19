@@ -64,7 +64,8 @@ public class SurfaceMenuBehaviour : MonoBehaviour
         playerSprite = GameObject.FindWithTag("Player").GetComponent<SpriteRenderer>();
         playerAnimator = GameObject.FindWithTag("Player").GetComponent<Animator>();
         playerAnimator.Play("Idle");
-        sequence = 12.8f;
+        //sequence = 12.8f;
+        sequence = 11f;
     }
 
     
