@@ -21736,6 +21736,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   darkness: {fileID: 1204593667}
   lightMask: {fileID: 1337709164}
+  startSequence: 1
 --- !u!4 &626464855
 Transform:
   m_ObjectHideFlags: 0
