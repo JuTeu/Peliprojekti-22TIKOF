@@ -29,7 +29,7 @@ public class DarknessBehaviour : MonoBehaviour
 
     public void ChangeLight(float initialSize, float targetSize, float changeSpeed)
     {
-        LightSize(initialSize);
+        if (initialSize >= 0) LightSize(initialSize);
         speed = changeSpeed;
         target = targetSize;
         sequence = 0f;
@@ -48,7 +48,7 @@ public class DarknessBehaviour : MonoBehaviour
         if (exponentialSequence < 10000f)
         {
             exponentialSequence = Mathf.Pow(2, sequence);
-            LightSize(target * (exponentialSequence / 10000));
+            LightSize(Mathf.MoveTowards(lightMask.transform.localScale.x, target, (exponentialSequence / 1000)));
 
             if (exponentialSequence > 10000f)
             {

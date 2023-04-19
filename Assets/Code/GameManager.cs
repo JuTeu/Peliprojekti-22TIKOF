@@ -112,7 +112,7 @@ public class GameManager : MonoBehaviour
         playerRigidbody.position = new Vector2(-4.5f, -16.656f);
         playerRigidbody.gravityScale = 1f;
         GenerateMap(0);
-        ChangeLightSize(0, 1000, 10);
+        ChangeLightSize(0, 50, 10);
         OpenSurfaceMenu();
     }
 }

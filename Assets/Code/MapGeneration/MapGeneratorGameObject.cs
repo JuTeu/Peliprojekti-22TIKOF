@@ -112,6 +112,7 @@ public class MapGeneratorGameObject : MonoBehaviour
             minBottomWidth = 1;
             maxBottomWidth = 2;
             minDeadEnds = 7;
+            GameManager.ChangeLightSize(7, 7, 10);
         }
         else if (mapNum == abyss)
         {
