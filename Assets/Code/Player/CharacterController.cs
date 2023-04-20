@@ -16,7 +16,6 @@ public class CharacterController : MonoBehaviour
     [SerializeField] float speed = 1;
     [SerializeField] RectTransform stickPosition, stickChild;
 
-    // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -116,7 +115,6 @@ public class CharacterController : MonoBehaviour
             }
         }
 
-        //movementVector = GetStick();
         rb.AddForce(movementVector * speed);
         if (movementVector != Vector2.zero)
         {
@@ -146,7 +144,6 @@ public class CharacterController : MonoBehaviour
             }
             if (currentAnim != nextAnim)
             {
-                //Debug.Log(nextAnim + " " + rotation);
                 currentAnim = nextAnim;
                 if (currentAnim == 0)
                 {
@@ -178,84 +175,5 @@ public class CharacterController : MonoBehaviour
                 sprite.flipX = false;
             }
         }
-        /*if (GetBeingPressed())
-        {
-            if (touchReleased && CheckIfPauseButtonIsBeingPressed()) stoppedBecauseButton = true;
-            else if (touchReleased) stoppedBecauseButton = false;
-            touchReleased = false;
-            if (stoppedBecauseButton) return;
-
-            if (oldPosition != GetPressedPosition())
-            {
-                changedPosition = false;
-                oldPosition = GetPressedPosition();
-            }
-            if (!changedPosition)
-            {
-                movementVector = GetPressedPosition() - rb.position;
-                movementVector = movementVector.normalized;
-                changedPosition = true;
-            }
-            rb.AddForce(movementVector * speed);
-            if (movementVector.x < 0f)
-            {
-                sprite.flipX = true;
-            }
-            else
-            {
-                sprite.flipX = false;
-            }
-            Vector2 angleComparer = movementVector.y > 0 ? Vector2.right : Vector2.left;
-            rb.rotation = Vector2.SignedAngle(Vector2.right, movementVector) - 90;
-        }
-        else
-        {
-            changedPosition = false;
-            touchReleased = true;
-        }*/
-    }
-
-    void SurfaceMovement()
-    {
-        /*if (GetBeingPressed())
-        {
-            if (touchReleased && CheckIfPauseButtonIsBeingPressed()) stoppedBecauseButton = true;
-            else if (touchReleased) stoppedBecauseButton = false;
-            touchReleased = false;
-            if (stoppedBecauseButton) return;
-
-            if (oldPosition != GetPressedPosition())
-            {
-                changedPosition = false;
-                oldPosition = GetPressedPosition();
-            }
-            if (!changedPosition)
-            {
-                movementVector = GetPressedPosition() - rb.position;
-                movementVector.y = 0f;
-                movementVector = movementVector.normalized;
-                changedPosition = true;
-            }
-            rb.AddForce(movementVector * speed);
-            if (movementVector.x < 0f)
-            {
-                sprite.flipX = true;
-            }
-            else
-            {
-                sprite.flipX = false;
-            }
-        }
-        else
-        {
-            changedPosition = false;
-            touchReleased = true;
-        }*/
-    }
-
-    bool CheckIfPauseButtonIsBeingPressed()
-    {
-        // En tiedä miten tämä pitäisi tehdä...
-        return false;
     }
 }

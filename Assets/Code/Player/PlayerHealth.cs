@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.UI;
 
 public class PlayerHealth : MonoBehaviour
@@ -10,10 +11,12 @@ public class PlayerHealth : MonoBehaviour
     public float damagePerSecond = 1f;
     private float iFrames = 0f;
     private SpriteRenderer sprite;
+    private AudioSource sound;
   
     void Start()
     {
         sprite = GetComponent<SpriteRenderer>();
+        sound = GetComponent<AudioSource>();
     }
 
     private void Update()
@@ -44,6 +47,7 @@ public class PlayerHealth : MonoBehaviour
     public void TakeDamageFromEnemy(GameObject enemy, float damage, float knockbackForce, float invinsibilityFrames)
     {
         if (iFrames > 0f) return;
+        sound.Play();
         Vector2 knockbackDirection = transform.position - enemy.transform.position;
         knockbackDirection.Normalize();
         Vector2 knockbackForceVector = knockbackDirection * knockbackForce;
