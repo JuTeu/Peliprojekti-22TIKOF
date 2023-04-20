@@ -8,11 +8,11 @@ public class CharacterController : MonoBehaviour
     private InputReader inputReader;
     private SpriteRenderer sprite;
     Vector2 movementVector = Vector2.zero;
-    Vector2 oldPosition = Vector2.zero;    
-    private bool changedPosition = false;
-    private bool touchReleased = false;
-    private bool stoppedBecauseButton = false;
+    Vector2 oldPosition = Vector2.zero;
+    private bool touchReleased = true;
+    private float screenSize;
     [SerializeField] float speed = 1;
+    [SerializeField] RectTransform stickPosition, stickChild;
 
     // Start is called before the first frame update
     void Start()
@@ -20,11 +20,17 @@ public class CharacterController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         sprite = GetComponent<SpriteRenderer>();
         inputReader = GetComponent<InputReader>();
+        screenSize = Screen.width / 5;
     }
 
     Vector2 GetPressedPosition()
     {
         return inputReader.GetMousePosition();
+    }
+
+    Vector2 GetStick()
+    {
+        return inputReader.GetStick();
     }
 
     bool GetBeingPressed()
@@ -43,13 +49,45 @@ public class CharacterController : MonoBehaviour
             //SurfaceMovement();
         }
     }
-
+    
     void UnderWaterMovement()
     {
         if (!GameManager.playerInControl) return;
 
+        if (GetBeingPressed() && touchReleased)
+        {
+            stickPosition.position = GetPressedPosition();
+            touchReleased = false;
+        }
+        else if (GetBeingPressed() && !touchReleased)
+        {
+            movementVector = GetPressedPosition() - ((Vector2)stickPosition.position);
+            stickChild.position = GetPressedPosition();
+            movementVector = Vector2.ClampMagnitude(stickChild.anchoredPosition, 100f) / 100f;
+            stickChild.anchoredPosition = Vector2.ClampMagnitude(stickChild.anchoredPosition, 100f);
+        }
+        else if (!GetBeingPressed() && !touchReleased)
+        {
+            touchReleased = true;
+            movementVector = Vector2.zero;
+            stickPosition.anchoredPosition = new Vector2(10000, 10000);
+        }
 
-        if (GetBeingPressed())
+        //movementVector = GetStick();
+        rb.AddForce(movementVector * speed);
+        if (movementVector != Vector2.zero)
+        {
+            rb.rotation = Vector2.SignedAngle(Vector2.right, movementVector) - 90;
+            if (movementVector.x < 0f)
+            {
+                sprite.flipX = true;
+            }
+            else
+            {
+                sprite.flipX = false;
+            }
+        }
+        /*if (GetBeingPressed())
         {
             if (touchReleased && CheckIfPauseButtonIsBeingPressed()) stoppedBecauseButton = true;
             else if (touchReleased) stoppedBecauseButton = false;
@@ -83,12 +121,12 @@ public class CharacterController : MonoBehaviour
         {
             changedPosition = false;
             touchReleased = true;
-        }
+        }*/
     }
 
     void SurfaceMovement()
     {
-        if (GetBeingPressed())
+        /*if (GetBeingPressed())
         {
             if (touchReleased && CheckIfPauseButtonIsBeingPressed()) stoppedBecauseButton = true;
             else if (touchReleased) stoppedBecauseButton = false;
@@ -121,7 +159,7 @@ public class CharacterController : MonoBehaviour
         {
             changedPosition = false;
             touchReleased = true;
-        }
+        }*/
     }
 
     bool CheckIfPauseButtonIsBeingPressed()
