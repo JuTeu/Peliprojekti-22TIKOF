@@ -158,7 +158,7 @@ public class SurfaceMenuBehaviour : MonoBehaviour
             jumpButtonT.anchoredPosition = new Vector2(0, 200);
             equipmentButtonT.anchoredPosition = new Vector2(0, 50);
             leftButtonB.interactable = true;
-            rightButtonB.interactable = true;
+            //rightButtonB.interactable = true;
             jumpButtonB.interactable = true;
             equipmentButtonB.interactable = true;
             sequenceStopped = true;
@@ -234,7 +234,7 @@ public class SurfaceMenuBehaviour : MonoBehaviour
             playerAnimator.Play("Idle");
             jumpButtonT.anchoredPosition = new Vector2(0, 200);
             leftButtonB.interactable = true;
-            rightButtonB.interactable = true;
+            //rightButtonB.interactable = true;
             equipmentButtonB.interactable = true;
             jumpButtonB.interactable = true;
             sequenceStopped = true;

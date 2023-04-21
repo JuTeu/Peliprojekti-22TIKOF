@@ -70,6 +70,11 @@ public class GameManager : MonoBehaviour
     {
         SceneManager.UnloadSceneAsync("SurfaceMenu");
     }
+    
+    public static void HideStick()
+    {
+        GameObject.Find("JoyStick").GetComponent<RectTransform>().anchoredPosition = new Vector2(10000, 10000);
+    }
 
     public static void GenerateMap(int mapNum)
     {
@@ -102,6 +107,7 @@ public class GameManager : MonoBehaviour
 
     public static void BeginGame()
     {
+        HideStick();
         PauseWorld(true);
         Camera.main.gameObject.GetComponent<Camera>().orthographicSize = 7.5f;
         cameraMode = 1;
