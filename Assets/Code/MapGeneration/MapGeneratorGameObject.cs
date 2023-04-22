@@ -184,24 +184,56 @@ public class MapGeneratorGameObject : MonoBehaviour
                 }
             }
 
-            int enemyRoomsPlaced = 0;
-            for (int i = 0; i < 1000; i++)
-            {
-                if (enemyRoomsPlaced >= enemies) break;
-                int randomX = Random.Range(0, generatedMap.GetLength(1));
-                int randomY = Random.Range(0, generatedMap.GetLength(0));
-                if (PlaceRoom(randomX, randomY * -1, generatedMap[randomY, randomX], 1)) enemyRoomsPlaced++;
-                if (i == 999) Debug.LogError("Kaikkia vihollishuoneita ei pystytty laittamaan...");
-            }
-
             int refrigeratorRoomsPlaced = 0;
+            int[,] refrigeratorRoomPositions = new int[refrigerators, 2];
             for (int i = 0; i < 1000; i++)
             {
                 if (refrigeratorRoomsPlaced >= refrigerators) break;
                 int randomX = Random.Range(0, generatedMap.GetLength(1));
                 int randomY = Random.Range(0, generatedMap.GetLength(0));
-                if (PlaceRoom(randomX, randomY * -1, generatedMap[randomY, randomX], 2)) refrigeratorRoomsPlaced++;
+                bool validPosition = true;
+                for (int j = 0; j < refrigeratorRoomsPlaced; j++)
+                {
+                    if (randomX == refrigeratorRoomPositions[j, 0] && randomY == refrigeratorRoomPositions[j, 1]) validPosition = false;
+                }
+                if (validPosition)
+                {
+                    if (PlaceRoom(randomX, randomY * -1, generatedMap[randomY, randomX], 2))
+                    {
+                        refrigeratorRoomPositions[refrigeratorRoomsPlaced, 0] = randomX;
+                        refrigeratorRoomPositions[refrigeratorRoomsPlaced, 1] = randomY;
+                        refrigeratorRoomsPlaced++;
+                    }
+                }
                 if (i == 999) Debug.LogError("Kaikkia pakastinhuoneita ei pystytty laittamaan...");
+            }
+
+            int enemyRoomsPlaced = 0;
+            int[,] enemyRoomPositions = new int[enemies, 2];
+            for (int i = 0; i < 1000; i++)
+            {
+                if (enemyRoomsPlaced >= enemies) break;
+                int randomX = Random.Range(0, generatedMap.GetLength(1));
+                int randomY = Random.Range(0, generatedMap.GetLength(0));
+                bool validPosition = true;
+                for (int j = 0; j < enemyRoomsPlaced; j++)
+                {
+                    if (randomX == enemyRoomPositions[j, 0] && randomY == enemyRoomPositions[j, 1]) validPosition = false;
+                }
+                for (int j = 0; j < refrigeratorRoomsPlaced; j++)
+                {
+                    if (randomX == refrigeratorRoomPositions[j, 0] && randomY == refrigeratorRoomPositions[j, 1]) validPosition = false;
+                }
+                if (validPosition)
+                {
+                    if (PlaceRoom(randomX, randomY * -1, generatedMap[randomY, randomX], 1))
+                    {
+                        enemyRoomPositions[enemyRoomsPlaced, 0] = randomX;
+                        enemyRoomPositions[enemyRoomsPlaced, 1] = randomY;
+                        enemyRoomsPlaced++;
+                    }
+                }
+                if (i == 999) Debug.LogError("Kaikkia vihollishuoneita ei pystytty laittamaan...");
             }
 
             map.SetTile(new Vector3Int(12 * mapGenerator.GetEndRoomXPosition() + ((int) startRoomPosition.x / 2) + 5, -12 * (generatedMap.GetLength(0) - 1) + ((int) startRoomPosition.y) + 5, 1), levelExit);

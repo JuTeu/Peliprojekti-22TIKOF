@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Chest
   - SpawnedObject
+  - LevelGeometry
   layers:
   - Default
   - TransparentFX
@@ -13,7 +14,7 @@ TagManager:
   - Player
   - Water
   - UI
-  - 
+  - Level Geometry
   - 
   - 
   - 

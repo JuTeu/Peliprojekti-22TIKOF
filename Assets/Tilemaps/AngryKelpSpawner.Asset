@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d291c82e0390aad649423e2f14c809f2, type: 3}
-  m_Name: CoolKelpSpawner
+  m_Name: AngryKelpSpawner
   m_EditorClassIdentifier: 
-  m_Sprite: {fileID: 21300000, guid: b3601efbb2a6ced408d6c46bad55b07b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 621cec1b0b8b7854480fccfcb6a66206, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Transform:
     e00: 1
@@ -34,4 +34,4 @@ MonoBehaviour:
   m_InstancedGameObject: {fileID: 0}
   m_Flags: 1
   m_ColliderType: 1
-  prefab: {fileID: 571027643421351931, guid: becf491e9ae428b4ea9c3c2d087aad54, type: 3}
+  prefab: {fileID: 7089482448951869628, guid: c96204fc588c9aa41af3f3c9af391bbb, type: 3}
