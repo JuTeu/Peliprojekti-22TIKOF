@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
     public static Bounds levelBounds;
+    public static bool levelIsGenerated = false;
     public static bool roomsSceneNoLongerLoaded = true;
     public static bool playerInControl = true;
     public static bool playerIsInvulnerable = false;
@@ -38,6 +39,7 @@ public class GameManager : MonoBehaviour
 
     public static void PauseWorld(bool toggle)
     {
+        HideStick();
         GameObject.FindWithTag("Player").GetComponent<Rigidbody2D>().velocity = new Vector2(0f, 0f);
         playerInControl = !toggle;
         playerIsInvulnerable = toggle;
@@ -87,11 +89,16 @@ public class GameManager : MonoBehaviour
     {
         GameObject.Find("JoyStick").GetComponent<RectTransform>().anchoredPosition = new Vector2(10000, 10000);
     }
-
+    public static bool GenerateMapWait(int mapNum)
+    {
+        GenerateMap(mapNum);
+        return true;
+    }
     public static void GenerateMap(int mapNum)
     {
-        GameObject.Find("MapGenerator").GetComponent<MapGeneratorGameObject>().GenerateMap(mapNum);
+        levelIsGenerated = false;
         GameObject.Find("Background").GetComponent<BackgroundManager>().ChangeBackground(mapNum);
+        GameObject.Find("MapGenerator").GetComponent<MapGeneratorGameObject>().GenerateMap(mapNum);
     }
 
     public static void EnablePauseButton(bool toggle)

@@ -286,6 +286,8 @@ public class MapGeneratorGameObject : MonoBehaviour
         CameraMovement cameraObject = GameObject.Find("Main Camera").GetComponent<CameraMovement>();
         cameraObject.cameraBounds = new Bounds();
         cameraObject.cameraBounds.SetMinMax(new Vector3(cameraMinX, cameraMinY, -10), new Vector3(cameraMaxX, cameraMaxY, -10));
+
+        GameManager.levelIsGenerated = true;
     }
     bool PlaceRoom(int x, int y, int tile, int mode)
     {

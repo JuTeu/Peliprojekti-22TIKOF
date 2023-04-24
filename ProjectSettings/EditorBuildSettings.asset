@@ -35,4 +35,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/SurfaceMenu.unity
     guid: 3229b5701f8a1bca9ab94a29f49c9867
+  - enabled: 1
+    path: Assets/Scenes/LevelTransitionMenu.unity
+    guid: cdcbafd064f76a540a942070df1a5d96
   m_configObjects: {}

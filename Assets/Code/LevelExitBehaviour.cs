@@ -20,7 +20,7 @@ public class LevelExitBehaviour : MonoBehaviour
     {
         if(collision.gameObject.tag == "Player")
         {
-            if (GameManager.questionsAnswered != GameManager.chestsInLevel)
+            if (GameManager.questionsAnswered >= GameManager.chestsInLevel)
             {
                 if (GameManager.currentFloor == 4) Debug.Log("Oot kaikista paras ihminen ikinä");
                 Debug.Log("Seuraavaan kenttään...");
