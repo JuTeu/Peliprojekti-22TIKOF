@@ -8,44 +8,61 @@ public class Dialogue : MonoBehaviour
     public TextMeshProUGUI textComponent;
     public string[] lines;
     public float textSpeed;
+    public float lineDelay;
 
     private int index;
-    // Start is called before the first frame update
+    private bool isTyping;
+
     void Start()
     {
         textComponent.text = string.Empty;
         StartDialogue();
     }
 
-    // Update is called once per frame
     void Update()
     {
-        if(Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0))
         {
-            if(textComponent.text == lines[index])
+            if (isTyping)
+            {
+                StopAllCoroutines();
+                isTyping = false;
+                textComponent.text = lines[index];
+                StartCoroutine(DelayBeforeNextLine());
+            }
+            else if (textComponent.text == lines[index])
             {
                 NextLine();
             }
-            else
-            {
-                StopAllCoroutines();
-                textComponent.text = lines[index];
-            }
         }
     }
+
     void StartDialogue()
     {
         index = 0;
         StartCoroutine(TypeLine());
     }
+
     IEnumerator TypeLine()
     {
+        isTyping = true;
         foreach (char c in lines[index].ToCharArray())
         {
             textComponent.text += c;
             yield return new WaitForSeconds(textSpeed);
         }
+
+        isTyping = false;
+        yield return new WaitForSeconds(lineDelay);
+        NextLine();
     }
+
+    IEnumerator DelayBeforeNextLine()
+    {
+        yield return new WaitForSeconds(lineDelay - ((lines[index].Length - textComponent.text.Length) * textSpeed));
+        NextLine();
+    }
+
     void NextLine()
     {
         if (index < lines.Length - 1)
@@ -60,3 +77,4 @@ public class Dialogue : MonoBehaviour
         }
     }
 }
+
