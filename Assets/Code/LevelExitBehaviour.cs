@@ -24,8 +24,9 @@ public class LevelExitBehaviour : MonoBehaviour
             {
                 if (GameManager.currentFloor == 4) Debug.Log("Oot kaikista paras ihminen ikinä");
                 Debug.Log("Seuraavaan kenttään...");
-                GameObject.FindWithTag("Player").transform.position = new Vector2(0f, -25f);
-                GameManager.GenerateMap(GameManager.currentFloor + 1);
+                //GameObject.FindWithTag("Player").transform.position = new Vector2(0f, -25f);
+                //GameManager.GenerateMap(GameManager.currentFloor + 1);
+                GameManager.OpenLevelTransitionMenu();
                 
             }
         }

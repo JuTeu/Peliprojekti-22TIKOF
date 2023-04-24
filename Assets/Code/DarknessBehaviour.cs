@@ -14,7 +14,7 @@ public class DarknessBehaviour : MonoBehaviour
     {
         player = GameObject.FindWithTag("Player");
         mainCamera = Camera.main;
-        float darknessHeight = 50f;
+        float darknessHeight = 100f;
         float darknessWidth = darknessHeight * mainCamera.aspect;
         darkness.transform.localScale = new Vector3(darknessWidth, darknessHeight, 1);
         LightSize(0f);

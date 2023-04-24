@@ -9,6 +9,7 @@ public class CameraMovement : MonoBehaviour
     private Vector3 velocity = Vector3.zero;
     public Bounds cameraBounds;
     private Camera cam;
+    private float transitionMenuTop;
     //private PixelPerfectCamera pixCam;
     private Vector3 targetPosition;
     // Start is called before the first frame update
@@ -35,6 +36,12 @@ public class CameraMovement : MonoBehaviour
                 Mathf.Clamp(player.position.x, cameraBounds.min.x, cameraBounds.max.x),
                 -15, -10);*/
             transform.position = new Vector3(player.position.x, player.position.y, -10);
+        }
+        else if (GameManager.cameraMode == 2)
+        {
+            transform.position = new Vector3(
+                player.position.x,
+                Mathf.Clamp(player.position.y, 250f, 320f), -10);
         }
         else if (GameManager.cameraMode == 100)
         {

@@ -327,3 +327,11 @@ MonoBehaviour:
     - 'Uhkailu. '
     - "Erilaiset mielipiteet ja n\xE4kemykset."
     correctAns: "Erilaiset mielipiteet ja n\xE4kemykset."
+  - questionInfo: "Mit\xE4 teet, kun tulee Zombie Apocalypse joka levi\xE4\xE4 r\xE4j\xE4hdysm\xE4isesti? "
+    options:
+    - "L\xE4hden loottaamaan kauppoja"
+    - "Etsin ja varastan aseita (Kultaisella Heavy sniperill\xE4 tuhoo ukon, jolla
+      on joku harmaa pisla:D)"
+    - "L\xE4hden pakoon kaupungista koska kaupunkeja pommitetaan. "
+    correctAns: "Etsin ja varastan aseita (Kultaisella Heavy sniperill\xE4 tuhoo
+      ukon, jolla on joku harmaa pisla:D)"
