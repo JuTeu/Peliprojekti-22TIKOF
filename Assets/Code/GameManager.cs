@@ -22,6 +22,8 @@ public class GameManager : MonoBehaviour
     public static bool newQuestion;
     public static List<Vector3Int> spawnerTiles = new List<Vector3Int>();
 
+    public const float cameraPlaySize = 10;
+
     void Awake()
     {
         Instance = this;

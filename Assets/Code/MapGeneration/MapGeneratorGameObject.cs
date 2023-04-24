@@ -275,13 +275,14 @@ public class MapGeneratorGameObject : MonoBehaviour
             GameManager.levelBounds = seabedMap.GetComponent<Tilemap>().localBounds;
         }
 
-        float cameraHeight = mainCamera.orthographicSize;
+        float cameraHeight = GameManager.cameraPlaySize;
         float cameraWidth = cameraHeight * mainCamera.aspect;
         float cameraMinX = GameManager.levelBounds.min.x + cameraWidth;
         float cameraMaxX = GameManager.levelBounds.extents.x - cameraWidth;
         float cameraMinY = GameManager.levelBounds.min.y + cameraHeight;
         // Tää ei toimi niinkuin sen pitäisi jos tän yrittää tehdä kunnolla. Kentän yläraja pysyy aina samana niin ihan sama, kovakoodaan sen.
         float cameraMaxY = -18 - cameraHeight;
+        if (mapNum == 0) cameraMaxY = 20 - cameraHeight;
         CameraMovement cameraObject = GameObject.Find("Main Camera").GetComponent<CameraMovement>();
         cameraObject.cameraBounds = new Bounds();
         cameraObject.cameraBounds.SetMinMax(new Vector3(cameraMinX, cameraMinY, -10), new Vector3(cameraMaxX, cameraMaxY, -10));
