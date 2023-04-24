@@ -20,7 +20,7 @@ public class EnemyAI : MonoBehaviour
     private bool isInChaseRange;
     private bool isInAttackRange;
 
-    private Animator anim;
+    public Animator animator;
     bool facingRight = false;
 
     // Start is called before the first frame update
@@ -40,6 +40,15 @@ public class EnemyAI : MonoBehaviour
         float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
         dir.Normalize();
         movement = dir;
+
+        if(isInChaseRange && isInAttackRange)
+        {
+            animator.SetBool("canBeAttacked", true);
+        }
+        else
+        {
+            animator.SetBool("canBeAttacked", false);
+        }
     }
 
     private void FixedUpdate()
