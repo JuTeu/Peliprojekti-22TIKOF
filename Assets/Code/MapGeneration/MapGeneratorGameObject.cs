@@ -43,6 +43,7 @@ public class MapGeneratorGameObject : MonoBehaviour
     {
         GameManager.currentFloor = mapNum;
         GameManager.questionsAnswered = 0;
+        GameManager.unhurt = true;
         GameObject.Find("PaperCount").GetComponent<UIPaperCount>().SetCollectedPapers(0);
 
         GameObject[] spawnedObjects = GameObject.FindGameObjectsWithTag("SpawnedObject");
@@ -75,12 +76,12 @@ public class MapGeneratorGameObject : MonoBehaviour
         else if (mapNum == kelp)
         {
             roomsScene = "KelpRooms";
-            mapWidth = 9;
+            mapWidth = 13;
             mapHeight = 5;
-            roomCount = 16;
+            roomCount = 20;
             minBottomWidth = 1;
-            maxBottomWidth = 2;
-            minDeadEnds = 4;
+            maxBottomWidth = 4;
+            minDeadEnds = 5;
 
         }
         else if (mapNum == seabed)
@@ -255,7 +256,7 @@ public class MapGeneratorGameObject : MonoBehaviour
         }
         GameManager.roomsSceneNoLongerLoaded = true;
         map.RefreshAllTiles();
-        //map.CompressBounds();
+        map.CompressBounds();
 
         List<Vector3Int> spawnerTiles = GameManager.spawnerTiles;
         for (int i = 0; i < GameManager.spawnerTiles.Count; i++)
@@ -278,7 +279,7 @@ public class MapGeneratorGameObject : MonoBehaviour
         float cameraHeight = GameManager.cameraPlaySize;
         float cameraWidth = cameraHeight * mainCamera.aspect;
         float cameraMinX = GameManager.levelBounds.min.x + cameraWidth;
-        float cameraMaxX = GameManager.levelBounds.extents.x - cameraWidth;
+        float cameraMaxX = GameManager.levelBounds.max.x - cameraWidth;
         float cameraMinY = GameManager.levelBounds.min.y + cameraHeight;
         // Tää ei toimi niinkuin sen pitäisi jos tän yrittää tehdä kunnolla. Kentän yläraja pysyy aina samana niin ihan sama, kovakoodaan sen.
         float cameraMaxY = -18 - cameraHeight;

@@ -47,13 +47,14 @@ public class PlayerHealth : MonoBehaviour
     public void TakeDamageFromEnemy(GameObject enemy, float damage, float knockbackForce, float invinsibilityFrames)
     {
         if (iFrames > 0f) return;
+        GameManager.unhurt = false;
         sound.Play();
         Vector2 knockbackDirection = transform.position - enemy.transform.position;
         knockbackDirection.Normalize();
         Vector2 knockbackForceVector = knockbackDirection * knockbackForce;
         TakeDamage(damage);
         iFrames = invinsibilityFrames;
-        GetComponent<Rigidbody2D>().AddForce(knockbackForceVector, ForceMode2D.Impulse);
+        if (healthAmount > 0) GetComponent<Rigidbody2D>().AddForce(knockbackForceVector, ForceMode2D.Impulse);
     }
 
     public void Heal(float healingAmount)

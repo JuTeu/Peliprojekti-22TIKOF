@@ -8,15 +8,17 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
     public static Bounds levelBounds;
+    public static bool unhurt;
     public static bool levelIsGenerated = false;
     public static bool roomsSceneNoLongerLoaded = true;
     public static bool playerInControl = true;
     public static bool playerIsInvulnerable = false;
     public static bool playerClipping = true;
     public static bool enemiesPaused = false;
+    public static int score;
     public static int chestsInLevel = 0;
     public static int questionsAnswered, questionsAnsweredTotal = 0;
-    public static int correctAnswers = 0;
+    public static int correctAnswers, correctAnswersTotal = 0;
     public static int currentFloor = 0;
     public static int cameraMode = 0;
     public static int playMode = 0;
@@ -28,6 +30,7 @@ public class GameManager : MonoBehaviour
     void Awake()
     {
         Instance = this;
+        score = 0;
         BeginGame();
     }
 

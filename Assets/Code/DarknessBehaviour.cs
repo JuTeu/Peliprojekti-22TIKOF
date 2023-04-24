@@ -24,6 +24,7 @@ public class DarknessBehaviour : MonoBehaviour
     void Update()
     {
         transform.position = player.transform.position;
+        darkness.transform.position = new Vector2(mainCamera.transform.position.x, mainCamera.transform.position.y);
         if (startSequence) ChangeLightSize();
     }
 
