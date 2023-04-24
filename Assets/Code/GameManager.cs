@@ -72,6 +72,16 @@ public class GameManager : MonoBehaviour
     {
         SceneManager.UnloadSceneAsync("SurfaceMenu");
     }
+
+    public static void OpenLevelTransitionMenu()
+    {
+        SceneManager.LoadSceneAsync("LevelTransitionMenu", LoadSceneMode.Additive);
+    }
+
+    public static void CloseLevelTransitionMenu()
+    {
+        SceneManager.UnloadSceneAsync("LevelTransitionMenu");
+    }
     
     public static void HideStick()
     {
