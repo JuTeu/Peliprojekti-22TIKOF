@@ -221,6 +221,7 @@ MonoBehaviour:
   - terve
   - "Lopuksi teet n\xE4in n\xE4in n\xE4in ja n\xE4in"
   textSpeed: 0.1
+  lineDelay: 2
 --- !u!1 &353948092
 GameObject:
   m_ObjectHideFlags: 0
