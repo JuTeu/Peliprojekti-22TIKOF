@@ -67,21 +67,27 @@ public class Dialogue : MonoBehaviour
         NextLine();
     }
 
-    void NextLine()
+void NextLine()
+{
+    if (isTyping)
     {
-        if (index < randomIndexes.Length - 1)
-        {
-            index++;
-            textComponent.text = string.Empty;
-            Debug.Log("Moving to line " + (index + 1) + ": " + lines[randomIndexes[index]]);
-            StartCoroutine(TypeLine());
-        }
-        else
-        {
-            Debug.Log("Dialogue completed.");
-            gameObject.SetActive(false);
-        }
+        return;
     }
+
+    if (index < randomIndexes.Length - 1)
+    {
+        index++;
+        textComponent.text = string.Empty;
+        Debug.Log("Moving to line " + (index + 1) + ": " + lines[randomIndexes[index]]);
+        StartCoroutine(TypeLine());
+    }
+    else
+    {
+        Debug.Log("Dialogue completed.");
+        gameObject.SetActive(false);
+    }
+}
+
 
     private int[] GetRandomIndexes(int count, int max)
     {
