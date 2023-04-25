@@ -10,13 +10,13 @@ public class Dialogue : MonoBehaviour
     public float textSpeed;
     public float lineDelay;
 
+    private int[] randomIndexes;
     private int index;
     private bool isTyping;
 
     void Start()
     {
         StartDialogue();
-
     }
 
     void Update()
@@ -27,10 +27,10 @@ public class Dialogue : MonoBehaviour
             {
                 StopAllCoroutines();
                 isTyping = false;
-                textComponent.text = lines[index];
+                textComponent.text = lines[randomIndexes[index]];
                 StartCoroutine(DelayBeforeNextLine());
             }
-            else if (textComponent.text == lines[index])
+            else if (textComponent.text == lines[randomIndexes[index]])
             {
                 NextLine();
             }
@@ -39,14 +39,17 @@ public class Dialogue : MonoBehaviour
 
     void StartDialogue()
     {
+        randomIndexes = GetRandomIndexes(2, lines.Length);
         index = 0;
         StartCoroutine(TypeLine());
     }
 
     IEnumerator TypeLine()
     {
+        Debug.Log("Typing line " + (index + 1) + ": " + lines[randomIndexes[index]]);
         isTyping = true;
-        foreach (char c in lines[index].ToCharArray())
+        textComponent.text = "";
+        foreach (char c in lines[randomIndexes[index]].ToCharArray())
         {
             textComponent.text += c;
             yield return new WaitForSeconds(textSpeed);
@@ -59,29 +62,35 @@ public class Dialogue : MonoBehaviour
 
     IEnumerator DelayBeforeNextLine()
     {
-        yield return new WaitForSeconds(lineDelay - ((lines[index].Length - textComponent.text.Length) * textSpeed));
+        Debug.Log("Delaying before next line...");
+        yield return new WaitForSeconds(lineDelay - ((lines[randomIndexes[index]].Length - textComponent.text.Length) * textSpeed));
         NextLine();
     }
 
     void NextLine()
     {
-        if (index < lines.Length - 1)
+        if (index < randomIndexes.Length - 1)
         {
             index++;
             textComponent.text = string.Empty;
+            Debug.Log("Moving to line " + (index + 1) + ": " + lines[randomIndexes[index]]);
             StartCoroutine(TypeLine());
         }
         else
         {
+            Debug.Log("Dialogue completed.");
             gameObject.SetActive(false);
         }
     }
 
-    public void StartDialog()
+    private int[] GetRandomIndexes(int count, int max)
     {
-        gameObject.SetActive(true);
-        StartDialogue();
+        HashSet<int> indexes = new HashSet<int>();
+        while (indexes.Count < count)
+        {
+            int index = Random.Range(0, max);
+            indexes.Add(index);
+        }
+        return new List<int>(indexes).ToArray();
     }
 }
-
-
