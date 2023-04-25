@@ -74,14 +74,11 @@ public class Dialogue : MonoBehaviour
         else
         {
             gameObject.SetActive(false);
+            GameManager.CloseDialogue();
         }
     }
 
-    public void StartDialog()
-    {
-        gameObject.SetActive(true);
-        StartDialogue();
-    }
+
 }
 
 
