@@ -215,20 +215,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   textComponent: {fileID: 1028912415}
   lines:
-  - "Hmm, teen hyv\xE4\xE4 tilans\xE4\xE4st\xF6\xE4 s\xE4ilytt\xE4ess\xE4 porkkanoita
-    ja kaloja samassa kanisterissa."
+  - "Hmm, teen hyvvee tilansi\xE4st\xF6\xF6 s\xE4ilytt\xE4ess\xE4 porkkanoet ja kaloi
+    samassa kanisterissa."
   - Sanna Marin on milf.
-  - "Pakastimista saat healthia. K\xE4yt\xE4 niit\xE4."
-  - "Tee ty\xF6si tai koet vakavat seuraukset."
-  - "Ai mih\xE4 vihu? Emm\xE4\xE4 tii\xE4. Sun teht\xE4v\xE4 ei ole v\xE4litt\xE4\xE4
-    vihuista."
-  - "Oikein vastaamalla kysymyksiin saat enemm\xE4n pisteit\xE4."
-  - "Muista vastata kaikkiin kysymyksii. Muuten et p\xE4\xE4se syvemm\xE4lle."
-  - "R\xE4pyl\xF6ill\xE4 voi uida lujempaa."
-  - "Jos et l\xF6yd\xE4 aarretta, \xE4l\xE4 tule takaisin."
-  - "S\xF6in t\xE4n\xE4\xE4n ruokatauolla lehm\xE4n."
-  - "V\xE4lit\xE4n hyvinvoinnistasi koska v\xE4lit\xE4n aarteesta. Tee siis ty\xF6si
-    ja saat palkkasi."
+  - "Me ee turhaa maksettu maltaita pakastimien laitosta merree. K\xE4\xE4t\xE4 niit\xE4
+    ni suat heltti\xE4."
+  - "Tee ty\xF6s tai koet vakavat seuraukset."
+  - "Ai mih\xE4 vihu? Emm\xE4\xE4 tii\xE4. Eekai siel semmottee oo."
+  - "Ku vastaat kysymyksii oikei ni suat enemm\xE4 pisteit."
+  - "Muista vastaa kaikkii kysymyksii ni pi\xE4set syvemm\xE4lle meree."
+  - "R\xE4pyl\xF6il pi\xE4set lujempaa."
+  - "Jos et l\xF6yr\xE4 uarretta, \xE4l\xE4 tuu takasi."
+  - "S\xF6in t\xE4n\xE4\xE4 ruokatauolla lehm\xE4n."
+  - "Mit\xE4 teet ti\xE4ll\xE4? Hypp\xE4\xE4 jokkee."
+  - "Syvemm\xE4ll\xE4 on pimi\xE4\xE4, yrit\xE4 ettii lamppu."
+  - "Oot mee\xE4 34. sukeltaja t\xE4ss\xE4 kuussa. \xC4l\xE4 tuota pettymyst\xE4."
+  - "Ti\xE4ll\xE4 noudatettaa kaikkia ty\xF6lakeja ja turvallisuuteen liittyvi\xE4
+    toemia."
+  - En tykkee luovuttajista. Jos joku on varma ni se on aeva varma.
   textSpeed: 0.1
   lineDelay: 2
 --- !u!1 &1028912413
