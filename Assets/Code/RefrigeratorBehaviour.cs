@@ -11,6 +11,7 @@ public class RefrigeratorBehaviour : MonoBehaviour
     [SerializeField] Sprite doorFront;
     [SerializeField] Sprite doorBack;
     [SerializeField] Sprite bodyOff;
+    [SerializeField] Sprite bodyOn;
     [SerializeField] LineRenderer cable;
     [SerializeField] Vector3 cableEnd;
     private bool playerEntered = false;
@@ -34,6 +35,13 @@ public class RefrigeratorBehaviour : MonoBehaviour
         refrigeratorCentre = transform.position;
         refrigeratorCentre.y -= 0.3f;
     }
+    public void Refresh()
+    {
+        GetComponent<SpriteRenderer>().sprite = bodyOn;
+        sequence = 0f;
+        door.transform.rotation = Quaternion.identity;
+        door.transform.localPosition = new Vector3(0f, 0f, 0f);
+    }
     void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag == "Player" && sequence < 1f)
@@ -43,10 +51,6 @@ public class RefrigeratorBehaviour : MonoBehaviour
             playerHealth = player.GetComponent<PlayerHealth>();
             playerEntered = true;
             GameManager.PauseWorld(true);
-            /*GameManager.playerInControl = false;
-            GameManager.playerIsInvulnerable = true;
-            GameManager.enemiesPaused = true;
-            GameManager.EnablePauseButton(false);*/
         }
     }
     void FixedUpdate()

@@ -245,6 +245,7 @@ public class MapGeneratorGameObject : MonoBehaviour
             seabedMap.SetActive(true);
             seabedMapBackground.SetActive(true);
             seabedObjects.SetActive(true);
+            GameManager.RefreshSeabedObjects();
         }
         
         
