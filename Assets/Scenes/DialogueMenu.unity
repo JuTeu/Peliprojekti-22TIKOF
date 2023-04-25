@@ -160,7 +160,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0, y: 250}
+  m_AnchoredPosition: {x: 0, y: 215}
   m_SizeDelta: {x: 454, y: 409}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &212225588
@@ -215,12 +215,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   textComponent: {fileID: 1028912415}
   lines:
-  - "Terve traveller. Miten menee? Seuraavaksi p\xE4\xE4set tutoriaalin pariin."
-  - "Chestin aukaiset n\xE4in ja n\xE4in ja niin edelleen ja okke"
-  - "Sukeltamaan p\xE4\xE4set n\xE4in ja n\xE4in ja sit n\xE4in ja muista tehd\xE4
-    n\xE4in"
-  - terve
-  - "Lopuksi teet n\xE4in n\xE4in n\xE4in ja n\xE4in"
+  - "Hmm, teen hyv\xE4\xE4 tilans\xE4\xE4st\xF6\xE4 s\xE4ilytt\xE4ess\xE4 porkkanoita
+    ja kaloja samassa kanisterissa."
+  - Sanna Marin on milf.
+  - "Pakastimista saat healthia. K\xE4yt\xE4 niit\xE4."
+  - "Tee ty\xF6si tai koet vakavat seuraukset."
+  - "Ai mih\xE4 vihu? Emm\xE4\xE4 tii\xE4. Sun teht\xE4v\xE4 ei ole v\xE4litt\xE4\xE4
+    vihuista."
+  - "Oikein vastaamalla kysymyksiin saat enemm\xE4n pisteit\xE4."
+  - "Muista vastata kaikkiin kysymyksii. Muuten et p\xE4\xE4se syvemm\xE4lle."
+  - "R\xE4pyl\xF6ill\xE4 voi uida lujempaa."
+  - "Jos et l\xF6yd\xE4 aarretta, \xE4l\xE4 tule takaisin."
+  - "S\xF6in t\xE4n\xE4\xE4n ruokatauolla lehm\xE4n."
+  - "V\xE4lit\xE4n hyvinvoinnistasi koska v\xE4lit\xE4n aarteesta. Tee siis ty\xF6si
+    ja saat palkkasi."
   textSpeed: 0.1
   lineDelay: 2
 --- !u!1 &1028912413
