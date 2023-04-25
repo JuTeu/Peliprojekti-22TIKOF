@@ -24,6 +24,7 @@ public class GameManager : MonoBehaviour
     public static int playMode = 0;
     public static bool newQuestion;
     public static List<Vector3Int> spawnerTiles = new List<Vector3Int>();
+    public static string[] lines;
 
     public const float cameraPlaySize = 10;
 
@@ -71,6 +72,17 @@ public class GameManager : MonoBehaviour
     public static void OpenSurfaceMenu()
     {
         SceneManager.LoadSceneAsync("SurfaceMenu", LoadSceneMode.Additive);
+    }
+    public static void OpenDialogue()
+    {
+        
+        SceneManager.LoadSceneAsync("DialogueMenu", LoadSceneMode.Additive);
+    }
+
+    public static void CloseDialogue()
+    {
+       
+        SceneManager.UnloadSceneAsync("DialogueMenu");
     }
 
     public static void CloseSurfaceMenu()

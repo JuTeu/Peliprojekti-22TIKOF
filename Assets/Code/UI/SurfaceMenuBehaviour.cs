@@ -204,6 +204,10 @@ public class SurfaceMenuBehaviour : MonoBehaviour
             sequenceStopped = true;
         }
     }
+    public void Talk() 
+    {
+        GameManager.OpenDialogue();
+    }
 
     void GoToHole()
     {

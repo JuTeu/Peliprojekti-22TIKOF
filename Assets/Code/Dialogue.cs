@@ -15,8 +15,8 @@ public class Dialogue : MonoBehaviour
 
     void Start()
     {
-        textComponent.text = string.Empty;
         StartDialogue();
+
     }
 
     void Update()
@@ -76,5 +76,12 @@ public class Dialogue : MonoBehaviour
             gameObject.SetActive(false);
         }
     }
+
+    public void StartDialog()
+    {
+        gameObject.SetActive(true);
+        StartDialogue();
+    }
 }
+
 
