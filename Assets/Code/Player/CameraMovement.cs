@@ -43,6 +43,10 @@ public class CameraMovement : MonoBehaviour
                 player.position.x,
                 Mathf.Clamp(player.position.y, 250f, 320f), -10);
         }
+        else if (GameManager.cameraMode == 3)
+        {
+            //ok
+        }
         else if (GameManager.cameraMode == 100)
         {
             /*transform.position = new Vector3(
