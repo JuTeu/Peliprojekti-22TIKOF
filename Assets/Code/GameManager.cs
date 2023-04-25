@@ -100,6 +100,14 @@ public class GameManager : MonoBehaviour
         SceneManager.UnloadSceneAsync("LevelTransitionMenu");
     }
     
+    public static void RefreshSeabedObjects()
+    {
+        GameObject[] objects = GameObject.FindGameObjectsWithTag("SeabedObject");
+        foreach (GameObject objecto in objects)
+        {
+            objecto.GetComponent<ObjectRefresher>().Refresh();
+        }
+    }
     public static void HideStick()
     {
         GameObject.Find("JoyStick").GetComponent<RectTransform>().anchoredPosition = new Vector2(10000, 10000);
