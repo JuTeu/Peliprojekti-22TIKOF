@@ -88,7 +88,7 @@ public class LevelExitBehaviour : MonoBehaviour
         {
             transform.position = new Vector2(transform.position.x, transform.position.y + 0.1f);
         }
-        if (sequence < 4f)
+        if (sequence < 10f)
         {
             playerRigidbody.rotation = Mathf.MoveTowards(playerRigidbody.rotation, 0f, 600 * Time.deltaTime);
             playerRigidbody.MovePosition(Vector2.MoveTowards(player.transform.position, aboveReward, 2 * Time.deltaTime));

@@ -64,6 +64,76 @@ public class LevelTransitionMenuBehaviour : MonoBehaviour
             hpBar.anchoredPosition = new Vector2(exponentialSequence / 10 - 130, -135);
             pauseButton.anchoredPosition = new Vector2(-exponentialSequence / 10 + 60, -60);
         }*/
+        if (GameManager.currentFloor != 4) DownwardsTransition();
+    }
+    void Tallying()
+    {
+        tallyDelay += Time.deltaTime;
+        if (tallyDelay > tallyDelayOld + 0.07f)
+        {
+            tallyDelayOld = tallyDelay;
+            if (time > 0)
+            {
+                points = time < 20 ? time : 20;
+                time -= points;
+                score += points;
+            }
+            else if (health > 0)
+            {
+                points = health < 20 ? health : 20;
+                health -= points;
+                score += points;
+            }
+            else if (allCorrect && allCorrectBonus > 0)
+            {
+                points = allCorrectBonus < 40 ? allCorrectBonus : 40;
+                allCorrectBonus -= points;
+                score += points;
+            }
+            else if (unhurt && noDamageBonus > 0)
+            {
+                points = noDamageBonus < 40 ? noDamageBonus : 40;
+                noDamageBonus -= points;
+                score += points;
+            }
+            else
+            {
+                GameManager.score = score;
+                tallyingFinished = true;
+                sequence = 18f;
+                playerRigidbody.position = new Vector2(59f + (floor * 50), 255f);
+            }
+            RefreshMenu();
+            if (!tallyingFinished && sequence > 10) sequence = 11f; 
+        }
+    }
+    void PointOperation(int input)
+    {
+        points = input < 20 ? points = input : 20;
+        input -= points;
+        score += points;
+    }
+    void RefreshMenu()
+    {
+        timeText.text = time + "";
+        timeTextDropShadow.text = time + "";
+        healthText.text = health + "";
+        healthTextDropShadow.text = health + "";
+        scoreText.text = score + "";
+        scoreTextDropShadow.text = score + "";
+        if (unhurt)
+        {
+            noDamageText.text = noDamageBonus + "";
+            noDamageTextDropShadow.text = noDamageBonus + "";
+        }
+        if (allCorrect)
+        {
+            allCorrectText.text = allCorrectBonus + "";
+            allCorrectTextDropShadow.text = allCorrectBonus + "";
+        }
+    }
+    void DownwardsTransition()
+    {
         if (exponentialSequence < 10000f && sequenceOrder == 1)
         {
             exponentialSequence = Mathf.Pow(2, sequence * 3);
@@ -146,72 +216,6 @@ public class LevelTransitionMenuBehaviour : MonoBehaviour
         {
             player.GetComponent<Animator>().Play("DownSwimIdle");
             GameManager.CloseLevelTransitionMenu();
-        }
-    }
-    void Tallying()
-    {
-        tallyDelay += Time.deltaTime;
-        if (tallyDelay > tallyDelayOld + 0.07f)
-        {
-            tallyDelayOld = tallyDelay;
-            if (time > 0)
-            {
-                points = time < 20 ? time : 20;
-                time -= points;
-                score += points;
-            }
-            else if (health > 0)
-            {
-                points = health < 20 ? health : 20;
-                health -= points;
-                score += points;
-            }
-            else if (allCorrect && allCorrectBonus > 0)
-            {
-                points = allCorrectBonus < 40 ? allCorrectBonus : 40;
-                allCorrectBonus -= points;
-                score += points;
-            }
-            else if (unhurt && noDamageBonus > 0)
-            {
-                points = noDamageBonus < 40 ? noDamageBonus : 40;
-                noDamageBonus -= points;
-                score += points;
-            }
-            else
-            {
-                GameManager.score = score;
-                tallyingFinished = true;
-                sequence = 18f;
-                playerRigidbody.position = new Vector2(59f + (floor * 50), 255f);
-            }
-            RefreshMenu();
-            if (!tallyingFinished && sequence > 10) sequence = 11f; 
-        }
-    }
-    void PointOperation(int input)
-    {
-        points = input < 20 ? points = input : 20;
-        input -= points;
-        score += points;
-    }
-    void RefreshMenu()
-    {
-        timeText.text = time + "";
-        timeTextDropShadow.text = time + "";
-        healthText.text = health + "";
-        healthTextDropShadow.text = health + "";
-        scoreText.text = score + "";
-        scoreTextDropShadow.text = score + "";
-        if (unhurt)
-        {
-            noDamageText.text = noDamageBonus + "";
-            noDamageTextDropShadow.text = noDamageBonus + "";
-        }
-        if (allCorrect)
-        {
-            allCorrectText.text = allCorrectBonus + "";
-            allCorrectTextDropShadow.text = allCorrectBonus + "";
         }
     }
 }
