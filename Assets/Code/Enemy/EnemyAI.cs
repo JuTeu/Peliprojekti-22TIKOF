@@ -23,11 +23,20 @@ public class EnemyAI : MonoBehaviour
     public Animator animator;
     bool facingRight = false;
 
+    public Transform startPoint;
+    public Transform endPoint;
+    private Vector3 targetPos;
+
+    private Vector2 startingPosition;
+    private bool shouldMoveRight = true;
+    public float moveDistance = 1.5f;
+
     // Start is called before the first frame update
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         target = GameObject.FindWithTag("Player").transform;
+        startingPosition = transform.position;
     }
 
     // Update is called once per frame
@@ -48,6 +57,26 @@ public class EnemyAI : MonoBehaviour
         else
         {
             animator.SetBool("canBeAttacked", false);
+
+            if(shouldMoveRight)
+            {
+                transform.position = new Vector2(transform.position.x + speed * Time.deltaTime, transform.position.y);
+                if(transform.position.x >= startingPosition.x + moveDistance)
+                {
+                    shouldMoveRight = false;
+                    transform.localScale = new Vector3(2.8f, 2.8f, 2.35f);
+                }
+            }
+            else
+            {
+                transform.position = new Vector2(transform.position.x - speed * Time.deltaTime, transform.position.y);
+                if(transform.position.x <= startingPosition.x - moveDistance)
+                {
+                    shouldMoveRight = true;
+                    transform.localScale = new Vector3(-2.8f,2.8f, 2.35f);
+                }
+            }
+            
         }
     }
 
@@ -59,6 +88,7 @@ public class EnemyAI : MonoBehaviour
         {
             MoveCharacter(movement);
         }
+
         if (isInAttackRange)
         {
             rb.velocity = Vector2.zero;

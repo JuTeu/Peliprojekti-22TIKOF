@@ -115,18 +115,569 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: Biohazard_animation_0
+      rect:
+        serializedVersion: 2
+        x: 26
+        y: 0
+        width: 26
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 31a1e3e25abca3a4dae06cdbd9bf0d48
+      internalID: 1469828678
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Biohazard_animation_1
+      rect:
+        serializedVersion: 2
+        x: 91
+        y: 0
+        width: 26
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3e808201886fafb43a8c767d1ec082d0
+      internalID: 1827303169
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Biohazard_animation_2
+      rect:
+        serializedVersion: 2
+        x: 157
+        y: 0
+        width: 26
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: da1ed886a9a66ce46b8902d73b35f296
+      internalID: -445880898
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Biohazard_animation_3
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 0
+        width: 26
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 09d321f999456c84baba3015148c6ee6
+      internalID: -726077753
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Biohazard_animation_4
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 0
+        width: 26
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2b2bdcb9aacdbb64f9bbcb1ef15fd23c
+      internalID: 102762540
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Biohazard_animation_5
+      rect:
+        serializedVersion: 2
+        x: 354
+        y: 0
+        width: 30
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d6493ca97fd78704ba4f26c793dd0c72
+      internalID: -473604784
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Biohazard_animation_6
+      rect:
+        serializedVersion: 2
+        x: 420
+        y: 0
+        width: 30
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4f12ee6f2aeb5d842a2000c46110cbaf
+      internalID: -1068843606
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Biohazard_animation_7
+      rect:
+        serializedVersion: 2
+        x: 486
+        y: 0
+        width: 30
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eae8a7d21706e0b42b4e05dba467f93f
+      internalID: -1257255809
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Biohazard_animation_8
+      rect:
+        serializedVersion: 2
+        x: 548
+        y: 0
+        width: 39
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f668635159fd85b4fa4584c6c13ec473
+      internalID: -387800895
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Biohazard_animation_9
+      rect:
+        serializedVersion: 2
+        x: 607
+        y: 0
+        width: 54
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 08354772cbfd6064db6b30708bff81a7
+      internalID: 1784266949
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Biohazard_animation_10
+      rect:
+        serializedVersion: 2
+        x: 671
+        y: 0
+        width: 58
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 200a57dd45788c44695f27cb6a3b61a4
+      internalID: -1412740538
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Biohazard_animation_11
+      rect:
+        serializedVersion: 2
+        x: 736
+        y: 0
+        width: 61
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c2012b70c6f04814f9d5eebabc72f142
+      internalID: 549850120
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Biohazard_animation_13
+      rect:
+        serializedVersion: 2
+        x: 801
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e8fca21033d45a643b221212dbb7ea95
+      internalID: -533717897
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Biohazard_animation_14
+      rect:
+        serializedVersion: 2
+        x: 867
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 13ca2bdccf959884989b58e68e0ab57f
+      internalID: -1342124836
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Biohazard_animation_15
+      rect:
+        serializedVersion: 2
+        x: 933
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b120f2e9461649045add40e2d2920e1f
+      internalID: -592908097
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Biohazard_animation_16
+      rect:
+        serializedVersion: 2
+        x: 999
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c61d168f204b22c4fad9d61d55e364ae
+      internalID: 1138521056
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Biohazard_animation_17
+      rect:
+        serializedVersion: 2
+        x: 1065
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6af692b49dc33414fafa001fca15886d
+      internalID: 865482424
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Biohazard_animation_18
+      rect:
+        serializedVersion: 2
+        x: 1132
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 37d6f8f30389ecf4b880caf93a79665d
+      internalID: 1241249747
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Biohazard_animation_19
+      rect:
+        serializedVersion: 2
+        x: 1198
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 78e0a2063b96cf74aa66d9758092c155
+      internalID: -1200267278
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Biohazard_animation_20
+      rect:
+        serializedVersion: 2
+        x: 1264
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 381efa5d2220ae44e9c5b331039fabbd
+      internalID: 1885605219
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Biohazard_animation_21
+      rect:
+        serializedVersion: 2
+        x: 1331
+        y: 0
+        width: 62
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 25fb097410a4a2f44857c3887acb993f
+      internalID: -701228792
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Biohazard_animation_22
+      rect:
+        serializedVersion: 2
+        x: 1397
+        y: 0
+        width: 62
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8bacedb9c0c51214da560738cf8675c3
+      internalID: -1710871127
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Biohazard_animation_23
+      rect:
+        serializedVersion: 2
+        x: 1544
+        y: 0
+        width: 34
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 47156577651c56e44a3bc4d0ef7e5b32
+      internalID: -1109622744
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Biohazard_animation_24
+      rect:
+        serializedVersion: 2
+        x: 1615
+        y: 0
+        width: 24
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0f7639bffd22d5c41a99dbbe0bac48ca
+      internalID: -650717270
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Biohazard_animation_25
+      rect:
+        serializedVersion: 2
+        x: 1467
+        y: 0
+        width: 55
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3801ad7526a78fb47a225a90cdc6a9fe
+      internalID: 539058098
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: e19c52de63b4d7f45a5445cc629afcff
     internalID: 0
     vertices: []
     indices: 
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Biohazard_animation_6: -1068843606
+      Biohazard_animation_19: -1200267278
+      Biohazard_animation_8: -387800895
+      Biohazard_animation_3: -726077753
+      Biohazard_animation_9: 1784266949
+      Biohazard_animation_10: -1412740538
+      Biohazard_animation_1: 1827303169
+      Biohazard_animation_14: -1342124836
+      Biohazard_animation_16: 1138521056
+      Biohazard_animation_12: 867522941
+      Biohazard_animation_5: -473604784
+      Biohazard_animation_0: 1469828678
+      Biohazard_animation_18: 1241249747
+      Biohazard_animation_22: -1710871127
+      Biohazard_animation_24: -650717270
+      Biohazard_animation_20: 1885605219
+      Biohazard_animation_13: -533717897
+      Biohazard_animation_21: -701228792
+      Biohazard_animation_11: 549850120
+      Biohazard_animation_7: -1257255809
+      Biohazard_animation_25: -452402676
+      Biohazard_animation_2: -445880898
+      Biohazard_animation_4: 102762540
+      Biohazard_animation_15: -592908097
+      Biohazard_animation_17: 865482424
+      Biohazard_animation_23: -1109622744
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

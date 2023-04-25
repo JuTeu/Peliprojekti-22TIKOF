@@ -144001,6 +144001,63 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0156b3343db6f5aceb96a97590012056, type: 3}
+--- !u!1001 &3542176893647369061
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 845604827651623125, guid: 3b0107b88197b174daf4a1600431db85, type: 3}
+      propertyPath: m_RootOrder
+      value: 21
+      objectReference: {fileID: 0}
+    - target: {fileID: 845604827651623125, guid: 3b0107b88197b174daf4a1600431db85, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -31.875046
+      objectReference: {fileID: 0}
+    - target: {fileID: 845604827651623125, guid: 3b0107b88197b174daf4a1600431db85, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 4.024598
+      objectReference: {fileID: 0}
+    - target: {fileID: 845604827651623125, guid: 3b0107b88197b174daf4a1600431db85, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 845604827651623125, guid: 3b0107b88197b174daf4a1600431db85, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 845604827651623125, guid: 3b0107b88197b174daf4a1600431db85, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 845604827651623125, guid: 3b0107b88197b174daf4a1600431db85, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 845604827651623125, guid: 3b0107b88197b174daf4a1600431db85, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 845604827651623125, guid: 3b0107b88197b174daf4a1600431db85, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 845604827651623125, guid: 3b0107b88197b174daf4a1600431db85, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 845604827651623125, guid: 3b0107b88197b174daf4a1600431db85, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7278067415941281405, guid: 3b0107b88197b174daf4a1600431db85, type: 3}
+      propertyPath: m_Name
+      value: Biohazard
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 3b0107b88197b174daf4a1600431db85, type: 3}
 --- !u!1001 &4426576609152438417
 PrefabInstance:
   m_ObjectHideFlags: 0
