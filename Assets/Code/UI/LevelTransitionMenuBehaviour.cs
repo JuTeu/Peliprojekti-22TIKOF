@@ -103,6 +103,7 @@ public class LevelTransitionMenuBehaviour : MonoBehaviour
             {
                 GameManager.score = score;
                 tallyingFinished = true;
+                GameObject.Find("PaperCount").GetComponent<UIPaperCount>().AddScore(0);
                 sequence = 18f;
             }
             RefreshMenu();

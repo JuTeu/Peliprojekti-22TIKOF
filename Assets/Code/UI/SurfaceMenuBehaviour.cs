@@ -2,10 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class SurfaceMenuBehaviour : MonoBehaviour
 {
     [SerializeField] GameObject leftButton, rightButton, totalScore, jumpButton, equipmentButton, openShopButton, talkButton;
+    [SerializeField] TextMeshProUGUI scoreText, highScoreText;
     RectTransform leftButtonT, rightButtonT, totalScoreT, jumpButtonT, equipmentButtonT, openShopButtonT, talkButtonT;
     Button leftButtonB, rightButtonB, totalScoreB, jumpButtonB, equipmentButtonB, openShopButtonB, talkButtonB;
     RectTransform hpBar, pauseButton, paperCount;
@@ -19,6 +21,11 @@ public class SurfaceMenuBehaviour : MonoBehaviour
     
     void Start()
     {
+        GameManager.totalScore += GameManager.score;
+        if (GameManager.score > GameManager.highScore) GameManager.highScore = GameManager.score;
+        scoreText.text = GameManager.totalScore + "";
+        highScoreText.text = GameManager.highScore + "";
+        GameManager.score = 0;
         leftButtonT = leftButton.GetComponent<RectTransform>();
         rightButtonT = rightButton.GetComponent<RectTransform>();
         totalScoreT = totalScore.GetComponent<RectTransform>();

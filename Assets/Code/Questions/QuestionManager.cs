@@ -41,6 +41,7 @@ public class QuestionManager : MonoBehaviour
         {
             correctAns = true;
             GameManager.correctAnswers++;
+            GameObject.Find("PaperCount").GetComponent<UIPaperCount>().AddScore(1000);
         }
         else
         {
