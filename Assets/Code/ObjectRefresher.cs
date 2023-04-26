@@ -10,5 +10,9 @@ public class ObjectRefresher : MonoBehaviour
         {
             GetComponent<RefrigeratorBehaviour>().Refresh();
         }
+        else if (transform.childCount == 4)
+        {
+            GetComponent<ChestOpener>().Refresh();
+        }
     }
 }

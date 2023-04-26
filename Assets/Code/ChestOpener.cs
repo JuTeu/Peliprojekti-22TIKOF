@@ -5,6 +5,7 @@ using UnityEngine;
 public class ChestOpener : MonoBehaviour
 {
     public GameObject Chest,ChestAnimated,Paper;
+    private Animator chestAnim;
     private bool opened = false;
     //public GameObject QuestionBG;
 
@@ -18,8 +19,10 @@ public class ChestOpener : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        chestAnim = ChestAnimated.GetComponent<Animator>();
         ChestAnimated.SetActive(false);
         Paper.SetActive(false);
+
         //QuestionBG.SetActive(false);     Tähän on parempi käyttää erillistä sceneä ja scenen käyttäminen toimii paremmin prefabeilla.
 
         playerDesiredPosition = transform.position;
@@ -28,7 +31,7 @@ public class ChestOpener : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if (!opened)
+        if (collision.tag == "Player" && !opened)
         {
             opened = true;
             //QuestionBG.SetActive(true);
@@ -43,6 +46,17 @@ public class ChestOpener : MonoBehaviour
         }
     }
 
+    public void Refresh()
+    {
+        chestOpened = false;
+        sequence = 0f;
+        opened = false;
+        Paper.transform.localPosition = new Vector2(0f, -0.365f);
+        Paper.GetComponent<PaperMove>().travelledSoFar = 0f;
+        Chest.SetActive(true);
+        ChestAnimated.SetActive(false);
+        Paper.SetActive(false);
+    }
     void OnTriggerExit2D(Collider2D collision)
     {
         //QuestionBG.SetActive(false);
@@ -70,8 +84,9 @@ public class ChestOpener : MonoBehaviour
         if (sequence > 1f && !chestOpened)
         {
             chestOpened = true;
-            Destroy(Chest);
+            Chest.SetActive(false);
             ChestAnimated.SetActive(true);
+            chestAnim.Play("ChestOpen");
             Paper.SetActive(true);
         }
 
