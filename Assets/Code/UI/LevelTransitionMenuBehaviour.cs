@@ -64,7 +64,10 @@ public class LevelTransitionMenuBehaviour : MonoBehaviour
             hpBar.anchoredPosition = new Vector2(exponentialSequence / 10 - 130, -135);
             pauseButton.anchoredPosition = new Vector2(-exponentialSequence / 10 + 60, -60);
         }*/
-        if (GameManager.currentFloor != 4) DownwardsTransition();
+        if (GameManager.currentFloor == 0) ToKelpTransition();
+        else if (GameManager.currentFloor == 4) UpwardsTunnelTransition();
+        else if (GameManager.currentFloor > 0) TunnelTransition();
+
     }
     void Tallying()
     {
@@ -101,7 +104,6 @@ public class LevelTransitionMenuBehaviour : MonoBehaviour
                 GameManager.score = score;
                 tallyingFinished = true;
                 sequence = 18f;
-                playerRigidbody.position = new Vector2(59f + (floor * 50), 255f);
             }
             RefreshMenu();
             if (!tallyingFinished && sequence > 10) sequence = 11f; 
@@ -132,7 +134,91 @@ public class LevelTransitionMenuBehaviour : MonoBehaviour
             allCorrectTextDropShadow.text = allCorrectBonus + "";
         }
     }
-    void DownwardsTransition()
+    void TunnelTransition()
+    {
+        if (exponentialSequence < 10000f && sequenceOrder == 1)
+        {
+            exponentialSequence = Mathf.Pow(2, sequence * 3);
+            mainTransform.anchoredPosition = new Vector2(0, 1000 - exponentialSequence / 10 - 200);
+            hpBar.anchoredPosition = new Vector2(exponentialSequence / 10 - 130, -135);
+            pauseButton.anchoredPosition = new Vector2(-exponentialSequence / 10 + 60, -60);
+            paperCount.anchoredPosition = new Vector2(exponentialSequence / 10 - 130, -60);
+
+            if (exponentialSequence > 10000f)
+            {
+                mainTransform.anchoredPosition = new Vector2(0, -200);
+            }
+        }
+        if (exponentialSequence < 10000f && sequenceOrder > 1)
+        {
+            exponentialSequence = Mathf.Pow(2, (sequence - 20) * 4);
+            mainTransform.anchoredPosition = new Vector2(0, exponentialSequence / 10 - 200);
+            hpBar.anchoredPosition = new Vector2(1000 - exponentialSequence / 10 - 130, -135);
+            pauseButton.anchoredPosition = new Vector2(-1000 + exponentialSequence / 10 + 60, -60);
+            paperCount.anchoredPosition = new Vector2(1000 - exponentialSequence / 10 - 130, -60);
+
+            if (exponentialSequence > 10000f)
+            {
+                hpBar.anchoredPosition = new Vector2(-130, -135);
+                pauseButton.anchoredPosition = new Vector2(60, -60);
+                paperCount.anchoredPosition = new Vector2(-130, -60);
+            }
+        }
+
+
+        if (exponentialSequence >= 10000f && !tallyingFinished) Tallying();
+
+        playerRigidbody.velocity = new Vector2(0f, -5f);
+
+        if (sequence > 2 && sequenceOrder == 0)
+        {
+            sequenceOrder = 1;
+            player.transform.position = new Vector2(59f + (floor * 50), 330f);
+            playerRigidbody.rotation = -180f;
+            player.GetComponent<Animator>().Play("DownSwim");
+            GameManager.cameraMode = 2;
+            Camera.main.gameObject.GetComponent<Camera>().orthographicSize = 10f;
+            GameManager.ChangeLightSize(0, 50, 10);
+        }
+        if (sequence > 5 && sequenceOrder == 1) GameManager.cameraMode = 4;
+        if (sequence > 20 && sequenceOrder == 1)
+        {
+            
+            exponentialSequence = 0f;
+            GameManager.cameraMode = 3;
+            sequenceOrder = 2;
+            GameManager.ChangeLightSize(50, 0, 10);
+            GameManager.GenerateMap(GameManager.currentFloor + 1);
+        }
+        if (sequence > 23 && GameManager.levelIsGenerated && sequenceOrder == 2)
+        {
+            Debug.Log("AAA");
+            sequenceOrder = 3;
+            GameManager.cameraMode = 0;
+            Camera.main.gameObject.GetComponent<Camera>().orthographicSize = GameManager.cameraPlaySize;
+            GameManager.PlayerClipping(false);
+            playerRigidbody.position = new Vector2(spawnRoomLocation, -14f);
+            playerRigidbody.velocity = new Vector2(0f, -5f);
+            GameManager.PauseWorld(false);
+            GameManager.ChangeLightSize(0, 50, 10);
+        }
+        if (sequence > 24 && sequenceOrder == 3)
+        {
+            sequenceOrder = 4;
+            GameManager.PlayerClipping(true);
+            player.GetComponent<Animator>().Play("DownSwim");
+        }
+        if (sequence > 24.3f && sequenceOrder == 4)
+        {
+            player.GetComponent<Animator>().Play("DownSwimIdle");
+            GameManager.CloseLevelTransitionMenu();
+        }
+    }
+    void UpwardsTunnelTransition()
+    {
+
+    }
+    void ToKelpTransition()
     {
         if (exponentialSequence < 10000f && sequenceOrder == 1)
         {
@@ -190,6 +276,7 @@ public class LevelTransitionMenuBehaviour : MonoBehaviour
         }
         if (sequence > 20 && sequenceOrder == 1)
         {
+            playerRigidbody.position = new Vector2(59f + (floor * 50), 255f);
             exponentialSequence = 0f;
             sequenceOrder = 2;
             GameManager.ChangeLightSize(50, 0, 10);
@@ -201,7 +288,7 @@ public class LevelTransitionMenuBehaviour : MonoBehaviour
             GameManager.cameraMode = 0;
             Camera.main.gameObject.GetComponent<Camera>().orthographicSize = GameManager.cameraPlaySize;
             GameManager.PlayerClipping(false);
-            playerRigidbody.position = new Vector2(spawnRoomLocation, -13.5f);
+            playerRigidbody.position = new Vector2(spawnRoomLocation, -14f);
             playerRigidbody.velocity = new Vector2(0f, -5f);
             GameManager.PauseWorld(false);
             GameManager.ChangeLightSize(0, 50, 10);
