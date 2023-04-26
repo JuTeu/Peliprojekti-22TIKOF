@@ -96,7 +96,7 @@ GameObject:
   - component: {fileID: 9213701982144898789}
   - component: {fileID: 9213701982144898790}
   - component: {fileID: 9213701982144898784}
-  - component: {fileID: 7325833538791562938}
+  - component: {fileID: 8718773014586165150}
   - component: {fileID: 7896743833323693779}
   m_Layer: 0
   m_Name: Anglerfish
@@ -223,7 +223,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 5
---- !u!114 &7325833538791562938
+--- !u!114 &8718773014586165150
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -232,18 +232,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 9213701982144898785}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 82bcd1814aa62d84fbc509c5da68ddf4, type: 3}
+  m_Script: {fileID: 11500000, guid: 838b10acc9cd4b54d80e9152bb3195a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 2
-  checkRadius: 4
+  checkRadius: 3
   attackRadius: 3
-  shouldRotate: 0
+  shouldRotate: 1
   whatIsPlayer:
     serializedVersion: 2
     m_Bits: 8
   dir: {x: 0, y: 0, z: 0}
   animator: {fileID: 7896743833323693779}
+  startPoint: {fileID: 0}
+  endPoint: {fileID: 0}
+  moveDistance: 1.5
 --- !u!95 &7896743833323693779
 Animator:
   serializedVersion: 5
