@@ -188,11 +188,21 @@ public class LevelTransitionMenuBehaviour : MonoBehaviour
             GameManager.cameraMode = 3;
             sequenceOrder = 2;
             GameManager.ChangeLightSize(50, 0, 10);
+            if (GameManager.currentFloor + 1 == 4)
+            {
+                //Tää on syvältä
+                GameManager.cameraMode = 0;
+                Camera.main.gameObject.GetComponent<Camera>().orthographicSize = GameManager.cameraPlaySize;
+                GameManager.PlayerClipping(true);
+                playerRigidbody.position = new Vector2(spawnRoomLocation, -21f);
+                playerRigidbody.velocity = new Vector2(0f, -5f);
+                GameManager.PauseWorld(false);
+                GameManager.ChangeLightSize(0, 50, 10);
+            }
             GameManager.GenerateMap(GameManager.currentFloor + 1);
         }
         if (sequence > 23 && GameManager.levelIsGenerated && sequenceOrder == 2)
         {
-            Debug.Log("AAA");
             sequenceOrder = 3;
             GameManager.cameraMode = 0;
             Camera.main.gameObject.GetComponent<Camera>().orthographicSize = GameManager.cameraPlaySize;
