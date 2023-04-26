@@ -6,6 +6,7 @@ using TMPro;
 public class UIPaperCount : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI text, textDropShadow;
+    GameObject requiredPapersDisplay;
     private int total, collected = 0;
     
     public void SetTotalPapers (int input) {total = input; UpdateGraphic();}
@@ -18,5 +19,7 @@ public class UIPaperCount : MonoBehaviour
         string displayedString = collected + "/" + total;
         text.text = displayedString;
         textDropShadow.text = displayedString;
+        requiredPapersDisplay = GameObject.Find("RequiredPapers");
+        if (requiredPapersDisplay != null) requiredPapersDisplay.GetComponent<TextMeshPro>().text = displayedString;
     }
 }

@@ -247,6 +247,7 @@ public class MapGeneratorGameObject : MonoBehaviour
             seabedMapBackground.SetActive(true);
             seabedObjects.SetActive(true);
             GameManager.RefreshSeabedObjects();
+            chestRoomTotal = 6;
         }
         
         
