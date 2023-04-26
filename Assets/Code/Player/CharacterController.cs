@@ -13,7 +13,7 @@ public class CharacterController : MonoBehaviour
     Vector2 oldPosition = Vector2.zero;
     private bool touchReleased = true;
     private float stickUpperBound;
-    [SerializeField] float speed = 1;
+    public float speed = 1f;
     [SerializeField] RectTransform stickPosition, stickChild;
 
     void Start()
@@ -35,11 +35,15 @@ public class CharacterController : MonoBehaviour
         return inputReader.GetStick();
     }
 
+
     bool GetBeingPressed()
     {
         return inputReader.GetLeftMouse();
     }
-
+   public void SetSpeed(float newSpeed)
+{
+    speed = newSpeed;
+}
     void FixedUpdate()
     {
         if (GameManager.playMode == 0)
