@@ -13,6 +13,8 @@ public class ChestOpener : MonoBehaviour
     private GameObject player;
     private Rigidbody2D playerRigidbody;
     private SpriteRenderer playerSprite;
+    private Animator playerAnimator;
+    private CharacterController playerController;
     private Vector2 playerDesiredPosition;
 
 
@@ -39,9 +41,13 @@ public class ChestOpener : MonoBehaviour
             player = collision.gameObject;
             playerRigidbody = player.GetComponent<Rigidbody2D>();
             playerSprite = player.GetComponent<SpriteRenderer>();
+            playerAnimator = player.GetComponent<Animator>();
+            playerController = player.GetComponent<CharacterController>();
             playerSprite.flipX = false;
             playerEntered = true;
             GameManager.PauseWorld(true);
+            playerController.currentAnim = 1;
+            playerAnimator.Play("MiddleUpSwim");
             //GameManager.OpenQuestionMenu();
         }
     }
@@ -83,6 +89,7 @@ public class ChestOpener : MonoBehaviour
 
         if (sequence > 1f && !chestOpened)
         {
+            playerAnimator.Play("MiddleUpSwimIdle");
             chestOpened = true;
             Chest.SetActive(false);
             ChestAnimated.SetActive(true);

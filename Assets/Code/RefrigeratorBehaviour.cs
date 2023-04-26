@@ -16,8 +16,10 @@ public class RefrigeratorBehaviour : MonoBehaviour
     [SerializeField] Vector3 cableEnd;
     private bool playerEntered = false;
     private GameObject player;
+    private Animator playerAnimator;
     private Rigidbody2D playerRigidbody;
     private PlayerHealth playerHealth;
+    private CharacterController playerController;
     private float sequence = 0f;
     private float doorRotation = 0f;
     private Vector3 hinge;
@@ -48,9 +50,14 @@ public class RefrigeratorBehaviour : MonoBehaviour
         {
             player = collision.gameObject;
             playerRigidbody = player.GetComponent<Rigidbody2D>();
+            playerAnimator = player.GetComponent<Animator>();
             playerHealth = player.GetComponent<PlayerHealth>();
+            playerController = player.GetComponent<CharacterController>();
+
             playerEntered = true;
             GameManager.PauseWorld(true);
+            playerController.currentAnim = 1;
+            playerAnimator.Play("MiddleUpSwimIdle");
         }
     }
     void FixedUpdate()
@@ -58,6 +65,7 @@ public class RefrigeratorBehaviour : MonoBehaviour
         if (playerEntered)
         {
             refrigeratorSequence();
+            //playerAnimator.Play("MiddleUpSwimIdle");
         }
     }
     void refrigeratorSequence()

@@ -9,7 +9,7 @@ public class CharacterController : MonoBehaviour
     private InputReader inputReader;
     private SpriteRenderer sprite, speedEffectSprite;
     private Animator anim;
-    private int currentAnim = 0;
+    public int currentAnim = 0;
     Vector2 movementVector = Vector2.zero;
     Vector2 oldPosition = Vector2.zero;
     private bool boostMode, movingForwards, speedEffectIsActive, touchReleased = true;
