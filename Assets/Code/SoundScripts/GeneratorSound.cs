@@ -3,33 +3,46 @@ using UnityEngine;
 public class GeneratorSound : MonoBehaviour
 {
     public AudioClip generatorSound;
-
     private AudioSource audioSource;
 
-    private void Start()
+    // the maximum distance at which the sound will be heard at full volume
+    public float maxDistance = 10f;
+
+    void Start()
     {
-        audioSource = GetComponent<AudioSource>();
+        audioSource = gameObject.AddComponent<AudioSource>();
         audioSource.clip = generatorSound;
         audioSource.loop = true;
         audioSource.playOnAwake = false;
+        audioSource.volume = 1f;
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    void OnTriggerStay2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("Player"))
+        if (other.CompareTag("Player"))
         {
-            audioSource.Play();
+            // calculate the distance between the player and the generator
+            float distance = Vector3.Distance(other.transform.position, transform.position);
+
+            // adjust the volume based on the distance
+            float volume = Mathf.Clamp01(1f - (distance / maxDistance));
+            audioSource.volume = volume;
+            if (!audioSource.isPlaying)
+            {
+                audioSource.Play();
+            }
         }
     }
 
-    private void OnTriggerExit2D(Collider2D other)
+    void OnTriggerExit2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("Player"))
+        if (other.CompareTag("Player"))
         {
             audioSource.Stop();
         }
     }
 }
+
 
 
 
