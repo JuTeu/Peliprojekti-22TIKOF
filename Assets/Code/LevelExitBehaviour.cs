@@ -33,15 +33,15 @@ public class LevelExitBehaviour : MonoBehaviour
     {
         if(collision.gameObject.tag == "Player")
         {
-            GameManager.PauseWorld(true);
             player = collision.gameObject;
             playerRigidbody = player.GetComponent<Rigidbody2D>();
 
-            if (GameManager.questionsAnswered != GameManager.chestsInLevel)
+            if (GameManager.questionsAnswered + 50 >= GameManager.chestsInLevel)
             {
+                GameManager.PauseWorld(true);
                 if (GameManager.currentFloor == 4) Debug.Log("Oot kaikista paras ihminen ikinä");
                 
-                if (GameManager.currentFloor == 0)
+                if (GameManager.currentFloor == 4)
                 {
                     exitSequence = true;
                     GameManager.PlayerClipping(false);

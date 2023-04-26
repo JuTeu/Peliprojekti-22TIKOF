@@ -8,7 +8,7 @@ public class PaperMove : MonoBehaviour
     [SerializeField] private float distance = 1; 
     [SerializeField] private float speed = 1;
 
-    private float travelledSoFar = 0;
+    public float travelledSoFar = 0;
 
     // Start is called before the first frame update
     void Start()

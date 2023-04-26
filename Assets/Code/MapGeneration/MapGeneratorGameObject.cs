@@ -109,11 +109,12 @@ public class MapGeneratorGameObject : MonoBehaviour
             roomsScene = "DeepRooms";
             mapWidth = 9;
             mapHeight = 8;
-            roomCount = 20;
+            roomCount = 23;
             minBottomWidth = 1;
-            maxBottomWidth = 2;
+            maxBottomWidth = 9;
             minDeadEnds = 7;
-            GameManager.ChangeLightSize(7, 7, 10);
+            GameManager.CloseLevelTransitionMenu();
+            //GameManager.ChangeLightSize(7, 7, 10);
         }
         else if (mapNum == abyss)
         {
