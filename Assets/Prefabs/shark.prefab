@@ -76,7 +76,7 @@ GameObject:
   - component: {fileID: 5235638698346418789}
   - component: {fileID: 5235638698346418784}
   - component: {fileID: 5235638698346418785}
-  - component: {fileID: 9192136024717776397}
+  - component: {fileID: 954057767}
   m_Layer: 0
   m_Name: shark
   m_TagString: SpawnedObject
@@ -210,9 +210,10 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   dir: {x: 0, y: 0, z: 0}
-  animator: {fileID: 9192136024717776397}
+  animator: {fileID: 954057767}
   startPoint: {fileID: 1724130750698409173}
   endPoint: {fileID: 6573253603998164084}
+  moveDistance: 1.5
 --- !u!114 &5235638698346418785
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -226,7 +227,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 7
---- !u!95 &9192136024717776397
+--- !u!95 &954057767
 Animator:
   serializedVersion: 5
   m_ObjectHideFlags: 0

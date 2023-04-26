@@ -10,8 +10,11 @@ public class SpeedBoost : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            CharacterController characterController = other.GetComponent<CharacterController>();
-            characterController.SetSpeed(characterController.speed + boostAmount);
+            /*CharacterController characterController = other.GetComponent<CharacterController>();
+            characterController.SetSpeed(characterController.speed + boostAmount);*/
+
+            GameManager.flippersUnlocked = true;
+            GameManager.flippersEquipped = true;
         }
     }
 }

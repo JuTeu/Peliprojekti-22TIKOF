@@ -15,7 +15,13 @@ public class GameManager : MonoBehaviour
     public static bool playerIsInvulnerable = false;
     public static bool playerClipping = true;
     public static bool enemiesPaused = false;
+
+    // Pysyvät tallennuksesta toiseen
     public static int score;
+    public static bool flippersUnlocked = false;
+    public static bool flippersEquipped = false;
+
+
     public static int chestsInLevel = 0;
     public static int questionsAnswered, questionsAnsweredTotal = 0;
     public static int correctAnswers, correctAnswersTotal = 0;

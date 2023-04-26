@@ -1,25 +1,29 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CharacterController : MonoBehaviour
 {
     private Rigidbody2D rb;
     private InputReader inputReader;
-    private SpriteRenderer sprite;
+    private SpriteRenderer sprite, speedEffectSprite;
     private Animator anim;
     private int currentAnim = 0;
     Vector2 movementVector = Vector2.zero;
     Vector2 oldPosition = Vector2.zero;
-    private bool touchReleased = true;
-    private float stickUpperBound;
+    private bool boostMode, movingForwards, speedEffectIsActive, touchReleased = true;
+    private float stickUpperBound, tapTime = 0f;
     public float speed = 1f;
     [SerializeField] RectTransform stickPosition, stickChild;
+    [SerializeField] Image joyStick, joyStickCap;
+    [SerializeField] GameObject speedEffect;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         sprite = GetComponent<SpriteRenderer>();
+        speedEffectSprite = speedEffect.GetComponent<SpriteRenderer>();
         anim = GetComponent<Animator>();
         inputReader = GetComponent<InputReader>();
         stickUpperBound = Screen.height * 0.9f;
@@ -35,15 +39,16 @@ public class CharacterController : MonoBehaviour
         return inputReader.GetStick();
     }
 
-
     bool GetBeingPressed()
     {
         return inputReader.GetLeftMouse();
     }
+
    public void SetSpeed(float newSpeed)
-{
-    speed = newSpeed;
-}
+    {
+        speed = newSpeed;
+    }
+
     void FixedUpdate()
     {
         if (GameManager.playMode == 0)
@@ -58,10 +63,36 @@ public class CharacterController : MonoBehaviour
     
     void UnderWaterMovement()
     {
-        if (!GameManager.playerInControl) return;
+        if (!GameManager.playerInControl) 
+        {
+            if(speedEffectIsActive)
+            {
+                speedEffect.SetActive(false);
+                speedEffectIsActive = false;
+            }
+            return;
+        }
+        if (tapTime > -1f) tapTime -= Time.deltaTime;
 
         if (GetBeingPressed() && touchReleased && GetPressedPosition().y < stickUpperBound)
         {
+            if(!speedEffectIsActive)
+            {
+                speedEffect.SetActive(true);
+                speedEffectIsActive = true;
+            }
+            boostMode = tapTime > 0f;
+            if (GameManager.flippersEquipped) tapTime = 0.5f;
+            if (boostMode)
+            {
+                joyStick.color = new Color(0.7f, 0.13f, 0.14f, 0.8f);
+                joyStickCap.color = new Color(1f, 0.6f, 0f);
+            }
+            else
+            {
+                joyStick.color = new Color(0.616f, 0.734f, 0.745f, 0.8f);
+                joyStickCap.color = Color.white;
+            }
             stickPosition.position = GetPressedPosition();
             touchReleased = false;
             if (currentAnim == 0)
@@ -90,6 +121,7 @@ public class CharacterController : MonoBehaviour
             movementVector = GetPressedPosition() - ((Vector2)stickPosition.position);
             stickChild.position = GetPressedPosition();
             movementVector = Vector2.ClampMagnitude(stickChild.anchoredPosition, 100f) / 100f;
+            if (boostMode) movementVector *= 2f;
             stickChild.anchoredPosition = Vector2.ClampMagnitude(stickChild.anchoredPosition, 100f);
         }
         else if (!GetBeingPressed() && !touchReleased)
@@ -120,6 +152,15 @@ public class CharacterController : MonoBehaviour
         }
 
         rb.AddForce(movementVector * speed);
+        movingForwards = Vector2.SignedAngle(rb.velocity.normalized, movementVector.normalized) < 30f;
+        if (rb.velocity.sqrMagnitude > 120f && movingForwards)
+        {
+            speedEffectSprite.color = new Color(0.3f, 0.4f, 0.9f, (rb.velocity.sqrMagnitude - 120f) / 150f);
+        }
+        else
+        {
+            speedEffectSprite.color = new Color(0, 0, 0, 0);
+        }
         if (movementVector != Vector2.zero)
         {
             float rotation = Vector2.SignedAngle(Vector2.right, movementVector) - 90;
