@@ -9,6 +9,7 @@ public class LevelExitBehaviour : MonoBehaviour
     SpriteRenderer deepCaveFinalRewardSprite;
     GameObject player;
     Rigidbody2D playerRigidbody;
+    Animator playerAnimator;
     Vector2 aboveReward;
     bool exitSequence = false;
     void Start()
@@ -35,7 +36,7 @@ public class LevelExitBehaviour : MonoBehaviour
         {
             player = collision.gameObject;
             playerRigidbody = player.GetComponent<Rigidbody2D>();
-
+            playerAnimator = player.GetComponent<Animator>();
             if (GameManager.questionsAnswered + 50 >= GameManager.chestsInLevel)
             {
                 GameManager.PauseWorld(true);
@@ -45,6 +46,7 @@ public class LevelExitBehaviour : MonoBehaviour
                 {
                     exitSequence = true;
                     GameManager.PlayerClipping(false);
+                    playerAnimator.Play("MiddleUpSwimIdle");
                     return;
                 }
 
@@ -83,6 +85,7 @@ public class LevelExitBehaviour : MonoBehaviour
         {
             sequenceOrder = 3;
             GameManager.ChangeLightSize(50, 0, 10);
+            GameManager.OpenLevelTransitionMenu();
         }
         if (sequence > 3.1f && sequenceOrder > 1)
         {
@@ -96,7 +99,7 @@ public class LevelExitBehaviour : MonoBehaviour
         if (Vector2.Distance(player.transform.position, aboveReward) < 0.1f && sequenceOrder == 0)
         {
             sequenceOrder = 1;
-            aboveReward = new Vector2(deepCaveFinalReward.transform.position.x, deepCaveFinalReward.transform.position.y + 1f);
+            aboveReward = new Vector2(deepCaveFinalReward.transform.position.x, deepCaveFinalReward.transform.position.y + 1.2f);
             deepCaveFinalRewardSprite.sortingOrder = 5;
         }
     }
