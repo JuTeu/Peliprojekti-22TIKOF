@@ -197,6 +197,9 @@ public class LevelTransitionMenuBehaviour : MonoBehaviour
                 GameManager.PlayerClipping(true);
                 playerRigidbody.position = new Vector2(spawnRoomLocation, -21f);
                 playerRigidbody.velocity = new Vector2(0f, -5f);
+                hpBar.anchoredPosition = new Vector2(-130, -135);
+                pauseButton.anchoredPosition = new Vector2(60, -60);
+                paperCount.anchoredPosition = new Vector2(-130, -60);
                 GameManager.PauseWorld(false);
                 GameManager.ChangeLightSize(0, 50, 10);
             }

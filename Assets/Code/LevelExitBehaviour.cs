@@ -13,7 +13,7 @@ public class LevelExitBehaviour : MonoBehaviour
     bool exitSequence = false;
     void Start()
     {
-        if (GameManager.currentFloor == 0) 
+        if (GameManager.currentFloor == 4) 
         {
             deepCaveFinalRewardSprite = deepCaveFinalReward.GetComponent<SpriteRenderer>();
             deepCaveFinalReward.SetActive(true);
@@ -24,7 +24,7 @@ public class LevelExitBehaviour : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         if (exitSequence) DoExitSequence();
     }

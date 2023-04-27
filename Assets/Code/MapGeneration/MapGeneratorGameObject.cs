@@ -113,7 +113,7 @@ public class MapGeneratorGameObject : MonoBehaviour
             minBottomWidth = 1;
             maxBottomWidth = 9;
             minDeadEnds = 7;
-            GameManager.CloseLevelTransitionMenu();
+            if (SceneManager.GetSceneByName("LevelTransitionMenu").isLoaded) GameManager.CloseLevelTransitionMenu();
             //GameManager.ChangeLightSize(7, 7, 10);
         }
         else if (mapNum == abyss)
