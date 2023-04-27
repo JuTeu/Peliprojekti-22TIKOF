@@ -12,7 +12,8 @@ public class CharacterController : MonoBehaviour
     public int currentAnim = 0;
     Vector2 movementVector = Vector2.zero;
     Vector2 oldPosition = Vector2.zero;
-    private bool boostMode, movingForwards, speedEffectIsActive, touchReleased = true;
+    private bool movingForwards, speedEffectIsActive, touchReleased = true;
+    public bool boostMode;
     private float stickUpperBound, tapTime = 0f;
     public float speed = 1f;
     [SerializeField] RectTransform stickPosition, stickChild;
@@ -51,6 +52,7 @@ public class CharacterController : MonoBehaviour
 
     void FixedUpdate()
     {
+        
         if (GameManager.playMode == 0)
         {
             UnderWaterMovement();
@@ -82,7 +84,7 @@ public class CharacterController : MonoBehaviour
                 speedEffectIsActive = true;
             }
             boostMode = tapTime > 0f;
-            if (GameManager.flippersEquipped) tapTime = 0.5f;
+            if (GameManager.flippersEquipped) tapTime = 2f;
             if (boostMode)
             {
                 joyStick.color = new Color(0.7f, 0.13f, 0.14f, 0.8f);
