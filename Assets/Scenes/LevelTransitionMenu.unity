@@ -2577,6 +2577,8 @@ MonoBehaviour:
   noDamageTextDropShadow: {fileID: 2014238577}
   allCorrectText: {fileID: 384531606}
   allCorrectTextDropShadow: {fileID: 1625793303}
+  bearNeutral: {fileID: 21300000, guid: e822b58f733d92b43a071c082bcc497b, type: 3}
+  bearHappy: {fileID: 21300000, guid: 54ad691debeac034fb61c0688d34da42, type: 3}
 --- !u!1 &2014238575
 GameObject:
   m_ObjectHideFlags: 0

@@ -11,11 +11,12 @@ public class LevelTransitionMenuBehaviour : MonoBehaviour
 
     [SerializeField] GameObject noDamageObj, allCorrectObj;
     [SerializeField] TextMeshProUGUI timeText, timeTextDropShadow, healthText, healthTextDropShadow, scoreText, scoreTextDropShadow, noDamageText, noDamageTextDropShadow, allCorrectText, allCorrectTextDropShadow;
+    [SerializeField] Sprite bearNeutral, bearHappy;
     bool allCorrect, unhurt;
     int time, health, points, score, noDamageBonus = 3000, allCorrectBonus = 5000, floor = GameManager.currentFloor;
     float spawnRoomLocation;
     RectTransform mainTransform, hpBar, pauseButton, paperCount;
-    GameObject player, trophy;
+    GameObject player, trophy, bear;
     Animator playerAnimator;
     CharacterController playerController;
     Rigidbody2D playerRigidbody;
@@ -58,6 +59,10 @@ public class LevelTransitionMenuBehaviour : MonoBehaviour
             playerRigidbody.rotation = -180f;
             playerAnimator.Play("DownSwim");
             playerRigidbody.velocity = new Vector2(0f, -5f);
+        }
+        else
+        {
+            bear = GameObject.Find("VKHead");
         }
         GameManager.ChangeLightSize(50, 0, 10);
     }
@@ -237,6 +242,7 @@ public class LevelTransitionMenuBehaviour : MonoBehaviour
             GameManager.CloseLevelTransitionMenu();
         }
     }
+    bool playerLanded = false;
     void UpwardsTunnelTransition()
     {
         if (exponentialSequence < 10000f && sequenceOrder == 1)
@@ -298,6 +304,8 @@ public class LevelTransitionMenuBehaviour : MonoBehaviour
         if (sequence > 23 && sequenceOrder == 2)
         {
             player.GetComponent<SpriteRenderer>().flipX = false;
+            bear.transform.localPosition = new Vector2(55f, -0.38f);
+            bear.GetComponent<SpriteRenderer>().sprite = bearNeutral;
             Camera.main.transform.position = new Vector3(-154f, 92f, -10f);
             Camera.main.gameObject.GetComponent<Camera>().orthographicSize = 14f;
             GameManager.ChangeLightSize(0, 100, 10);
@@ -314,12 +322,26 @@ public class LevelTransitionMenuBehaviour : MonoBehaviour
             GameManager.PlayerClipping(true);
             sequenceOrder = 5;
         }
-        if (sequence > 30 && sequenceOrder == 5)
+        if (sequence > 26.7f)
         {
-            GameManager.ChangeLightSize(50, 0, 10);
+            bear.transform.localPosition = new Vector2(bear.transform.localPosition.x, -0.38f + (Mathf.Sin(sequence * 20) / 100));
+        }
+        if (sequence > 26 && sequenceOrder == 5)
+        {
             sequenceOrder = 6;
+            bear.GetComponent<SpriteRenderer>().sprite = bearHappy;
+        }
+        if (!playerLanded && sequenceOrder > 4 && player.transform.position.y < 89.5f)
+        {
+            playerLanded = true;
+            playerAnimator.Play("JumpFromTrophy");
         }
         if (sequence > 32 && sequenceOrder == 6)
+        {
+            GameManager.ChangeLightSize(50, 0, 10);
+            sequenceOrder = 7;
+        }
+        if (sequence > 34 && sequenceOrder == 7)
         {
             GameManager.BeginGame();
             GameManager.CloseLevelTransitionMenu();
