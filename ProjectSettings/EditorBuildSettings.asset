@@ -41,4 +41,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/DialogueMenu.unity
     guid: cbbc32288b0cb0648a74dabeba3539c2
+  - enabled: 1
+    path: Assets/Scenes/TutorialScene.unity
+    guid: e0e7f065bd6dd7341b79d9efa80693b7
   m_configObjects: {}
