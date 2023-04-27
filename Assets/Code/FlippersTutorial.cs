@@ -36,7 +36,7 @@ public class FlippersTutorial : MonoBehaviour
         if (Time.timeScale == 0f)
         {
             // Check if the user has clicked on the screen
-            if (Input.GetMouseButtonUp(0))
+            if (Input.GetMouseButtonDown(0))
             {
                 // Resume the game
                 Time.timeScale = 1f;
