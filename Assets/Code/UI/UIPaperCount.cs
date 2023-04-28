@@ -17,7 +17,6 @@ public class UIPaperCount : MonoBehaviour
     {
         GameManager.score += input;
         UpdateGraphic();
-        if (collected >= total) OpenPaperLocked();
     }
     
     private void UpdateGraphic()
@@ -28,6 +27,7 @@ public class UIPaperCount : MonoBehaviour
         score.text = GameManager.score + "";
         requiredPapersDisplay = GameObject.Find("RequiredPapers");
         if (requiredPapersDisplay != null) requiredPapersDisplay.GetComponent<TextMeshPro>().text = displayedString;
+        if (collected >= total) OpenPaperLocked();
     }
 
     private void OpenPaperLocked()
