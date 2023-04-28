@@ -5,15 +5,24 @@ using UnityEngine;
 public class LevelExitBehaviour : MonoBehaviour
 {
     // Start is called before the first frame update
-    [SerializeField] GameObject deepCaveFinalReward, rope;
+    [SerializeField] GameObject deepCaveFinalReward, rope, bubble;
     SpriteRenderer deepCaveFinalRewardSprite;
+    CharacterController characterController;
+    Collider2D exitCollider;
     GameObject player;
     Rigidbody2D playerRigidbody;
     Animator playerAnimator;
     Vector2 aboveReward;
-    bool exitSequence = false;
+    bool levelFinished = false, boostSkipable = false, exitSequence = false;
     void Start()
     {
+        exitCollider = GetComponent<Collider2D>();
+        if (GameManager.currentFloor == 0)
+        {
+            bubble.SetActive(true);
+            characterController = GameObject.FindWithTag("Player").GetComponent<CharacterController>();
+            boostSkipable = true;
+        }
         if (GameManager.currentFloor == 4) 
         {
             deepCaveFinalRewardSprite = deepCaveFinalReward.GetComponent<SpriteRenderer>();
@@ -23,11 +32,23 @@ public class LevelExitBehaviour : MonoBehaviour
             aboveReward = new Vector2(deepCaveFinalReward.transform.position.x, deepCaveFinalReward.transform.position.y + 1.5f);
         }
     }
-
+    public void Open()
+    {
+        levelFinished = true;
+        exitCollider.isTrigger = true;
+        if (GameManager.currentFloor == 0)
+        {
+            bubble.GetComponent<ParticleSystem>().Stop();
+        }
+    }
     // Update is called once per frame
     void FixedUpdate()
     {
         if (exitSequence) DoExitSequence();
+        if (boostSkipable && !levelFinished)
+        {
+            exitCollider.isTrigger = characterController.boostMode;
+        } 
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

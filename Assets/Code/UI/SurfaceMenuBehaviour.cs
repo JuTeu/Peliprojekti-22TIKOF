@@ -203,10 +203,10 @@ public class SurfaceMenuBehaviour : MonoBehaviour
         {
             currentMenu = 1;
             playerAnimator.Play("Idle");
-            leftButtonB.interactable = true;
+            //leftButtonB.interactable = true;
             rightButtonB.interactable = true;
             equipmentButtonB.interactable = true;
-            openShopButtonB.interactable = true;
+            //openShopButtonB.interactable = true;
             talkButtonB.interactable = true;
             sequenceStopped = true;
         }
