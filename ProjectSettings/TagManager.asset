@@ -9,6 +9,7 @@ TagManager:
   - LevelGeometry
   - SeabedObject
   - SpeedBoost
+  - PaperLocked
   layers:
   - Default
   - TransparentFX

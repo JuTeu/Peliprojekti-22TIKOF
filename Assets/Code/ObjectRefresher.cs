@@ -6,7 +6,11 @@ public class ObjectRefresher : MonoBehaviour
 {
     public void Refresh()
     {
-        if (transform.childCount == 3)
+        if (transform.childCount == 2)
+        {
+            GetComponent<HatchBehaviour>().Refresh();
+        }
+        else if (transform.childCount == 3)
         {
             GetComponent<RefrigeratorBehaviour>().Refresh();
         }
