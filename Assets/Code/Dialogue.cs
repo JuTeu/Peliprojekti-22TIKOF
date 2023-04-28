@@ -85,6 +85,7 @@ void NextLine()
     {
         Debug.Log("Dialogue completed.");
         gameObject.SetActive(false);
+        GameManager.CloseDialogue();
     }
 }
 
