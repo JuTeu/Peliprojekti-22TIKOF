@@ -64,7 +64,11 @@ public class EnemyAI : MonoBehaviour
                 if(transform.position.x >= startingPosition.x + moveDistance)
                 {
                     shouldMoveRight = false;
-                    transform.localScale = new Vector3(2.8f, 2.8f, 2.35f);
+                    
+                    if (facingRight)
+                    {
+                        Flip();
+                    }
                 }
             }
             else
@@ -73,7 +77,11 @@ public class EnemyAI : MonoBehaviour
                 if(transform.position.x <= startingPosition.x - moveDistance)
                 {
                     shouldMoveRight = true;
-                    transform.localScale = new Vector3(-2.8f,2.8f, 2.35f);
+                    
+                    if (!facingRight)
+                    {
+                        Flip();
+                    }
                 }
             }
             
@@ -87,20 +95,19 @@ public class EnemyAI : MonoBehaviour
         if(isInChaseRange && isInAttackRange)
         {
             MoveCharacter(movement);
+            if (dir.x > 0 && !facingRight)
+            {
+                Flip();
+            }
+            else if (dir.x < 0 && facingRight)
+            {
+                Flip();
+            }
         }
 
         if (isInAttackRange)
         {
             rb.velocity = Vector2.zero;
-        }
-
-        if(dir.x > 0 && !facingRight)
-        {
-            Flip();
-        }
-        else if(dir.x < 0 && facingRight)
-        {
-            Flip();
         }
     }
 
