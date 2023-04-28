@@ -7,7 +7,7 @@ public class FlippersTutorial : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Player") && !isInTutorial)
+        if (other.CompareTag("Player") && !isInTutorial && !PlayerPrefs.HasKey("flippersTutorialShown"))
         {
             isInTutorial = true;
 
@@ -16,6 +16,9 @@ public class FlippersTutorial : MonoBehaviour
 
             // Load the TutorialScene
             SceneManager.LoadSceneAsync("TutorialScene", LoadSceneMode.Additive);
+
+            // Set the flag to indicate that the tutorial has been shown
+            PlayerPrefs.SetInt("flippersTutorialShown", 1);
         }
     }
 
@@ -44,5 +47,6 @@ public class FlippersTutorial : MonoBehaviour
         }
     }
 }
+
 
 
