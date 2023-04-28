@@ -13,10 +13,11 @@ public class PauseMenuBehaviour : MonoBehaviour
     private bool clipping = GameManager.playerClipping;
     private bool invlunerablity = GameManager.playerIsInvulnerable;
     private int levelNum = -1;
-    [SerializeField] private TextMeshProUGUI devLevelText, devClipText, devInvulnerabilityText;
+    [SerializeField] private TextMeshProUGUI devLevelText, devClipText, devInvulnerabilityText, score;
 
     void Start()
     {
+        score.text = GameManager.score + "";
         rt = GetComponent<RectTransform>();
         rt.anchoredPosition = new Vector2(-1000, 0);
         if (clipping == false)
