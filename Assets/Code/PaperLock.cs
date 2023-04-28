@@ -6,6 +6,6 @@ public class PaperLock : MonoBehaviour
 {
     public void Open()
     {
-        if (transform.parent.gameObject.name == "SubmarineHatch") transform.parent.gameObject.GetComponent<HatchBehaviour>().Open();
+        if (transform.parent.gameObject.name == "SubmarineHatch" && GameManager.currentFloor == 2) transform.parent.gameObject.GetComponent<HatchBehaviour>().Open();
     }
 }
