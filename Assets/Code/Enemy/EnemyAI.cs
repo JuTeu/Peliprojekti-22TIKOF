@@ -92,7 +92,7 @@ public class EnemyAI : MonoBehaviour
     {
         if (GameManager.enemiesPaused) return;
         
-        if(isInChaseRange && isInAttackRange)
+        if(isInChaseRange && isInAttackRange && Vector2.Distance(transform.position, target.position) > 0.1f)
         {
             MoveCharacter(movement);
             if (dir.x > 0 && !facingRight)

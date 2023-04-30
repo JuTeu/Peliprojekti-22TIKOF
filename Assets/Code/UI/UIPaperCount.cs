@@ -27,12 +27,17 @@ public class UIPaperCount : MonoBehaviour
         score.text = GameManager.score + "";
         requiredPapersDisplay = GameObject.Find("RequiredPapers");
         if (requiredPapersDisplay != null) requiredPapersDisplay.GetComponent<TextMeshPro>().text = displayedString;
-        if (collected >= total && collected > 0) OpenPaperLocked();
+        if (collected >= total && collected > 0 && GameManager.cameraMode == 0) Invoke("OpenPaperLocked", 1);
     }
 
     private void OpenPaperLocked()
     {
         GameObject paperLock = GameObject.FindWithTag("PaperLocked");
-        if (paperLock != null) paperLock.GetComponent<PaperLock>().Open();
+        if (paperLock != null)
+        {
+            PaperLock paplock = paperLock.GetComponent<PaperLock>();
+            //paplock.Open();
+            GameManager.cameraMode = 128;
+        }
     }
 }

@@ -30,6 +30,8 @@ public class DarknessBehaviour : MonoBehaviour
 
     public void ChangeLight(float initialSize, float targetSize, float changeSpeed)
     {
+        if (initialSize == 50) initialSize = 100;
+        if (targetSize == 50) targetSize = 100;
         if (initialSize >= 0) LightSize(initialSize);
         speed = changeSpeed;
         target = targetSize;

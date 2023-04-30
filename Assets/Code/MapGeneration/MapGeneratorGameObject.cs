@@ -82,7 +82,8 @@ public class MapGeneratorGameObject : MonoBehaviour
             minBottomWidth = 1;
             maxBottomWidth = 4;
             minDeadEnds = 5;
-
+            refrigerators = 3;
+            enemies = 3;
         }
         else if (mapNum == seabed)
         {
@@ -292,6 +293,7 @@ public class MapGeneratorGameObject : MonoBehaviour
         cameraObject.cameraBounds.SetMinMax(new Vector3(cameraMinX, cameraMinY, -10), new Vector3(cameraMaxX, cameraMaxY, -10));
 
         GameManager.levelIsGenerated = true;
+        if (mapNum == deep) GameObject.FindWithTag("Player").transform.position = new Vector2(0, -25);
     }
     bool PlaceRoom(int x, int y, int tile, int mode)
     {

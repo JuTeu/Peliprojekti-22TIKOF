@@ -22,6 +22,7 @@ public class GameManager : MonoBehaviour
     public static int highScore;
     public static bool flippersUnlocked = false;
     public static bool flippersEquipped = false;
+    public static bool regularEndingReached = false;
 
 
     public static int chestsInLevel = 0;
@@ -34,11 +35,12 @@ public class GameManager : MonoBehaviour
     public static List<Vector3Int> spawnerTiles = new List<Vector3Int>();
     public static string[] lines;
 
-    public const float cameraPlaySize = 10;
+    public const float cameraPlaySize = 14;
 
     void Awake()
     {
         Instance = this;
+        Screen.sleepTimeout = SleepTimeout.NeverSleep;
         score = 0;
         BeginGame();
     }
@@ -157,6 +159,7 @@ public class GameManager : MonoBehaviour
 
     public static void BeginGame()
     {
+        GameObject.Find("RegularEndingTrophy").GetComponent<SpriteRenderer>().enabled = regularEndingReached;
         HideStick();
         PauseWorld(true);
         Camera.main.gameObject.GetComponent<Camera>().orthographicSize = 7.5f;

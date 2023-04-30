@@ -24,7 +24,7 @@ public class KelpFruit : MonoBehaviour
         if (collision.tag == "Player" && !hasExploded)
         {
             pulsingSpeed = 8f - Vector2.Distance(fruitCollider.transform.position, collision.transform.position) * 2;
-            if (Vector2.Distance(fruitCollider.transform.position, collision.transform.position) < 1.7f)
+            if (Vector2.Distance(fruitCollider.transform.position, collision.transform.position) < 1.4f)
             {
                 fruit.SetActive(false);
                 stalk.SetActive(false);

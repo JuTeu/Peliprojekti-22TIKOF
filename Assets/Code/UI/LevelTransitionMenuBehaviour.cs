@@ -116,6 +116,7 @@ public class LevelTransitionMenuBehaviour : MonoBehaviour
             else
             {
                 GameManager.score = score;
+                player.GetComponent<PlayerHealth>().Heal(100f);
                 tallyingFinished = true;
                 GameObject.Find("PaperCount").GetComponent<UIPaperCount>().AddScore(0);
                 sequence = 18f;
@@ -209,7 +210,7 @@ public class LevelTransitionMenuBehaviour : MonoBehaviour
                 GameManager.cameraMode = 0;
                 Camera.main.gameObject.GetComponent<Camera>().orthographicSize = GameManager.cameraPlaySize;
                 GameManager.PlayerClipping(true);
-                playerRigidbody.position = new Vector2(spawnRoomLocation, -21f);
+                playerRigidbody.position = new Vector2(spawnRoomLocation, -25f);
                 playerRigidbody.velocity = new Vector2(0f, -5f);
                 hpBar.anchoredPosition = new Vector2(-130, -135);
                 pauseButton.anchoredPosition = new Vector2(60, -60);
