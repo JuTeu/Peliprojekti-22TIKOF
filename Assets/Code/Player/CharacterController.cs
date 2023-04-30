@@ -29,7 +29,14 @@ public class CharacterController : MonoBehaviour
         inputReader = GetComponent<InputReader>();
         stickUpperBound = Screen.height * 0.9f;
     }
-
+    void OnBecameInvisible()
+    {
+        GameManager.playerOnScreen = false;
+    }
+    void OnBecameVisible()
+    {
+        GameManager.playerOnScreen = true;
+    }
     Vector2 GetPressedPosition()
     {
         return inputReader.GetMousePosition();

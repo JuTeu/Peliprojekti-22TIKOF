@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     public static bool roomsSceneNoLongerLoaded = true;
     public static bool playerInControl = true;
     public static bool playerIsInvulnerable = false;
+    public static bool playerOnScreen;
     public static bool playerClipping = true;
     public static bool enemiesPaused = false;
     public static int score;

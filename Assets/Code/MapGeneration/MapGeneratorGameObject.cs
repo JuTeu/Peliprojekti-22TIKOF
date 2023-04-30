@@ -294,6 +294,15 @@ public class MapGeneratorGameObject : MonoBehaviour
 
         GameManager.levelIsGenerated = true;
         if (mapNum == deep) GameObject.FindWithTag("Player").transform.position = new Vector2(0, -25);
+        Invoke("QuickFix", 6.5f);
+    }
+    void QuickFix()
+    {
+        if (!GameManager.playerOnScreen)
+        {
+            if (GameManager.currentFloor != 1) GameObject.FindWithTag("Player").transform.position = new Vector2(0, -25);
+        }
+        if (SceneManager.GetSceneByName("LevelTransitionMenu").isLoaded) GameManager.CloseLevelTransitionMenu();
     }
     bool PlaceRoom(int x, int y, int tile, int mode)
     {
