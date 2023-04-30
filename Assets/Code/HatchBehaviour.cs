@@ -6,6 +6,7 @@ public class HatchBehaviour : MonoBehaviour
 {
     SpriteRenderer hatchSprite;
     Collider2D hatchCollision;
+    [SerializeField] GameObject arrow, flippers;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,10 +19,13 @@ public class HatchBehaviour : MonoBehaviour
     {
         hatchSprite.enabled = false;
         hatchCollision.isTrigger = false;
+        flippers.SetActive(!GameManager.flippersEquipped);
+        arrow.SetActive(false);
     }
     public void Open()
     {
         hatchSprite.enabled = true;
         hatchCollision.isTrigger = true;
+        arrow.SetActive(true);
     }
 }
