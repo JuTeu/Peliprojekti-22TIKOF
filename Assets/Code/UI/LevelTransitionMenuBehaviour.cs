@@ -34,7 +34,7 @@ public class LevelTransitionMenuBehaviour : MonoBehaviour
 
         if (GameManager.currentFloor == 4) trophy = GameObject.Find("CutsceneTrophy");
 
-        allCorrect = GameManager.correctAnswers == GameManager.chestsInLevel;
+        allCorrect = GameManager.correctAnswers >= GameManager.chestsInLevel;
         unhurt = GameManager.unhurt;
         time = 1000;
         health = (int) (player.GetComponent<PlayerHealth>().healthAmount * 10);
@@ -71,13 +71,6 @@ public class LevelTransitionMenuBehaviour : MonoBehaviour
     {
         sequence += Time.deltaTime;
 
-        /*if (exponentialSequence < 10000f && sequenceOrder == 0)
-        {
-            exponentialSequence = Mathf.Pow(2, sequence * 2);
-            Debug.Log("Wat");
-            hpBar.anchoredPosition = new Vector2(exponentialSequence / 10 - 130, -135);
-            pauseButton.anchoredPosition = new Vector2(-exponentialSequence / 10 + 60, -60);
-        }*/
         if (GameManager.currentFloor == 0) ToKelpTransition();
         else if (GameManager.currentFloor == 4) UpwardsTunnelTransition();
         else if (GameManager.currentFloor > 0) TunnelTransition();
@@ -273,7 +266,6 @@ public class LevelTransitionMenuBehaviour : MonoBehaviour
             player.transform.localPosition = new Vector2(0f, 1f);
             trophy.transform.position = new Vector2(trophy.transform.position.x, trophy.transform.position.y + 0.05f);
             playerRigidbody.velocity = Vector2.zero;
-            //player.transform.localPosition = new Vector2(0f, 1f);
         } else if (sequenceOrder == 3)
         {
             sequenceOrder = 4;
@@ -287,8 +279,6 @@ public class LevelTransitionMenuBehaviour : MonoBehaviour
             player.transform.localPosition = new Vector2(0f, 1f);
             playerController.currentAnim = 1;
             playerAnimator.Play("MiddleUpSwimIdle");
-            //playerRigidbody.rotation = -180f;
-            //player.GetComponent<Animator>().Play("DownSwim");
             GameManager.cameraMode = 2;
             Camera.main.gameObject.GetComponent<Camera>().orthographicSize = 10f;
             GameManager.ChangeLightSize(0, 50, 10);
@@ -347,29 +337,6 @@ public class LevelTransitionMenuBehaviour : MonoBehaviour
             GameManager.BeginGame();
             GameManager.CloseLevelTransitionMenu();
         }
-        /*
-        if (sequence > 23 && GameManager.levelIsGenerated && sequenceOrder == 2)
-        {
-            sequenceOrder = 3;
-            GameManager.cameraMode = 0;
-            Camera.main.gameObject.GetComponent<Camera>().orthographicSize = GameManager.cameraPlaySize;
-            GameManager.PlayerClipping(false);
-            playerRigidbody.position = new Vector2(spawnRoomLocation, -14f);
-            playerRigidbody.velocity = new Vector2(0f, -5f);
-            GameManager.PauseWorld(false);
-            GameManager.ChangeLightSize(0, 50, 10);
-        }
-        if (sequence > 24 && sequenceOrder == 3)
-        {
-            sequenceOrder = 4;
-            GameManager.PlayerClipping(true);
-            player.GetComponent<Animator>().Play("DownSwim");
-        }
-        if (sequence > 24.3f && sequenceOrder == 4)
-        {
-            player.GetComponent<Animator>().Play("DownSwimIdle");
-            GameManager.CloseLevelTransitionMenu();
-        }*/
     }
     void ToKelpTransition()
     {

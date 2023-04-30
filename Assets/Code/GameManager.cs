@@ -21,10 +21,17 @@ public class GameManager : MonoBehaviour
     // Pysyvät tallennuksesta toiseen
     public static int totalScore;
     public static int highScore;
-    public static bool flippersUnlocked = false;
-    public static bool flippersEquipped = false;
-    public static bool regularEndingReached = false;
+    public static int flippers;
 
+    /*
+     1 = peliavattu ekaa kertaa, 10 = normaali loppu saavutettu,
+     100 = erikoisloppu saavutettu, 1000 = keltanokka, 1_0000 = vauhtipipo,
+     10_0000 = kompassihattu, 100_0000 = kovanaamalakki, 1000_0000 = kultasilinteri
+    */
+    public static int unlocks;
+
+    // 0 = ei hattua, 1 = keltanokka, 2 = vauhtipipo, 3 = kompassihattu, 4 = kovanaamalakki, 5 = kultasilinteri
+    public static int equippedHat;
 
     public static int chestsInLevel = 0;
     public static int questionsAnswered, questionsAnsweredTotal = 0;
@@ -40,10 +47,25 @@ public class GameManager : MonoBehaviour
 
     void Awake()
     {
+        totalScore = PlayerPrefs.GetInt("TotalScore", 0);
+        highScore = PlayerPrefs.GetInt("HighScore", 0);
+        flippers = PlayerPrefs.GetInt("Flippers", 0);
+        unlocks = PlayerPrefs.GetInt("Unlocks", 0);
+        equippedHat = PlayerPrefs.GetInt("EquippedHat", 0);
+
         Instance = this;
         Screen.sleepTimeout = SleepTimeout.NeverSleep;
         score = 0;
         BeginGame();
+    }
+
+    public static void Save()
+    {
+        PlayerPrefs.SetInt("TotalScore", totalScore);
+        PlayerPrefs.SetInt("HighScore", highScore);
+        PlayerPrefs.SetInt("Flippers", flippers);
+        PlayerPrefs.SetInt("Unlocks", unlocks);
+        PlayerPrefs.SetInt("EquippedHat", equippedHat);
     }
 
     public static void OpenQuestionMenu()
@@ -160,7 +182,9 @@ public class GameManager : MonoBehaviour
 
     public static void BeginGame()
     {
-        GameObject.Find("RegularEndingTrophy").GetComponent<SpriteRenderer>().enabled = regularEndingReached;
+        Save();
+        GameObject.Find("RegularEndingTrophy").GetComponent<SpriteRenderer>().enabled = (unlocks & 0b_10) == 0b_10;
+        correctAnswersTotal = 0;
         HideStick();
         PauseWorld(true);
         Camera.main.gameObject.GetComponent<Camera>().orthographicSize = 7.5f;

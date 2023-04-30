@@ -35,8 +35,7 @@ public class UIPaperCount : MonoBehaviour
         GameObject paperLock = GameObject.FindWithTag("PaperLocked");
         if (paperLock != null)
         {
-            PaperLock paplock = paperLock.GetComponent<PaperLock>();
-            //paplock.Open();
+            GameObject.FindWithTag("Player").GetComponent<PlayerHealth>().Heal(15f);
             GameManager.cameraMode = 128;
         }
     }

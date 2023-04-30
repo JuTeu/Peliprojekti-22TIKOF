@@ -94,7 +94,7 @@ public class CameraMovement : MonoBehaviour
                 sequence = 2.1f;
                 GameObject.FindWithTag("PaperLocked").GetComponent<PaperLock>().Open();
             }
-            if (sequence > 6)
+            if (sequence > 5)
             {
                 sequence = 0;
                 GameManager.cameraMode = 127;

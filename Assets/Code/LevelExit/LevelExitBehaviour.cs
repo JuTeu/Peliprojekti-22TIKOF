@@ -94,7 +94,8 @@ public class LevelExitBehaviour : MonoBehaviour
                 
                 if (GameManager.currentFloor == 4)
                 {
-                    GameManager.regularEndingReached = true;
+                    GameManager.unlocks = GameManager.unlocks | 0b_10;
+                    GameManager.Save();
                     exitSequence = true;
                     GameManager.PlayerClipping(false);
                     playerAnimator.Play("MiddleUpSwimIdle");

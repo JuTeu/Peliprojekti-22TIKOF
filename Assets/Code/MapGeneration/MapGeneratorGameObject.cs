@@ -270,6 +270,7 @@ public class MapGeneratorGameObject : MonoBehaviour
         GameManager.spawnerTiles.Clear();
 
         GameManager.chestsInLevel = chestRoomTotal;
+        GameManager.correctAnswers = 0;
         GameObject.Find("PaperCount").GetComponent<UIPaperCount>().SetTotalPapers(chestRoomTotal);
         if (mapNum != seabed)
         {

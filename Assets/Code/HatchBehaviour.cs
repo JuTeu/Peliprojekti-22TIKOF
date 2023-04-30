@@ -19,7 +19,7 @@ public class HatchBehaviour : MonoBehaviour
     {
         hatchSprite.enabled = false;
         hatchCollision.isTrigger = false;
-        flippers.SetActive(!GameManager.flippersEquipped);
+        flippers.SetActive(GameManager.flippers != 2);
         arrow.SetActive(false);
     }
     public void Open()
