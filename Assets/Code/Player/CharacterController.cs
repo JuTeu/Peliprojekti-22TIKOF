@@ -7,8 +7,9 @@ public class CharacterController : MonoBehaviour
 {
     private Rigidbody2D rb;
     private InputReader inputReader;
-    private SpriteRenderer sprite, speedEffectSprite;
-    private Animator anim;
+    private SpriteRenderer sprite, armSprite, hatSprite, speedEffectSprite;
+    private Animator anim, armAnim, hatAnim;
+    private PlayerAnimator animator;
     public int currentAnim = 0;
     Vector2 movementVector = Vector2.zero;
     Vector2 oldPosition = Vector2.zero;
@@ -24,8 +25,13 @@ public class CharacterController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         sprite = GetComponent<SpriteRenderer>();
+        armSprite = transform.Find("Arms").gameObject.GetComponent<SpriteRenderer>();
+        hatSprite = transform.Find("Hat").gameObject.GetComponent<SpriteRenderer>();
         speedEffectSprite = speedEffect.GetComponent<SpriteRenderer>();
+        animator = GetComponent<PlayerAnimator>();
         anim = GetComponent<Animator>();
+        armAnim = transform.Find("Arms").gameObject.GetComponent<Animator>();
+        hatAnim = transform.Find("Hat").gameObject.GetComponent<Animator>();
         inputReader = GetComponent<InputReader>();
         stickUpperBound = Screen.height * 0.9f;
     }
@@ -106,23 +112,23 @@ public class CharacterController : MonoBehaviour
             touchReleased = false;
             if (currentAnim == 0)
             {
-                anim.Play("UpSwim");
+                animator.Play("UpSwim");
             }
             else if (currentAnim == 1)
             {
-                anim.Play("MiddleUpSwim");
+                animator.Play("MiddleUpSwim");
             }
             else if (currentAnim == 2)
             {
-                anim.Play("MiddleSwim");
+                animator.Play("MiddleSwim");
             }
             else if (currentAnim == 3)
             {
-                anim.Play("MiddleDownSwim");
+                animator.Play("MiddleDownSwim");
             }
             else if (currentAnim == 4)
             {
-                anim.Play("DownSwim");
+                animator.Play("DownSwim");
             }
         }
         else if (GetBeingPressed() && !touchReleased)
@@ -140,23 +146,23 @@ public class CharacterController : MonoBehaviour
             stickPosition.anchoredPosition = new Vector2(10000, 10000);
             if (currentAnim == 0)
             {
-                anim.Play("UpSwimIdle");
+                animator.Play("UpSwimIdle");
             }
             else if (currentAnim == 1)
             {
-                anim.Play("MiddleUpSwimIdle");
+                animator.Play("MiddleUpSwimIdle");
             }
             else if (currentAnim == 2)
             {
-                anim.Play("MiddleSwimIdle");
+                animator.Play("MiddleSwimIdle");
             }
             else if (currentAnim == 3)
             {
-                anim.Play("MiddleDownSwimIdle");
+                animator.Play("MiddleDownSwimIdle");
             }
             else if (currentAnim == 4)
             {
-                anim.Play("DownSwimIdle");
+                animator.Play("DownSwimIdle");
             }
         }
 
@@ -201,33 +207,26 @@ public class CharacterController : MonoBehaviour
                 currentAnim = nextAnim;
                 if (currentAnim == 0)
                 {
-                    anim.Play("UpSwim");
+                    animator.Play("UpSwim");
                 }
                 else if (currentAnim == 1)
                 {
-                    anim.Play("MiddleUpSwim");
+                    animator.Play("MiddleUpSwim");
                 }
                 else if (currentAnim == 2)
                 {
-                    anim.Play("MiddleSwim");
+                    animator.Play("MiddleSwim");
                 }
                 else if (currentAnim == 3)
                 {
-                    anim.Play("MiddleDownSwim");
+                    animator.Play("MiddleDownSwim");
                 }
                 else if (currentAnim == 4)
                 {
-                    anim.Play("DownSwim");
+                    animator.Play("DownSwim");
                 }
             }
-            if (movementVector.x < 0f)
-            {
-                sprite.flipX = true;
-            }
-            else
-            {
-                sprite.flipX = false;
-            }
+            animator.Flip(movementVector.x < 0f);
         }
     }
 }

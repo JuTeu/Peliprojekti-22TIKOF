@@ -16,7 +16,7 @@ public class RefrigeratorBehaviour : MonoBehaviour
     [SerializeField] Vector3 cableEnd;
     private bool playerEntered = false;
     private GameObject player;
-    private Animator playerAnimator;
+    private PlayerAnimator playerAnimator;
     private Rigidbody2D playerRigidbody;
     private PlayerHealth playerHealth;
     private CharacterController playerController;
@@ -50,7 +50,7 @@ public class RefrigeratorBehaviour : MonoBehaviour
         {
             player = collision.gameObject;
             playerRigidbody = player.GetComponent<Rigidbody2D>();
-            playerAnimator = player.GetComponent<Animator>();
+            playerAnimator = player.GetComponent<PlayerAnimator>();
             playerHealth = player.GetComponent<PlayerHealth>();
             playerController = player.GetComponent<CharacterController>();
 
@@ -82,7 +82,7 @@ public class RefrigeratorBehaviour : MonoBehaviour
                 doorSprite.sprite = doorBack;
             }
         }
-        if (sequence < 1.1f && sequence > 1f) doorSprite.sortingOrder = 5;
+        if (sequence < 1.1f && sequence > 1f) doorSprite.sortingOrder = 6;
         if (sequence < 2.15f && sequence > 1.15f)
         {
             doorRotation = -10 * sequence;

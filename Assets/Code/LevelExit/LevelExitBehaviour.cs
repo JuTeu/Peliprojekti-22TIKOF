@@ -11,7 +11,7 @@ public class LevelExitBehaviour : MonoBehaviour
     Collider2D exitCollider;
     GameObject player;
     Rigidbody2D playerRigidbody;
-    Animator playerAnimator;
+    PlayerAnimator playerAnimator;
     Vector2 aboveReward;
     bool levelFinished = false, boostSkipable = false, exitSequence = false;
     void Start()
@@ -86,7 +86,7 @@ public class LevelExitBehaviour : MonoBehaviour
         {
             player = collision.gameObject;
             playerRigidbody = player.GetComponent<Rigidbody2D>();
-            playerAnimator = player.GetComponent<Animator>();
+            playerAnimator = player.GetComponent<PlayerAnimator>();
             if (GameManager.questionsAnswered + 50 >= GameManager.chestsInLevel)
             {
                 GameManager.PauseWorld(true);

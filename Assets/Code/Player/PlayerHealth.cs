@@ -10,12 +10,12 @@ public class PlayerHealth : MonoBehaviour
     public float healthAmount = 100f;    
     public float damagePerSecond = 1f;
     private float iFrames = 0f;
-    private SpriteRenderer sprite;
+    private PlayerAnimator animator;
     private AudioSource sound;
   
     void Start()
     {
-        sprite = GetComponent<SpriteRenderer>();
+        animator = GetComponent<PlayerAnimator>();
         sound = GetComponent<AudioSource>();
     }
 
@@ -23,8 +23,8 @@ public class PlayerHealth : MonoBehaviour
     {
         if (iFrames > 0f) { 
             iFrames -= Time.deltaTime;
-            sprite.color = new Color(1f, 1f, 1f, Mathf.Sin(32 * iFrames) / 2 + 0.5f);
-            if (iFrames < 0.1f) sprite.color = new Color(1f, 1f, 1f, 1f);
+            animator.SetColor(new Color(1f, 1f, 1f, Mathf.Sin(32 * iFrames) / 2 + 0.5f));
+            if (iFrames < 0.1f) animator.SetColor(Color.white);
         }
         TakeDamage(damagePerSecond * Time.deltaTime);
     }

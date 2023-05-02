@@ -17,7 +17,7 @@ public class LevelTransitionMenuBehaviour : MonoBehaviour
     float spawnRoomLocation;
     RectTransform mainTransform, hpBar, pauseButton, paperCount;
     GameObject player, trophy, bear;
-    Animator playerAnimator;
+    PlayerAnimator playerAnimator;
     CharacterController playerController;
     Rigidbody2D playerRigidbody;
 
@@ -29,7 +29,7 @@ public class LevelTransitionMenuBehaviour : MonoBehaviour
         hpBar = GameObject.Find("HPBar").GetComponent<RectTransform>();
         pauseButton = GameObject.Find("PauseButton").GetComponent<RectTransform>();
         paperCount = GameObject.Find("PaperCount").GetComponent<RectTransform>();
-        playerAnimator = player.GetComponent<Animator>();
+        playerAnimator = player.GetComponent<PlayerAnimator>();
         playerController = player.GetComponent<CharacterController>();
 
         if (GameManager.currentFloor == 4) trophy = GameObject.Find("CutsceneTrophy");
@@ -294,7 +294,7 @@ public class LevelTransitionMenuBehaviour : MonoBehaviour
         }
         if (sequence > 23 && sequenceOrder == 2)
         {
-            player.GetComponent<SpriteRenderer>().flipX = false;
+            playerAnimator.Flip(false);
             bear.transform.localPosition = new Vector2(55f, -0.38f);
             bear.GetComponent<SpriteRenderer>().sprite = bearNeutral;
             Camera.main.transform.position = new Vector3(-154f, 92f, -10f);

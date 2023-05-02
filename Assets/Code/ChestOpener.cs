@@ -12,8 +12,7 @@ public class ChestOpener : MonoBehaviour
     private bool playerEntered = false;
     private GameObject player;
     private Rigidbody2D playerRigidbody;
-    private SpriteRenderer playerSprite;
-    private Animator playerAnimator;
+    private PlayerAnimator playerAnimator;
     private CharacterController playerController;
     private Vector2 playerDesiredPosition;
 
@@ -40,10 +39,10 @@ public class ChestOpener : MonoBehaviour
             
             player = collision.gameObject;
             playerRigidbody = player.GetComponent<Rigidbody2D>();
-            playerSprite = player.GetComponent<SpriteRenderer>();
-            playerAnimator = player.GetComponent<Animator>();
+            playerAnimator = player.GetComponent<PlayerAnimator>();
             playerController = player.GetComponent<CharacterController>();
-            playerSprite.flipX = false;
+            //playerSprite.flipX = false;
+            playerAnimator.Flip(false);
             playerEntered = true;
             GameManager.PauseWorld(true);
             playerController.currentAnim = 1;

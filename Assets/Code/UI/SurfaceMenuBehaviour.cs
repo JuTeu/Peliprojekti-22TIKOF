@@ -12,8 +12,8 @@ public class SurfaceMenuBehaviour : MonoBehaviour
     Button leftButtonB, rightButtonB, totalScoreB, jumpButtonB, equipmentButtonB, openShopButtonB, talkButtonB;
     RectTransform hpBar, pauseButton, paperCount;
     Rigidbody2D playerRigidbody;
-    SpriteRenderer playerSprite;
-    Animator playerAnimator;
+    SpriteRenderer playerSprite, armSprite, hatSprite;
+    Animator playerAnimator, armAnimator, hatAnimator;
     bool sequenceStopped = false;
     float sequence, exponentialSequence = 0f;
     int menuAnimId = 0;
@@ -67,10 +67,18 @@ public class SurfaceMenuBehaviour : MonoBehaviour
         pauseButton.anchoredPosition = new Vector2(-1000, -60);
         paperCount.anchoredPosition = new Vector2(1000, -60);
         
-        playerRigidbody = GameObject.FindWithTag("Player").GetComponent<Rigidbody2D>();
-        playerSprite = GameObject.FindWithTag("Player").GetComponent<SpriteRenderer>();
-        playerAnimator = GameObject.FindWithTag("Player").GetComponent<Animator>();
+        GameObject player = GameObject.FindWithTag("Player");
+        playerRigidbody = player.GetComponent<Rigidbody2D>();
+        playerSprite = player.GetComponent<SpriteRenderer>();
+        armSprite = player.transform.Find("Arms").gameObject.GetComponent<SpriteRenderer>();
+        hatSprite = player.transform.Find("Hat").gameObject.GetComponent<SpriteRenderer>();
+        playerAnimator = player.GetComponent<Animator>();
+        armAnimator = player.transform.Find("Arms").gameObject.GetComponent<Animator>();
+        hatAnimator = player.transform.Find("Hat").gameObject.GetComponent<Animator>();
+
         playerAnimator.Play("Idle");
+        armAnimator.Play("Idle");
+        hatAnimator.Play("Idle");
         //sequence = 12.8f;
         sequence = 11f;
     }
@@ -133,6 +141,8 @@ public class SurfaceMenuBehaviour : MonoBehaviour
         if (id == 1 || id == 2 || id == 3)
         {
             playerAnimator.Play("Walk");
+            armAnimator.Play("Walk");
+            hatAnimator.Play("Walk");
         }
         if (id == 1 || id == 2)
         {
@@ -196,13 +206,22 @@ public class SurfaceMenuBehaviour : MonoBehaviour
         {
             playerRigidbody.MovePosition(Vector2.MoveTowards(playerRigidbody.position, new Vector2(-10.65f, playerRigidbody.position.y), 5f * Time.deltaTime));
             playerSprite.flipX = currentMenu == 0 ? true : false;
+            armSprite.flipX = currentMenu == 0 ? true : false;
+            hatSprite.flipX = currentMenu == 0 ? true : false;
         }
         if ((playerRigidbody.position.x < -10.64f && playerSprite.flipX) || 
-            (playerRigidbody.position.x > -10.66f && !playerSprite.flipX)) playerAnimator.Play("Idle");
+            (playerRigidbody.position.x > -10.66f && !playerSprite.flipX))
+        {
+            playerAnimator.Play("Idle");
+            armAnimator.Play("Idle");
+            hatAnimator.Play("Idle");
+        }    
         if (sequence > 13.5f)
         {
             currentMenu = 1;
             playerAnimator.Play("Idle");
+            armAnimator.Play("Idle");
+            hatAnimator.Play("Idle");
             //leftButtonB.interactable = true;
             rightButtonB.interactable = true;
             equipmentButtonB.interactable = true;
@@ -237,12 +256,21 @@ public class SurfaceMenuBehaviour : MonoBehaviour
         {
             playerRigidbody.MovePosition(Vector2.MoveTowards(playerRigidbody.position, new Vector2(-4.5f, playerRigidbody.position.y), 5f * Time.deltaTime));
             playerSprite.flipX = false;
+            armSprite.flipX = false;
+            hatSprite.flipX = false;
         }
-        if (playerRigidbody.position.x > -4.51f) playerAnimator.Play("Idle");
+        if (playerRigidbody.position.x > -4.51f)
+        {
+            playerAnimator.Play("Idle");
+            armAnimator.Play("Idle");
+            hatAnimator.Play("Idle");
+        }
         if (sequence > 13.5f)
         {
             currentMenu = 0;
             playerAnimator.Play("Idle");
+            armAnimator.Play("Idle");
+            hatAnimator.Play("Idle");
             jumpButtonT.anchoredPosition = new Vector2(0, 200);
             leftButtonB.interactable = true;
             //rightButtonB.interactable = true;
@@ -269,13 +297,21 @@ public class SurfaceMenuBehaviour : MonoBehaviour
         {
             playerRigidbody.MovePosition(Vector2.MoveTowards(playerRigidbody.position, new Vector2(-2f, playerRigidbody.position.y), 2.5f * Time.deltaTime));
             playerSprite.flipX = false;
+            armSprite.flipX = false;
+            hatSprite.flipX = false;
         }
-        if (playerRigidbody.position.x > -2.01f && !playerJumped) playerAnimator.Play("Idle");
-
+        if (playerRigidbody.position.x > -2.01f && !playerJumped)
+        {
+            playerAnimator.Play("Idle");
+            armAnimator.Play("Idle");
+            hatAnimator.Play("Idle");
+        }
         if (sequence > 10f && !playerJumped)
         {
             playerJumped = true;
             playerAnimator.Play("Jump");
+            armAnimator.Play("Jump");
+            hatAnimator.Play("Jump");
         }
         if (sequence > 42f && !playerJumped2)
         {

@@ -13,7 +13,7 @@ public class SpeedBoost : MonoBehaviour
             /*CharacterController characterController = other.GetComponent<CharacterController>();
             characterController.SetSpeed(characterController.speed + boostAmount);*/
 
-            GameManager.flippers = 3;
+            GameManager.flippers = 2;
             GameManager.Save();
         }
     }
