@@ -29,7 +29,7 @@ public class GameManager : MonoBehaviour
     */
     public static int unlocks;
 
-    // 0 = ei hattua, 1 = keltanokka, 2 = vauhtipipo, 3 = kompassihattu, 4 = kovanaamalakki, 5 = kultasilinteri
+    // 0 = ei hattua, 1 = keltanokka, 2 = vauhtipipo, 3 = kompassihattu, 4 = kovislakki, 5 = kultapytty
     public static int equippedHat;
 
     public static int chestsInLevel = 0;
