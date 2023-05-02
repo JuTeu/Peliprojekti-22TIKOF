@@ -109,7 +109,7 @@ public class LevelTransitionMenuBehaviour : MonoBehaviour
             else
             {
                 GameManager.score = score;
-                player.GetComponent<PlayerHealth>().Heal(100f);
+                if (GameManager.healBetweenLevels) player.GetComponent<PlayerHealth>().Heal(100f);
                 tallyingFinished = true;
                 GameObject.Find("PaperCount").GetComponent<UIPaperCount>().AddScore(0);
                 sequence = 18f;

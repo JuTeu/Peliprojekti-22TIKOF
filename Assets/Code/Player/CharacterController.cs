@@ -97,7 +97,7 @@ public class CharacterController : MonoBehaviour
                 speedEffectIsActive = true;
             }
             boostMode = tapTime > 0f;
-            if (GameManager.flippers == 2) tapTime = 0.5f;
+            if ((GameManager.unlocks & 0b_1_0000) == 0b_1_0000) tapTime = 0.5f;
             if (boostMode)
             {
                 joyStick.color = new Color(0.7f, 0.13f, 0.14f, 0.8f);

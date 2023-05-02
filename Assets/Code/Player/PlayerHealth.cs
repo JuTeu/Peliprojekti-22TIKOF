@@ -34,7 +34,7 @@ public class PlayerHealth : MonoBehaviour
         if (iFrames > 0f || GameManager.playMode == 1) return;
         if (!GameManager.playerIsInvulnerable)
         {
-            healthAmount -= damage;
+            healthAmount -= damage * GameManager.damageMultiplier;
         }
         healthBar.fillAmount = healthAmount / 100f;
         if(healthAmount <= 0)         
@@ -59,7 +59,7 @@ public class PlayerHealth : MonoBehaviour
 
     public void Heal(float healingAmount)
     {
-        healthAmount += healingAmount;
+        healthAmount += healingAmount * GameManager.healingMultiplier;
         healthAmount = Mathf.Clamp(healthAmount, 0, 100);
 
         healthBar.fillAmount = healthAmount / 100f;

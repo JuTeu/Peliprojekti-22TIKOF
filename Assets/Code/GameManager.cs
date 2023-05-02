@@ -8,25 +8,24 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
     public static Bounds levelBounds;
-    public static bool unhurt;
+    public static bool unhurt, playerInControl, playerIsInvulnerable, playerOnScreen, enemiesPaused;
     public static bool levelIsGenerated = false;
     public static bool roomsSceneNoLongerLoaded = true;
-    public static bool playerInControl = true;
-    public static bool playerIsInvulnerable = false;
-    public static bool playerOnScreen;
     public static bool playerClipping = true;
-    public static bool enemiesPaused = false;
     public static int score;
+
+    public static int scoreMultiplier = 1;
+    public static float damageMultiplier = 1f, healingMultiplier = 1f;
+    public static bool healBetweenLevels = true;
 
     // Pysyvät tallennuksesta toiseen
     public static int totalScore;
     public static int highScore;
-    public static int flippers;
 
     /*
      1 = peliavattu ekaa kertaa, 10 = normaali loppu saavutettu,
-     100 = erikoisloppu saavutettu, 1000 = keltanokka, 1_0000 = vauhtipipo,
-     10_0000 = kompassihattu, 100_0000 = kovanaamalakki, 1000_0000 = kultasilinteri
+     100 = erikoisloppu saavutettu, 1000 = räpylä avattu, 1_0000 = räpylä puettu, 10_0000 = keltanokka, 100_0000 = vauhtipipo,
+     1000_0000 = kompassihattu, 1_0000_0000 = kovanaamalakki, 10_0000_0000 = kultasilinteri
     */
     public static int unlocks;
 
@@ -49,7 +48,6 @@ public class GameManager : MonoBehaviour
     {
         totalScore = PlayerPrefs.GetInt("TotalScore", 0);
         highScore = PlayerPrefs.GetInt("HighScore", 0);
-        flippers = PlayerPrefs.GetInt("Flippers", 0);
         unlocks = PlayerPrefs.GetInt("Unlocks", 0);
         equippedHat = PlayerPrefs.GetInt("EquippedHat", 0);
 
@@ -63,7 +61,6 @@ public class GameManager : MonoBehaviour
     {
         PlayerPrefs.SetInt("TotalScore", totalScore);
         PlayerPrefs.SetInt("HighScore", highScore);
-        PlayerPrefs.SetInt("Flippers", flippers);
         PlayerPrefs.SetInt("Unlocks", unlocks);
         PlayerPrefs.SetInt("EquippedHat", equippedHat);
     }
@@ -182,7 +179,6 @@ public class GameManager : MonoBehaviour
 
     public static void BeginGame()
     {
-        Save();
         GameObject.Find("RegularEndingTrophy").GetComponent<SpriteRenderer>().enabled = (unlocks & 0b_10) == 0b_10;
         correctAnswersTotal = 0;
         HideStick();

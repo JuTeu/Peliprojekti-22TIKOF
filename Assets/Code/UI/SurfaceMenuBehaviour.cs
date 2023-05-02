@@ -23,6 +23,7 @@ public class SurfaceMenuBehaviour : MonoBehaviour
     {
         GameManager.totalScore += GameManager.score;
         if (GameManager.score > GameManager.highScore) GameManager.highScore = GameManager.score;
+        GameManager.Save();
         scoreText.text = GameManager.totalScore + "";
         highScoreText.text = GameManager.highScore + "";
         GameManager.score = 0;

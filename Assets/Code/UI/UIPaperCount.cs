@@ -15,7 +15,7 @@ public class UIPaperCount : MonoBehaviour
     public void RevokedPapers (int input) {collected -= input; UpdateGraphic();}
     public void AddScore (int input)
     {
-        GameManager.score += input;
+        GameManager.score += input * GameManager.scoreMultiplier;
         UpdateGraphic();
     }
     
