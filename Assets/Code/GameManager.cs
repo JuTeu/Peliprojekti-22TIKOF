@@ -54,6 +54,7 @@ public class GameManager : MonoBehaviour
         Instance = this;
         Screen.sleepTimeout = SleepTimeout.NeverSleep;
         score = 0;
+        equippedHat = 2;
         BeginGame();
     }
 

@@ -6,12 +6,12 @@ using TMPro;
 
 public class SurfaceMenuBehaviour : MonoBehaviour
 {
-    [SerializeField] GameObject leftButton, rightButton, totalScore, jumpButton, equipmentButton, openShopButton, talkButton, equipmentScreen, equipmentBack, equipmentLeft, equipmentRight, equipmentFlipperButton, equipmentFlipperIcon;
-    [SerializeField] TextMeshProUGUI scoreText, highScoreText, hatNameText;
-    RectTransform leftButtonT, rightButtonT, totalScoreT, jumpButtonT, equipmentButtonT, openShopButtonT, talkButtonT, equipmentScreenT;
-    Button leftButtonB, rightButtonB, totalScoreB, jumpButtonB, equipmentButtonB, openShopButtonB, talkButtonB, equipmentBackB, equipmentLeftB, equipmentRightB, equipmentFlipperButtonB;
+    [SerializeField] GameObject leftButton, rightButton, totalScore, jumpButton, equipmentButton, openShopButton, talkButton, equipmentScreen, equipmentBack, equipmentLeft, equipmentRight, equipmentFlipperButton, equipmentFlipperIcon, shopScreen, shopBack, shopLeft, shopRight, shopBuy, shopHatIcon;
+    [SerializeField] TextMeshProUGUI scoreText, highScoreText, hatNameText, shopHatNameText, shopBuyText, shopPriceText;
+    RectTransform leftButtonT, rightButtonT, totalScoreT, jumpButtonT, equipmentButtonT, openShopButtonT, talkButtonT, equipmentScreenT, shopScreenT;
+    Button leftButtonB, rightButtonB, totalScoreB, jumpButtonB, equipmentButtonB, openShopButtonB, talkButtonB, equipmentBackB, equipmentLeftB, equipmentRightB, equipmentFlipperButtonB, shopBackB, shopLeftB, shopRightB, shopBuyB;
     RectTransform hpBar, pauseButton, paperCount;
-    Image equipmentFlipperIconI;
+    Image equipmentFlipperIconI, shopHatIconI;
     Rigidbody2D playerRigidbody;
     SpriteRenderer playerSprite, armSprite, hatSprite;
     Animator playerAnimator, armAnimator, hatAnimator;
@@ -37,10 +37,12 @@ public class SurfaceMenuBehaviour : MonoBehaviour
         openShopButtonT = openShopButton.GetComponent<RectTransform>();
         talkButtonT = talkButton.GetComponent<RectTransform>();
         equipmentScreenT = equipmentScreen.GetComponent<RectTransform>();
+        shopScreenT = shopScreen.GetComponent<RectTransform>();
 
         equipmentFlipperIconI = equipmentFlipperIcon.GetComponent<Image>();
         flipperEquipped = (GameManager.unlocks & 0b_1_0000) == 0b_1_0000;
         equipmentFlipperIconI.color = flipperEquipped ? Color.white : new Color(0.14f, 0.117f, 0.18f);
+        shopHatIconI = shopHatIcon.GetComponent<Image>();
 
         leftButtonB = leftButton.GetComponent<Button>();
         rightButtonB = rightButton.GetComponent<Button>();
@@ -52,6 +54,10 @@ public class SurfaceMenuBehaviour : MonoBehaviour
         equipmentLeftB = equipmentLeft.GetComponent<Button>();
         equipmentRightB = equipmentRight.GetComponent<Button>();
         equipmentFlipperButtonB = equipmentFlipperButton.GetComponent<Button>();
+        shopBackB = shopBack.GetComponent<Button>();
+        shopLeftB = shopLeft.GetComponent<Button>();
+        shopRightB = shopRight.GetComponent<Button>();
+        shopBuyB = shopBuy.GetComponent<Button>();
 
         leftButtonB.interactable = false;
         rightButtonB.interactable = false;
@@ -63,6 +69,10 @@ public class SurfaceMenuBehaviour : MonoBehaviour
         equipmentLeftB.interactable = false;
         equipmentRightB.interactable = false;
         equipmentFlipperButtonB.interactable = false;
+        shopBackB.interactable = false;
+        shopLeftB.interactable = false;
+        shopRightB.interactable = false;
+        shopBuyB.interactable = false;
         
 
         leftButtonT.anchoredPosition = new Vector2(-1000, 0);
@@ -76,6 +86,7 @@ public class SurfaceMenuBehaviour : MonoBehaviour
         talkButtonT.anchoredPosition = new Vector2(0, -1000);
 
         equipmentScreenT.anchoredPosition = new Vector2(-1000, 0);
+        shopScreenT.anchoredPosition = new Vector2(-1000, 0);
 
         hpBar = GameObject.Find("HPBar").GetComponent<RectTransform>();
         pauseButton = GameObject.Find("PauseButton").GetComponent<RectTransform>();
@@ -128,6 +139,40 @@ public class SurfaceMenuBehaviour : MonoBehaviour
         }
     }
 
+    public void PressOpenShop()
+    {
+        openShopButtonB.interactable = false;
+        talkButtonB.interactable = false;
+        leftButtonB.interactable = false;
+        rightButtonB.interactable = false;
+        equipmentButtonB.interactable = false;
+        DoMenuAnim(6);
+    }
+
+    public void PressCloseShop()
+    {
+        shopBackB.interactable = false;
+        shopLeftB.interactable = false;
+        shopRightB.interactable = false;
+        shopBuyB.interactable = false;
+        DoMenuAnim(7);
+    }
+
+    public void PressLeftShop()
+    {
+        //
+    }
+
+    public void PressRightShop()
+    {
+        //
+    }
+
+    public void PressBuyShop()
+    {
+        //
+    }
+
     public void PressEquipment()
     {
         leftButtonB.interactable = false;
@@ -157,7 +202,7 @@ public class SurfaceMenuBehaviour : MonoBehaviour
     {
         
     }
-
+    
     public void PressFlipper()
     {
         if (flipperEquipped)
@@ -200,6 +245,14 @@ public class SurfaceMenuBehaviour : MonoBehaviour
         else if (menuAnimId == 5)
         {
             CloseEquipmentMenu();
+        }
+        else if (menuAnimId == 6)
+        {
+            OpenShopMenu();
+        }
+        else if (menuAnimId == 7)
+        {
+            CloseShopMenu();
         }
     }
 
@@ -251,6 +304,40 @@ public class SurfaceMenuBehaviour : MonoBehaviour
             //rightButtonB.interactable = true;
             jumpButtonB.interactable = true;
             equipmentButtonB.interactable = true;
+            sequenceStopped = true;
+        }
+    }
+    
+    void OpenShopMenu()
+    {
+        sequence += 50 * Time.deltaTime;
+        exponentialSequence = Mathf.Pow(2, sequence);
+        shopScreenT.anchoredPosition = new Vector2(-1000 + exponentialSequence / 10, 0);
+
+        if (exponentialSequence > 10000f)
+        {
+            shopScreenT.anchoredPosition = new Vector2(0, 0);
+            shopBackB.interactable = true;
+            shopLeftB.interactable = true;
+            shopRightB.interactable = true;
+            shopBuyB.interactable = true;
+            sequenceStopped = true;
+        }
+    }
+
+    void CloseShopMenu()
+    {
+        sequence += 50 * Time.deltaTime;
+        exponentialSequence = Mathf.Pow(2, sequence);
+        shopScreenT.anchoredPosition = new Vector2(0 + exponentialSequence / 10, 0);
+
+        if (exponentialSequence > 10000f)
+        {
+            equipmentButtonB.interactable = true;
+            openShopButtonB.interactable = true;
+            talkButtonB.interactable = true;
+            leftButtonB.interactable = true;
+            rightButtonB.interactable = true;
             sequenceStopped = true;
         }
     }
@@ -337,10 +424,10 @@ public class SurfaceMenuBehaviour : MonoBehaviour
             playerAnimator.Play("Idle");
             armAnimator.Play("Idle");
             hatAnimator.Play("Idle");
-            //leftButtonB.interactable = true;
+            leftButtonB.interactable = true;
             rightButtonB.interactable = true;
             equipmentButtonB.interactable = true;
-            //openShopButtonB.interactable = true;
+            openShopButtonB.interactable = true;
             talkButtonB.interactable = true;
             sequenceStopped = true;
         }

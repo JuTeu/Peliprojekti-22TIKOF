@@ -21,6 +21,18 @@ public class HatSetter : MonoBehaviour
         {
             hatType = "no_hat";
         }
+        else if (GameManager.equippedHat == 1)
+        {
+            hatType = "yellow_cap";
+        }
+        else if (GameManager.equippedHat == 2)
+        {
+            hatType = "firebeanie";
+        }
+        else if (GameManager.equippedHat == 4)
+        {
+            hatType = "";
+        }
         hatSprites = Resources.LoadAll<Sprite>(hatType);
     }
     public void SetHat(int direction)
@@ -31,19 +43,19 @@ public class HatSetter : MonoBehaviour
                 hat.sprite = hatSprites[0];
                 break;
             case 1 :
-                hat.sprite = hatSprites[3];
+                hat.sprite = hatSprites[1]; // 1
                 break;
             case 2 :
-                hat.sprite = hatSprites[2];
+                hat.sprite = hatSprites[2]; //2
                 break;
             case 3 :
-                hat.sprite = hatSprites[4];
+                hat.sprite = hatSprites[3];
                 break;
             case 4 :
-                hat.sprite = hatSprites[5];
+                hat.sprite = hatSprites[4];
                 break;
             case 5 :
-                hat.sprite = hatSprites[1];
+                hat.sprite = hatSprites[5];
                 break;
         }
     }
