@@ -348,8 +348,8 @@ public class SurfaceMenuBehaviour : MonoBehaviour
             equipmentHatIconI.sprite = Resources.LoadAll<Sprite>("golden_useless_hat")[5];
         }
         GameObject.FindWithTag("Player").transform.Find("Hat").gameObject.GetComponent<HatSetter>().SetHatType();
-        playerAnimator.Play("Walk");
-        playerAnimator.Play("Idle");
+        GameObject.FindWithTag("Player").transform.Find("Hat").gameObject.GetComponent<HatSetter>().SetHat(5);
+        
         GameManager.Save();
     }
 
@@ -499,7 +499,7 @@ public class SurfaceMenuBehaviour : MonoBehaviour
             shopBackB.interactable = true;
             shopLeftB.interactable = true;
             shopRightB.interactable = true;
-            shopBuyB.interactable = true;
+            RefreshShopScreen();
             sequenceStopped = true;
         }
     }
