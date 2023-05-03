@@ -188,6 +188,8 @@ public class SurfaceMenuBehaviour : MonoBehaviour
             GameManager.unlocks |= hatIds[shopSelectedHat];
             GameManager.equippedHat = shopSelectedHat + 1;
             RefreshEquipmentScreen();
+            RefreshShopScreen();
+            scoreText.text = GameManager.totalScore + "";
         }
     }
 
@@ -307,7 +309,7 @@ public class SurfaceMenuBehaviour : MonoBehaviour
         GameManager.scoreMultiplier = 1f;
         GameManager.speedMultiplier = 1f;
         GameManager.healBetweenLevels = true;
-        
+
         if (GameManager.equippedHat == 0)
         {
             hatNameText.text = "Ei hattua";
@@ -346,6 +348,7 @@ public class SurfaceMenuBehaviour : MonoBehaviour
             equipmentHatIconI.sprite = Resources.LoadAll<Sprite>("golden_useless_hat")[5];
         }
         GameObject.FindWithTag("Player").transform.Find("Hat").gameObject.GetComponent<HatSetter>().SetHatType();
+        playerAnimator.Play("Walk");
         playerAnimator.Play("Idle");
         GameManager.Save();
     }
