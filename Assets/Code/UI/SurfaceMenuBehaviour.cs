@@ -6,12 +6,12 @@ using TMPro;
 
 public class SurfaceMenuBehaviour : MonoBehaviour
 {
-    [SerializeField] GameObject leftButton, rightButton, totalScore, jumpButton, equipmentButton, openShopButton, talkButton, equipmentScreen, equipmentBack, equipmentLeft, equipmentRight, equipmentFlipperButton, equipmentFlipperIcon, shopScreen, shopBack, shopLeft, shopRight, shopBuy, shopHatIcon;
-    [SerializeField] TextMeshProUGUI scoreText, highScoreText, hatNameText, shopHatNameText, shopBuyText, shopPriceText;
+    [SerializeField] GameObject leftButton, rightButton, totalScore, jumpButton, equipmentButton, openShopButton, talkButton, equipmentScreen, equipmentBack, equipmentLeft, equipmentRight, equipmentFlipperButton, equipmentFlipperIcon, shopScreen, shopBack, shopLeft, shopRight, shopBuy, shopHatIcon, equipmentHatIcon;
+    [SerializeField] TextMeshProUGUI scoreText, highScoreText, hatNameText, shopHatNameText, shopBuyText, shopPriceText, shopDescription;
     RectTransform leftButtonT, rightButtonT, totalScoreT, jumpButtonT, equipmentButtonT, openShopButtonT, talkButtonT, equipmentScreenT, shopScreenT;
     Button leftButtonB, rightButtonB, totalScoreB, jumpButtonB, equipmentButtonB, openShopButtonB, talkButtonB, equipmentBackB, equipmentLeftB, equipmentRightB, equipmentFlipperButtonB, shopBackB, shopLeftB, shopRightB, shopBuyB;
     RectTransform hpBar, pauseButton, paperCount;
-    Image equipmentFlipperIconI, shopHatIconI;
+    Image equipmentFlipperIconI, shopHatIconI, equipmentHatIconI;
     Rigidbody2D playerRigidbody;
     SpriteRenderer playerSprite, armSprite, hatSprite;
     Animator playerAnimator, armAnimator, hatAnimator;
@@ -20,6 +20,8 @@ public class SurfaceMenuBehaviour : MonoBehaviour
     float sequence, exponentialSequence = 0f;
     int menuAnimId = 0;
     int currentMenu = 0;
+
+    int shopSelectedHat = 0;
     
     void Start()
     {
@@ -43,6 +45,7 @@ public class SurfaceMenuBehaviour : MonoBehaviour
         flipperEquipped = (GameManager.unlocks & 0b_1_0000) == 0b_1_0000;
         equipmentFlipperIconI.color = flipperEquipped ? Color.white : new Color(0.14f, 0.117f, 0.18f);
         shopHatIconI = shopHatIcon.GetComponent<Image>();
+        equipmentHatIconI = equipmentHatIcon.GetComponent<Image>();
 
         leftButtonB = leftButton.GetComponent<Button>();
         rightButtonB = rightButton.GetComponent<Button>();
@@ -108,6 +111,9 @@ public class SurfaceMenuBehaviour : MonoBehaviour
         playerAnimator.Play("Idle");
         armAnimator.Play("Idle");
         hatAnimator.Play("Idle");
+
+        RefreshShopScreen();
+        RefreshEquipmentScreen();
         //sequence = 12.8f;
         sequence = 11f;
     }
@@ -160,17 +166,123 @@ public class SurfaceMenuBehaviour : MonoBehaviour
 
     public void PressLeftShop()
     {
-        //
+        shopSelectedHat -= 1;
+        if (shopSelectedHat == -1) shopSelectedHat = 4;
+        RefreshShopScreen();
     }
 
     public void PressRightShop()
     {
-        //
+        shopSelectedHat += 1;
+        if (shopSelectedHat == 5) shopSelectedHat = 0;
+        RefreshShopScreen();
     }
 
     public void PressBuyShop()
     {
-        //
+        int[] prices = new int[] {5000, 20000, 40000, 50000, 99999};
+        int[] hatIds = new int[] {0b_10_0000, 0b_100_0000, 0b_1000_0000, 0b_1_0000_0000, 0b_10_0000_0000};
+        if (GameManager.totalScore >= prices[shopSelectedHat])
+        {
+            GameManager.totalScore -= prices[shopSelectedHat];
+            GameManager.unlocks |= hatIds[shopSelectedHat];
+            GameManager.equippedHat = shopSelectedHat + 1;
+            RefreshEquipmentScreen();
+        }
+    }
+
+    void RefreshShopScreen()
+    {
+        if (shopSelectedHat == 0)
+        {
+            shopHatNameText.text = "Keltanokka";
+            shopDescription.text = "Aloittelijoille, saat vähemmän vahinkoa ja pisteitä.";
+            shopHatIconI.sprite = Resources.LoadAll<Sprite>("yellow_cap")[5];
+            if ((GameManager.unlocks & 0b_10_0000) == 0b_10_0000)
+            {
+                shopBuyText.text = "Ostettu";
+                shopPriceText.text = "";
+                shopBuyB.interactable = false;
+            }
+            else
+            {
+                shopBuyText.text = "Osta";
+                shopPriceText.text = "5 000";
+                shopBuyB.interactable = true;
+            }
+        }
+        else if (shopSelectedHat == 1)
+        {
+            shopHatNameText.text = "Liekkipipo";
+            shopDescription.text = "Näiden käyttäjät olivat kuulemma erittäin nopeita.";
+            shopHatIconI.sprite = Resources.LoadAll<Sprite>("firebeanie")[5];
+            if ((GameManager.unlocks & 0b_100_0000) == 0b_100_0000)
+            {
+                shopBuyText.text = "Ostettu";
+                shopPriceText.text = "";
+                shopBuyB.interactable = false;
+            }
+            else
+            {
+                shopBuyText.text = "Osta";
+                shopPriceText.text = "20 000";
+                shopBuyB.interactable = true;
+            }
+        }
+        else if (shopSelectedHat == 2)
+        {
+            shopHatNameText.text = "Kompassi";
+            shopDescription.text = "Osoittaa tien aarteiden luo.";
+            shopHatIconI.sprite = Resources.LoadAll<Sprite>("compass_hat")[5];
+            if ((GameManager.unlocks & 0b_1000_0000) == 0b_1000_0000)
+            {
+                shopBuyText.text = "Ostettu";
+                shopPriceText.text = "";
+                shopBuyB.interactable = false;
+            }
+            else
+            {
+                shopBuyText.text = "Osta";
+                shopPriceText.text = "TYÖN ALLA";
+                shopBuyB.interactable = false;
+            }
+        }
+        else if (shopSelectedHat == 3)
+        {
+            shopHatNameText.text = "Kovislakki";
+            shopDescription.text = "Elämä on tuskaa, mutta saat paljon pisteitä.";
+            shopHatIconI.sprite = Resources.LoadAll<Sprite>("hardcore_hat")[5];
+            if ((GameManager.unlocks & 0b_1_0000_0000) == 0b_1_0000_0000)
+            {
+                shopBuyText.text = "Ostettu";
+                shopPriceText.text = "";
+                shopBuyB.interactable = false;
+            }
+            else
+            {
+                shopBuyText.text = "Osta";
+                shopPriceText.text = "50 000";
+                shopBuyB.interactable = true;
+            }
+        }
+        else if (shopSelectedHat == 4)
+        {
+            shopHatNameText.text = "Kultapytty";
+            shopDescription.text = "Paras sijoitus ikinä.";
+            shopHatIconI.sprite = Resources.LoadAll<Sprite>("golden_useless_hat")[5];
+            if ((GameManager.unlocks & 0b_10_0000_0000) == 0b_10_0000_0000)
+            {
+                shopBuyText.text = "Ostettu";
+                shopPriceText.text = "";
+                shopBuyB.interactable = false;
+            }
+            else
+            {
+                shopBuyText.text = "Osta";
+                shopPriceText.text = "99 999";
+                shopBuyB.interactable = true;
+            }
+        }
     }
 
     public void PressEquipment()
@@ -188,6 +300,56 @@ public class SurfaceMenuBehaviour : MonoBehaviour
         DoMenuAnim(4);
     }
 
+    void RefreshEquipmentScreen()
+    {
+        GameManager.damageMultiplier = 1f;
+        GameManager.healingMultiplier = 1f;
+        GameManager.scoreMultiplier = 1f;
+        GameManager.speedMultiplier = 1f;
+        GameManager.healBetweenLevels = true;
+        
+        if (GameManager.equippedHat == 0)
+        {
+            hatNameText.text = "Ei hattua";
+            equipmentHatIconI.sprite = Resources.LoadAll<Sprite>("no_hat")[5];
+        }
+        else if (GameManager.equippedHat == 1)
+        {
+            hatNameText.text = "Keltanokka";
+            equipmentHatIconI.sprite = Resources.LoadAll<Sprite>("yellow_cap")[5];
+            GameManager.damageMultiplier = 0.5f;
+            GameManager.healingMultiplier = 2f;
+            GameManager.scoreMultiplier = 0.5f;
+        }
+        else if (GameManager.equippedHat == 2)
+        {
+            hatNameText.text = "Liekkipipo";
+            equipmentHatIconI.sprite = Resources.LoadAll<Sprite>("firebeanie")[5];
+            GameManager.speedMultiplier = 1.5f;
+        }
+        else if (GameManager.equippedHat == 3)
+        {
+            hatNameText.text = "Kompassi";
+            equipmentHatIconI.sprite = Resources.LoadAll<Sprite>("compass_hat")[5];
+        }
+        else if (GameManager.equippedHat == 4)
+        {
+            hatNameText.text = "Kovislakki";
+            equipmentHatIconI.sprite = Resources.LoadAll<Sprite>("hardcore_hat")[5];
+            GameManager.damageMultiplier = 2f;
+            GameManager.scoreMultiplier = 2f;
+            GameManager.healBetweenLevels = false;
+        }
+        else if (GameManager.equippedHat == 5)
+        {
+            hatNameText.text = "Kultapytty";
+            equipmentHatIconI.sprite = Resources.LoadAll<Sprite>("golden_useless_hat")[5];
+        }
+        GameObject.FindWithTag("Player").transform.Find("Hat").gameObject.GetComponent<HatSetter>().SetHatType();
+        playerAnimator.Play("Idle");
+        GameManager.Save();
+    }
+
     public void PressCloseEquipment()
     {
         DoMenuAnim(5);
@@ -195,12 +357,26 @@ public class SurfaceMenuBehaviour : MonoBehaviour
 
     public void PressLeftEquipment()
     {
-
+        int testIfNewHats = GameManager.equippedHat;
+        if ((GameManager.unlocks & 0b_10_0000) == 0b_10_0000 && GameManager.equippedHat > 1) GameManager.equippedHat = 1;
+        if ((GameManager.unlocks & 0b_100_0000) == 0b_100_0000 && GameManager.equippedHat > 2) GameManager.equippedHat = 2;
+        if ((GameManager.unlocks & 0b_1000_0000) == 0b_1000_0000 && GameManager.equippedHat > 3) GameManager.equippedHat = 3;
+        if ((GameManager.unlocks & 0b_1_0000_0000) == 0b_1_0000_0000 && GameManager.equippedHat > 4) GameManager.equippedHat = 4;
+        if ((GameManager.unlocks & 0b_10_0000_0000) == 0b_10_0000_0000 && GameManager.equippedHat > 5) GameManager.equippedHat = 5;
+        if (testIfNewHats == GameManager.equippedHat) GameManager.equippedHat = 0;
+        RefreshEquipmentScreen();
     }
 
     public void PressRightEquipment()
     {
-        
+        int testIfNewHats = GameManager.equippedHat;
+        if ((GameManager.unlocks & 0b_10_0000_0000) == 0b_10_0000_0000 && GameManager.equippedHat < 5) GameManager.equippedHat = 5;
+        if ((GameManager.unlocks & 0b_1_0000_0000) == 0b_1_0000_0000 && GameManager.equippedHat < 4) GameManager.equippedHat = 4;
+        if ((GameManager.unlocks & 0b_1000_0000) == 0b_1000_0000 && GameManager.equippedHat < 3) GameManager.equippedHat = 3;
+        if ((GameManager.unlocks & 0b_100_0000) == 0b_100_0000 && GameManager.equippedHat < 2) GameManager.equippedHat = 2;
+        if ((GameManager.unlocks & 0b_10_0000) == 0b_10_0000 && GameManager.equippedHat < 1) GameManager.equippedHat = 1;
+        if (testIfNewHats == GameManager.equippedHat) GameManager.equippedHat = 0;
+        RefreshEquipmentScreen();
     }
     
     public void PressFlipper()

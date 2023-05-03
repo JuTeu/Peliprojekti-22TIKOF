@@ -1167,12 +1167,14 @@ MonoBehaviour:
   shopRight: {fileID: 1584214753}
   shopBuy: {fileID: 1419226880}
   shopHatIcon: {fileID: 1802437981}
+  equipmentHatIcon: {fileID: 796776198}
   scoreText: {fileID: 365610810}
   highScoreText: {fileID: 1683171710}
   hatNameText: {fileID: 1478739070}
   shopHatNameText: {fileID: 1037172639}
   shopBuyText: {fileID: 635882492}
   shopPriceText: {fileID: 1775314466}
+  shopDescription: {fileID: 1797766109}
 --- !u!1 &635882490
 GameObject:
   m_ObjectHideFlags: 0
