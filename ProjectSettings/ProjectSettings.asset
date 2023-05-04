@@ -250,7 +250,7 @@ PlayerSettings:
   AndroidTargetArchitectures: 3
   AndroidTargetDevices: 0
   AndroidSplashScreenScale: 0
-  androidSplashScreen: {fileID: 2800000, guid: 91932c4e6556d664e9193d71d7d0cf56, type: 3}
+  androidSplashScreen: {fileID: 0}
   AndroidKeystoreName: '{inproject}: user.keystore'
   AndroidKeyaliasName: avain
   AndroidBuildApkPerCpuArchitecture: 0
