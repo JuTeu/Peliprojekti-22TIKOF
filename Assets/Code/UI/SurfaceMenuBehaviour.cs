@@ -180,7 +180,7 @@ public class SurfaceMenuBehaviour : MonoBehaviour
 
     public void PressBuyShop()
     {
-        int[] prices = new int[] {5000, 20000, 40000, 50000, 99999};
+        int[] prices = new int[] {5000, 30000, 50000, 100000, 999999};
         int[] hatIds = new int[] {0b_10_0000, 0b_100_0000, 0b_1000_0000, 0b_1_0000_0000, 0b_10_0000_0000};
         if (GameManager.totalScore >= prices[shopSelectedHat])
         {
@@ -227,7 +227,7 @@ public class SurfaceMenuBehaviour : MonoBehaviour
             else
             {
                 shopBuyText.text = "Osta";
-                shopPriceText.text = "20 000";
+                shopPriceText.text = "30 000";
                 shopBuyB.interactable = true;
             }
         }
@@ -263,7 +263,7 @@ public class SurfaceMenuBehaviour : MonoBehaviour
             else
             {
                 shopBuyText.text = "Osta";
-                shopPriceText.text = "50 000";
+                shopPriceText.text = "100 000";
                 shopBuyB.interactable = true;
             }
         }
@@ -281,7 +281,7 @@ public class SurfaceMenuBehaviour : MonoBehaviour
             else
             {
                 shopBuyText.text = "Osta";
-                shopPriceText.text = "99 999";
+                shopPriceText.text = "999 999";
                 shopBuyB.interactable = true;
             }
         }
