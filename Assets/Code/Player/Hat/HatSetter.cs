@@ -39,7 +39,7 @@ public class HatSetter : MonoBehaviour
         }
         else if (GameManager.equippedHat == 5)
         {
-            hatType = "golden_useless_hat"
+            hatType = "golden_useless_hat";
         }
         hatSprites = Resources.LoadAll<Sprite>(hatType);
     }
