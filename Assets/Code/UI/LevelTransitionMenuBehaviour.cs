@@ -20,6 +20,7 @@ public class LevelTransitionMenuBehaviour : MonoBehaviour
     PlayerAnimator playerAnimator;
     CharacterController playerController;
     Rigidbody2D playerRigidbody;
+    LevelTransitionBackground background;
 
     void Start()
     {
@@ -31,6 +32,7 @@ public class LevelTransitionMenuBehaviour : MonoBehaviour
         paperCount = GameObject.Find("PaperCount").GetComponent<RectTransform>();
         playerAnimator = player.GetComponent<PlayerAnimator>();
         playerController = player.GetComponent<CharacterController>();
+        background = Camera.main.transform.Find("LevelTransitionBackground").gameObject.GetComponent<LevelTransitionBackground>();
 
         if (GameManager.currentFloor == 4) trophy = GameObject.Find("CutsceneTrophy");
 
@@ -182,6 +184,8 @@ public class LevelTransitionMenuBehaviour : MonoBehaviour
         if (sequence > 2 && sequenceOrder == 0)
         {
             sequenceOrder = 1;
+            background.EnableBackground(true);
+            background.ChangeBackground(GameManager.currentFloor);
             player.transform.position = new Vector2(59f + (floor * 50), 330f);
             playerRigidbody.rotation = -180f;
             player.GetComponent<Animator>().Play("DownSwim");
@@ -200,6 +204,7 @@ public class LevelTransitionMenuBehaviour : MonoBehaviour
             if (GameManager.currentFloor + 1 == 4)
             {
                 //Tää on syvältä
+                background.EnableBackground(false);
                 GameManager.cameraMode = 0;
                 Camera.main.gameObject.GetComponent<Camera>().orthographicSize = GameManager.cameraPlaySize;
                 GameManager.PlayerClipping(true);
@@ -216,6 +221,7 @@ public class LevelTransitionMenuBehaviour : MonoBehaviour
         if (sequence > 23 && GameManager.levelIsGenerated && sequenceOrder == 2)
         {
             sequenceOrder = 3;
+            background.EnableBackground(false);
             GameManager.cameraMode = 0;
             Camera.main.gameObject.GetComponent<Camera>().orthographicSize = GameManager.cameraPlaySize;
             GameManager.PlayerClipping(false);
@@ -273,6 +279,8 @@ public class LevelTransitionMenuBehaviour : MonoBehaviour
         if (sequence > 2 && sequenceOrder == 0)
         {
             sequenceOrder = 1;
+            background.EnableBackground(true);
+            background.ChangeBackground(GameManager.currentFloor);
             player.transform.parent = null;
             trophy.transform.position = new Vector2(59f + (floor * 50), 250f);
             player.transform.parent = trophy.transform;
@@ -294,6 +302,7 @@ public class LevelTransitionMenuBehaviour : MonoBehaviour
         }
         if (sequence > 23 && sequenceOrder == 2)
         {
+            background.EnableBackground(false);
             playerAnimator.Flip(false);
             bear.transform.localPosition = new Vector2(55f, -0.38f);
             bear.GetComponent<SpriteRenderer>().sprite = bearNeutral;
@@ -387,6 +396,8 @@ public class LevelTransitionMenuBehaviour : MonoBehaviour
         if (sequence > 2 && sequenceOrder == 0)
         {
             sequenceOrder = 1;
+            background.EnableBackground(true);
+            background.ChangeBackground(GameManager.currentFloor);
             player.transform.position = new Vector2(59f + (floor * 50), 330f);
             playerRigidbody.rotation = -180f;
             player.GetComponent<Animator>().Play("DownSwim");
@@ -405,6 +416,7 @@ public class LevelTransitionMenuBehaviour : MonoBehaviour
         if (sequence > 23 && GameManager.levelIsGenerated && sequenceOrder == 2)
         {
             sequenceOrder = 3;
+            background.EnableBackground(false);
             GameManager.cameraMode = 0;
             Camera.main.gameObject.GetComponent<Camera>().orthographicSize = GameManager.cameraPlaySize;
             GameManager.PlayerClipping(false);
