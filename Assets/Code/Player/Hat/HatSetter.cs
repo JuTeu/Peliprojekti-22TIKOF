@@ -29,9 +29,17 @@ public class HatSetter : MonoBehaviour
         {
             hatType = "firebeanie";
         }
+        else if (GameManager.equippedHat == 3)
+        {
+            hatType = "compass_hat";
+        }
         else if (GameManager.equippedHat == 4)
         {
-            hatType = "";
+            hatType = "hardcore_hat";
+        }
+        else if (GameManager.equippedHat == 5)
+        {
+            hatType = "golden_useless_hat"
         }
         hatSprites = Resources.LoadAll<Sprite>(hatType);
     }
