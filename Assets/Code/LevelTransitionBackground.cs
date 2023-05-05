@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class LevelTransitionBackground : MonoBehaviour
 {
+    public AudioSource bgMusic;
+    public AudioClip[] audioClips;
+    public Animator musicFade;
     // Start is called before the first frame update
     SpriteRenderer background;
     [SerializeField] Sprite ice, kelp, seabed, shallow, deep;
@@ -16,6 +19,11 @@ public class LevelTransitionBackground : MonoBehaviour
     public void EnableBackground(bool toggle)
     {
         background.enabled = toggle;
+        if (!toggle)
+        {
+            bgMusic.Play();
+            musicFade.Play("fadeIn");
+        }
     }
 
     public void ChangeBackground(int type)
@@ -37,6 +45,11 @@ public class LevelTransitionBackground : MonoBehaviour
             case 4:
                 background.sprite = deep;
                 break;
+        }
+        bgMusic.Stop();
+        if (type < 4)
+        {
+            bgMusic.clip = audioClips[type + 1];
         }
     }
 }

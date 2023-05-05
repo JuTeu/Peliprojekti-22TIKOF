@@ -15,8 +15,10 @@ public class LevelExitBehaviour : MonoBehaviour
     PlayerAnimator playerAnimator;
     Vector2 aboveReward;
     bool levelFinished = false, boostSkipable = false, exitSequence = false;
+    Animator musicFade;
     void Start()
     {
+        musicFade = GameObject.Find("LevelTransitionBackground").GetComponent<Animator>();
         exitCollider = GetComponent<Collider2D>();
         if (GameManager.currentFloor == 0)
         {
@@ -97,6 +99,7 @@ public class LevelExitBehaviour : MonoBehaviour
     {
         if(collision.gameObject.tag == "Player")
         {
+            musicFade.Play("fadeOut");
             player = collision.gameObject;
             playerRigidbody = player.GetComponent<Rigidbody2D>();
             playerAnimator = player.GetComponent<PlayerAnimator>();
