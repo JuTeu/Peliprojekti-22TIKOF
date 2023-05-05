@@ -235,7 +235,7 @@ MonoBehaviour:
     toemia."
   - En tykkee luovuttajista. Jos joku on varma ni se on aeva varma.
   textSpeed: 0.1
-  lineDelay: 2
+  lineDelay: 10
 --- !u!1 &1028912413
 GameObject:
   m_ObjectHideFlags: 0
