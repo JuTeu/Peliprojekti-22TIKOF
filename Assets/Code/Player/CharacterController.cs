@@ -105,7 +105,7 @@ public class CharacterController : MonoBehaviour
             }
             else
             {
-                joyStick.color = new Color(0.616f, 0.734f, 0.745f, 0.8f);
+                joyStick.color = new Color(0.6f, 0.6f, 0.6f, 0.8f);
                 joyStickCap.color = Color.white;
             }
             stickPosition.position = GetPressedPosition();
