@@ -9,6 +9,8 @@ public class FlippersTutorial : MonoBehaviour
     {
         if (other.CompareTag("Player") && !isInTutorial && !PlayerPrefs.HasKey("flippersTutorialShown"))
         {
+            GetComponent<Renderer>().enabled = false;
+            
             isInTutorial = true;
 
             // Pause the game

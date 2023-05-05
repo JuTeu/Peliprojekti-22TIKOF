@@ -39,7 +39,7 @@ public class Dialogue : MonoBehaviour
 
     void StartDialogue()
     {
-        randomIndexes = GetRandomIndexes(2, lines.Length);
+        randomIndexes = GetRandomIndexes(1, lines.Length);
         index = 0;
         StartCoroutine(TypeLine());
     }
@@ -92,12 +92,7 @@ void NextLine()
 
     private int[] GetRandomIndexes(int count, int max)
     {
-        HashSet<int> indexes = new HashSet<int>();
-        while (indexes.Count < count)
-        {
-            int index = Random.Range(0, max);
-            indexes.Add(index);
-        }
-        return new List<int>(indexes).ToArray();
+        int index = Random.Range(0, max);
+        return new int[] { index };
     }
 }
