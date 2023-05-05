@@ -5,8 +5,9 @@ using UnityEngine;
 public class LevelExitBehaviour : MonoBehaviour
 {
     // Start is called before the first frame update
-    [SerializeField] GameObject deepCaveFinalReward, rope, bubble, arrow, kelpDoor, dynamite, dynamiteBubble;
+    [SerializeField] GameObject deepCaveFinalReward, rope, bubble, arrow, kelpDoor, dynamite, dynamiteBubble, chain1, chain2, endLock;
     SpriteRenderer deepCaveFinalRewardSprite;
+    Animator chain1Animator, chain2Animator, lockAnimator;
     CharacterController characterController;
     Collider2D exitCollider;
     GameObject player;
@@ -38,6 +39,12 @@ public class LevelExitBehaviour : MonoBehaviour
             rewardCollider.offset = new Vector2(0f, -2.5f);
             deepCaveFinalRewardSprite = deepCaveFinalReward.GetComponent<SpriteRenderer>();
             deepCaveFinalReward.SetActive(true);
+            chain1.SetActive(true);
+            chain2.SetActive(true);
+            endLock.SetActive(true);
+            chain1Animator = chain1.GetComponent<Animator>();
+            chain2Animator = chain2.GetComponent<Animator>();
+            lockAnimator = endLock.GetComponent<Animator>();
             rope.SetActive(true);
             rope.transform.localPosition = new Vector2(rope.transform.localPosition.x, 1000f);
             aboveReward = new Vector2(deepCaveFinalReward.transform.position.x, deepCaveFinalReward.transform.position.y + 1.5f);
@@ -60,6 +67,12 @@ public class LevelExitBehaviour : MonoBehaviour
         else if (GameManager.currentFloor == 3)
         {
             dynamite.GetComponent<Animator>().Play("Explode");
+        }
+        else if (GameManager.currentFloor == 4)
+        {
+            chain1Animator.Play("Open");
+            chain2Animator.Play("Open");
+            lockAnimator.Play("Open");
         }
     }
     // Update is called once per frame
