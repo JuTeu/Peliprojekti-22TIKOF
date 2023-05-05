@@ -52,6 +52,7 @@ public class CameraMovement : MonoBehaviour
                 Mathf.MoveTowards(transform.position.y, -15, 20 * Time.deltaTime), -10);
             SmoothlyChangeSize(5, 1);
         }
+        //Takaisin pelaajan luo
         else if (GameManager.cameraMode == 127)
         {
             sequence += 10 * Time.deltaTime;
@@ -66,6 +67,7 @@ public class CameraMovement : MonoBehaviour
                 GameObject.Find("Darkness").GetComponent<SpriteRenderer>().enabled = true;
             }
         }
+        //Papereilla avattavan luo alku
         else if (GameManager.cameraMode == 128)
         {
             levelExit = GameObject.FindWithTag("PaperLocked").GetComponent<Transform>();
@@ -74,6 +76,7 @@ public class CameraMovement : MonoBehaviour
             GameManager.PauseWorld(true);
             GameManager.cameraMode = 129;
         }
+        // Papereilla avattavan luo
         else if (GameManager.cameraMode == 129)
         {
             sequence += 10 * Time.deltaTime;
@@ -86,6 +89,7 @@ public class CameraMovement : MonoBehaviour
                 GameManager.cameraMode = 130;
             }
         }
+        //Papereilla avattavan avaus
         else if (GameManager.cameraMode == 130)
         {
             sequence += Time.deltaTime;
@@ -98,6 +102,25 @@ public class CameraMovement : MonoBehaviour
             {
                 sequence = 0;
                 GameManager.cameraMode = 127;
+            }
+        }
+        else if (GameManager.cameraMode == 131)
+        {
+            levelExit.position = new Vector2(-47.2f, -41.6f);
+            sequence = 0f;
+            GameObject.Find("Darkness").GetComponent<SpriteRenderer>().enabled = false;
+            GameManager.cameraMode = 132;
+        }
+        else if (GameManager.cameraMode == 132)
+        {
+            sequence += 10 * Time.deltaTime;
+            transform.position = new Vector3(
+                Mathf.MoveTowards(transform.position.x, Mathf.Clamp(levelExit.position.x, cameraBounds.min.x, cameraBounds.max.x), sequence),
+                Mathf.MoveTowards(transform.position.y, Mathf.Clamp(levelExit.position.y, cameraBounds.min.y, cameraBounds.max.y), sequence), -10);
+            if (Vector2.Distance(transform.position, new Vector2(Mathf.Clamp(levelExit.position.x, cameraBounds.min.x, cameraBounds.max.x), Mathf.Clamp(levelExit.position.y, cameraBounds.min.y, cameraBounds.max.y))) < 0.1f)
+            {
+                sequence = 0f;
+                GameManager.cameraMode = 3;
             }
         }
         else

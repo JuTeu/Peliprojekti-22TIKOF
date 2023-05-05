@@ -361,24 +361,36 @@ public class SurfaceMenuBehaviour : MonoBehaviour
     public void PressLeftEquipment()
     {
         int testIfNewHats = GameManager.equippedHat;
-        if ((GameManager.unlocks & 0b_10_0000) == 0b_10_0000 && GameManager.equippedHat > 1) GameManager.equippedHat = 1;
-        if ((GameManager.unlocks & 0b_100_0000) == 0b_100_0000 && GameManager.equippedHat > 2) GameManager.equippedHat = 2;
-        if ((GameManager.unlocks & 0b_1000_0000) == 0b_1000_0000 && GameManager.equippedHat > 3) GameManager.equippedHat = 3;
-        if ((GameManager.unlocks & 0b_1_0000_0000) == 0b_1_0000_0000 && GameManager.equippedHat > 4) GameManager.equippedHat = 4;
-        if ((GameManager.unlocks & 0b_10_0000_0000) == 0b_10_0000_0000 && GameManager.equippedHat > 5) GameManager.equippedHat = 5;
-        if (testIfNewHats == GameManager.equippedHat) GameManager.equippedHat = 0;
+        int newHat = 0;
+        if ((GameManager.unlocks & 0b_10_0000) == 0b_10_0000 && GameManager.equippedHat > 1) newHat = 1;
+        if ((GameManager.unlocks & 0b_100_0000) == 0b_100_0000 && GameManager.equippedHat > 2) newHat = 2;
+        if ((GameManager.unlocks & 0b_1000_0000) == 0b_1000_0000 && GameManager.equippedHat > 3) newHat = 3;
+        if ((GameManager.unlocks & 0b_1_0000_0000) == 0b_1_0000_0000 && GameManager.equippedHat > 4) newHat = 4;
+        if ((GameManager.unlocks & 0b_10_0000_0000) == 0b_10_0000_0000 && GameManager.equippedHat > 5) newHat = 5;
+        if (testIfNewHats == newHat)
+        {
+            if ((GameManager.unlocks & 0b_10_0000_0000) == 0b_10_0000_0000) newHat = 5;
+            else if ((GameManager.unlocks & 0b_1_0000_0000) == 0b_1_0000_0000) newHat = 4;
+            else if ((GameManager.unlocks & 0b_1000_0000) == 0b_1000_0000) newHat = 3;
+            else if ((GameManager.unlocks & 0b_100_0000) == 0b_100_0000) newHat = 2;
+            else if ((GameManager.unlocks & 0b_10_0000) == 0b_10_0000) newHat = 1;
+            else newHat = 0;
+        }
+        GameManager.equippedHat = newHat;
         RefreshEquipmentScreen();
     }
 
     public void PressRightEquipment()
     {
         int testIfNewHats = GameManager.equippedHat;
-        if ((GameManager.unlocks & 0b_10_0000_0000) == 0b_10_0000_0000 && GameManager.equippedHat < 5) GameManager.equippedHat = 5;
-        if ((GameManager.unlocks & 0b_1_0000_0000) == 0b_1_0000_0000 && GameManager.equippedHat < 4) GameManager.equippedHat = 4;
-        if ((GameManager.unlocks & 0b_1000_0000) == 0b_1000_0000 && GameManager.equippedHat < 3) GameManager.equippedHat = 3;
-        if ((GameManager.unlocks & 0b_100_0000) == 0b_100_0000 && GameManager.equippedHat < 2) GameManager.equippedHat = 2;
-        if ((GameManager.unlocks & 0b_10_0000) == 0b_10_0000 && GameManager.equippedHat < 1) GameManager.equippedHat = 1;
-        if (testIfNewHats == GameManager.equippedHat) GameManager.equippedHat = 0;
+        int newHat = GameManager.equippedHat;
+        if ((GameManager.unlocks & 0b_10_0000_0000) == 0b_10_0000_0000 && GameManager.equippedHat < 5) newHat = 5;
+        if ((GameManager.unlocks & 0b_1_0000_0000) == 0b_1_0000_0000 && GameManager.equippedHat < 4) newHat = 4;
+        if ((GameManager.unlocks & 0b_1000_0000) == 0b_1000_0000 && GameManager.equippedHat < 3) newHat = 3;
+        if ((GameManager.unlocks & 0b_100_0000) == 0b_100_0000 && GameManager.equippedHat < 2) newHat = 2;
+        if ((GameManager.unlocks & 0b_10_0000) == 0b_10_0000 && GameManager.equippedHat < 1) newHat = 1;
+        if (testIfNewHats == newHat) newHat = 0;
+        GameManager.equippedHat = newHat;
         RefreshEquipmentScreen();
     }
     
