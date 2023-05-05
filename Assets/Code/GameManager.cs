@@ -24,7 +24,7 @@ public class GameManager : MonoBehaviour
     /*
      1 = peliavattu ekaa kertaa, 10 = normaali loppu saavutettu,
      100 = erikoisloppu saavutettu, 1000 = räpylä avattu, 1_0000 = räpylä puettu, 10_0000 = keltanokka, 100_0000 = vauhtipipo,
-     1000_0000 = kompassihattu, 1_0000_0000 = kovanaamalakki, 10_0000_0000 = kultasilinteri
+     1000_0000 = kompassihattu, 1_0000_0000 = kovanaamalakki, 10_0000_0000 = kultasilinteri, 100_0000_0000 = musiikki mykistetty
     */
     public static int unlocks;
 

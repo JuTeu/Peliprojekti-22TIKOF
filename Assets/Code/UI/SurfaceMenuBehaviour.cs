@@ -8,6 +8,7 @@ public class SurfaceMenuBehaviour : MonoBehaviour
 {
     [SerializeField] GameObject leftButton, rightButton, totalScore, jumpButton, equipmentButton, openShopButton, talkButton, equipmentScreen, equipmentBack, equipmentLeft, equipmentRight, equipmentFlipperButton, equipmentFlipperIcon, shopScreen, shopBack, shopLeft, shopRight, shopBuy, shopHatIcon, equipmentHatIcon, settingsScreen, settingsBack, quitButton, muteButton, muteButtonIcon;
     [SerializeField] TextMeshProUGUI scoreText, highScoreText, hatNameText, shopHatNameText, shopBuyText, shopPriceText, shopDescription;
+    [SerializeField] Sprite musicButtonOn, musicButtonOff;
     RectTransform leftButtonT, rightButtonT, totalScoreT, jumpButtonT, equipmentButtonT, openShopButtonT, talkButtonT, equipmentScreenT, shopScreenT, settingsScreenT;
     Button leftButtonB, rightButtonB, totalScoreB, jumpButtonB, equipmentButtonB, openShopButtonB, talkButtonB, equipmentBackB, equipmentLeftB, equipmentRightB, equipmentFlipperButtonB, shopBackB, shopLeftB, shopRightB, shopBuyB, settingsBackB, quitButtonB, muteButtonB;
     RectTransform hpBar, pauseButton, paperCount;
@@ -16,7 +17,7 @@ public class SurfaceMenuBehaviour : MonoBehaviour
     SpriteRenderer playerSprite, armSprite, hatSprite;
     Animator playerAnimator, armAnimator, hatAnimator;
     bool sequenceStopped = false;
-    bool flipperEquipped;
+    bool flipperEquipped, musicMuted;
     float sequence, exponentialSequence = 0f;
     int menuAnimId = 0;
     int currentMenu = 0;
@@ -48,6 +49,8 @@ public class SurfaceMenuBehaviour : MonoBehaviour
         shopHatIconI = shopHatIcon.GetComponent<Image>();
         equipmentHatIconI = equipmentHatIcon.GetComponent<Image>();
         muteButtonIconI = muteButtonIcon.GetComponent<Image>();
+        musicMuted = (GameManager.unlocks & 0b_100_0000_0000) == 0b_100_0000_0000;
+        muteButtonIconI.sprite = musicMuted ? musicButtonOff : musicButtonOn;
 
         leftButtonB = leftButton.GetComponent<Button>();
         rightButtonB = rightButton.GetComponent<Button>();
@@ -437,6 +440,23 @@ public class SurfaceMenuBehaviour : MonoBehaviour
         GameManager.Save();
     }
 
+    public void PressMute()
+    {
+        if (musicMuted)
+        {
+            musicMuted = false;
+            muteButtonIconI.sprite = musicButtonOn;
+            GameManager.unlocks ^= 0b_100_0000_0000;
+        }
+        else
+        {
+            musicMuted = true;
+            muteButtonIconI.sprite = musicButtonOff;
+            GameManager.unlocks |= 0b_100_0000_0000;
+        }
+        GameManager.Save();
+    }
+
     void MenuAnimation()
     {
         if (menuAnimId == 0)
@@ -577,6 +597,8 @@ public class SurfaceMenuBehaviour : MonoBehaviour
         {
             settingsScreenT.anchoredPosition = new Vector2(0, 0);
             settingsBackB.interactable = true;
+            muteButtonB.interactable = true;
+            quitButtonB.interactable = true;
             sequenceStopped = true;
         }
     }
@@ -627,6 +649,7 @@ public class SurfaceMenuBehaviour : MonoBehaviour
             {
                 jumpButtonB.interactable = true;
                 leftButtonB.interactable = true;
+                rightButtonB.interactable = true;
             }
             if (currentMenu == 1)
             {
