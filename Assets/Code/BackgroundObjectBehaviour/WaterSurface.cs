@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class WaterSurface : MonoBehaviour
 {
+    public AudioSource splash;
     // Start is called before the first frame update
     Animator anim;
     void Start()
@@ -15,6 +16,7 @@ public class WaterSurface : MonoBehaviour
     void OnTriggerEnter2D (Collider2D collision)
     {
         anim.Play("Splash");
+        splash.Play();
     }
 
     public void PlayIdle()
