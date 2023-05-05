@@ -179,6 +179,7 @@ public class GameManager : MonoBehaviour
 
     public static void BeginGame()
     {
+        GameObject.Find("Bear").GetComponent<AudioSource>().Play();
         GameObject.Find("RegularEndingTrophy").GetComponent<SpriteRenderer>().enabled = (unlocks & 0b_10) == 0b_10;
         correctAnswersTotal = 0;
         HideStick();

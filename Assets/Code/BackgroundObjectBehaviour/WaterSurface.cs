@@ -15,8 +15,12 @@ public class WaterSurface : MonoBehaviour
     // Update is called once per frame
     void OnTriggerEnter2D (Collider2D collision)
     {
-        anim.Play("Splash");
-        splash.Play();
+        if (collision.tag == "Player" && GameManager.currentFloor == 0)
+        {
+            anim.Play("Splash");
+            splash.Play();
+            GameObject.Find("Bear").GetComponent<AudioSource>().Stop();
+        }
     }
 
     public void PlayIdle()
