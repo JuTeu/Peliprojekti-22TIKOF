@@ -6,12 +6,12 @@ using TMPro;
 
 public class SurfaceMenuBehaviour : MonoBehaviour
 {
-    [SerializeField] GameObject leftButton, rightButton, totalScore, jumpButton, equipmentButton, openShopButton, talkButton, equipmentScreen, equipmentBack, equipmentLeft, equipmentRight, equipmentFlipperButton, equipmentFlipperIcon, shopScreen, shopBack, shopLeft, shopRight, shopBuy, shopHatIcon, equipmentHatIcon;
+    [SerializeField] GameObject leftButton, rightButton, totalScore, jumpButton, equipmentButton, openShopButton, talkButton, equipmentScreen, equipmentBack, equipmentLeft, equipmentRight, equipmentFlipperButton, equipmentFlipperIcon, shopScreen, shopBack, shopLeft, shopRight, shopBuy, shopHatIcon, equipmentHatIcon, settingsScreen, settingsBack, quitButton, muteButton, muteButtonIcon;
     [SerializeField] TextMeshProUGUI scoreText, highScoreText, hatNameText, shopHatNameText, shopBuyText, shopPriceText, shopDescription;
-    RectTransform leftButtonT, rightButtonT, totalScoreT, jumpButtonT, equipmentButtonT, openShopButtonT, talkButtonT, equipmentScreenT, shopScreenT;
-    Button leftButtonB, rightButtonB, totalScoreB, jumpButtonB, equipmentButtonB, openShopButtonB, talkButtonB, equipmentBackB, equipmentLeftB, equipmentRightB, equipmentFlipperButtonB, shopBackB, shopLeftB, shopRightB, shopBuyB;
+    RectTransform leftButtonT, rightButtonT, totalScoreT, jumpButtonT, equipmentButtonT, openShopButtonT, talkButtonT, equipmentScreenT, shopScreenT, settingsScreenT;
+    Button leftButtonB, rightButtonB, totalScoreB, jumpButtonB, equipmentButtonB, openShopButtonB, talkButtonB, equipmentBackB, equipmentLeftB, equipmentRightB, equipmentFlipperButtonB, shopBackB, shopLeftB, shopRightB, shopBuyB, settingsBackB, quitButtonB, muteButtonB;
     RectTransform hpBar, pauseButton, paperCount;
-    Image equipmentFlipperIconI, shopHatIconI, equipmentHatIconI;
+    Image equipmentFlipperIconI, shopHatIconI, equipmentHatIconI, muteButtonIconI;
     Rigidbody2D playerRigidbody;
     SpriteRenderer playerSprite, armSprite, hatSprite;
     Animator playerAnimator, armAnimator, hatAnimator;
@@ -40,12 +40,14 @@ public class SurfaceMenuBehaviour : MonoBehaviour
         talkButtonT = talkButton.GetComponent<RectTransform>();
         equipmentScreenT = equipmentScreen.GetComponent<RectTransform>();
         shopScreenT = shopScreen.GetComponent<RectTransform>();
+        settingsScreenT = settingsScreen.GetComponent<RectTransform>();
 
         equipmentFlipperIconI = equipmentFlipperIcon.GetComponent<Image>();
         flipperEquipped = (GameManager.unlocks & 0b_1_0000) == 0b_1_0000;
         equipmentFlipperIconI.color = flipperEquipped ? Color.white : new Color(0.14f, 0.117f, 0.18f);
         shopHatIconI = shopHatIcon.GetComponent<Image>();
         equipmentHatIconI = equipmentHatIcon.GetComponent<Image>();
+        muteButtonIconI = muteButtonIcon.GetComponent<Image>();
 
         leftButtonB = leftButton.GetComponent<Button>();
         rightButtonB = rightButton.GetComponent<Button>();
@@ -61,6 +63,9 @@ public class SurfaceMenuBehaviour : MonoBehaviour
         shopLeftB = shopLeft.GetComponent<Button>();
         shopRightB = shopRight.GetComponent<Button>();
         shopBuyB = shopBuy.GetComponent<Button>();
+        settingsBackB = settingsBack.GetComponent<Button>();
+        quitButtonB = quitButton.GetComponent<Button>();
+        muteButtonB = muteButton.GetComponent<Button>();
 
         leftButtonB.interactable = false;
         rightButtonB.interactable = false;
@@ -76,6 +81,9 @@ public class SurfaceMenuBehaviour : MonoBehaviour
         shopLeftB.interactable = false;
         shopRightB.interactable = false;
         shopBuyB.interactable = false;
+        settingsBackB.interactable = false;
+        quitButtonB.interactable = false;
+        muteButtonB.interactable = false;
         
 
         leftButtonT.anchoredPosition = new Vector2(-1000, 0);
@@ -90,6 +98,7 @@ public class SurfaceMenuBehaviour : MonoBehaviour
 
         equipmentScreenT.anchoredPosition = new Vector2(-1000, 0);
         shopScreenT.anchoredPosition = new Vector2(-1000, 0);
+        settingsScreenT.anchoredPosition = new Vector2(1000, 0);
 
         hpBar = GameObject.Find("HPBar").GetComponent<RectTransform>();
         pauseButton = GameObject.Find("PauseButton").GetComponent<RectTransform>();
@@ -139,12 +148,29 @@ public class SurfaceMenuBehaviour : MonoBehaviour
 
     public void PressRight()
     {
-        if (currentMenu == 1)
+        if (currentMenu == 0)
+        {
+            DoMenuAnim(8);
+            jumpButtonB.interactable = false;
+            equipmentButtonB.interactable = false;
+        }
+        else if (currentMenu == 1)
         {
             DoMenuAnim(3);
         }
     }
 
+    public void PressCloseSettings()
+    {
+        settingsBackB.interactable = false;
+        muteButtonB.interactable = false;
+        quitButtonB.interactable = false;
+        DoMenuAnim(9);
+    }
+    public void PressQuit()
+    {
+        Application.Quit();
+    }
     public void PressOpenShop()
     {
         openShopButtonB.interactable = false;
@@ -445,6 +471,14 @@ public class SurfaceMenuBehaviour : MonoBehaviour
         {
             CloseShopMenu();
         }
+        else if (menuAnimId == 8)
+        {
+            OpenTutorialAndSettings();
+        }
+        else if (menuAnimId == 9)
+        {
+            CloseTutorialAndSettings();
+        }
     }
 
     void DoMenuAnim(int id)
@@ -492,7 +526,7 @@ public class SurfaceMenuBehaviour : MonoBehaviour
             jumpButtonT.anchoredPosition = new Vector2(0, 200);
             equipmentButtonT.anchoredPosition = new Vector2(0, 50);
             leftButtonB.interactable = true;
-            //rightButtonB.interactable = true;
+            rightButtonB.interactable = true;
             jumpButtonB.interactable = true;
             equipmentButtonB.interactable = true;
             sequenceStopped = true;
@@ -527,6 +561,36 @@ public class SurfaceMenuBehaviour : MonoBehaviour
             equipmentButtonB.interactable = true;
             openShopButtonB.interactable = true;
             talkButtonB.interactable = true;
+            leftButtonB.interactable = true;
+            rightButtonB.interactable = true;
+            sequenceStopped = true;
+        }
+    }
+
+    void OpenTutorialAndSettings()
+    {
+        sequence += 50 * Time.deltaTime;
+        exponentialSequence = Mathf.Pow(2, sequence);
+        settingsScreenT.anchoredPosition = new Vector2(1000 - exponentialSequence / 10, 0);
+
+        if (exponentialSequence > 10000f)
+        {
+            settingsScreenT.anchoredPosition = new Vector2(0, 0);
+            settingsBackB.interactable = true;
+            sequenceStopped = true;
+        }
+    }
+
+    void CloseTutorialAndSettings()
+    {
+        sequence += 50 * Time.deltaTime;
+        exponentialSequence = Mathf.Pow(2, sequence);
+        settingsScreenT.anchoredPosition = new Vector2(0 + exponentialSequence / 10, 0);
+
+        if (exponentialSequence > 10000f)
+        {
+            equipmentButtonB.interactable = true;
+            jumpButtonB.interactable = true;
             leftButtonB.interactable = true;
             rightButtonB.interactable = true;
             sequenceStopped = true;
@@ -666,7 +730,7 @@ public class SurfaceMenuBehaviour : MonoBehaviour
             hatAnimator.Play("Idle");
             jumpButtonT.anchoredPosition = new Vector2(0, 200);
             leftButtonB.interactable = true;
-            //rightButtonB.interactable = true;
+            rightButtonB.interactable = true;
             equipmentButtonB.interactable = true;
             jumpButtonB.interactable = true;
             sequenceStopped = true;
