@@ -1392,6 +1392,7 @@ MonoBehaviour:
   shopDescription: {fileID: 1797766109}
   musicButtonOn: {fileID: 21300000, guid: 81421e8144db6bc4b94ba353057e2851, type: 3}
   musicButtonOff: {fileID: 21300000, guid: 4564ab9c55491874495071ce9f3c1ec2, type: 3}
+  audioMix: {fileID: 24100000, guid: d0c7cc483279c1ee69bd18beb72f453a, type: 2}
 --- !u!1 &635882490
 GameObject:
   m_ObjectHideFlags: 0

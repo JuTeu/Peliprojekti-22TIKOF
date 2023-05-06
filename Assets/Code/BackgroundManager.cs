@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BackgroundManager : MonoBehaviour
 {
-    [SerializeField] private GameObject bg1, bg2, bg3, bg4;
+    [SerializeField] private GameObject bg1, bg2, bg3, bg4, seaSurface;
     [SerializeField] private Sprite iceberg, iceBackground, deepCaveBackground1, deepCaveBackground2, deepCaveBackground3, kelpBackground1, kelpBackground2, kelpBackground3, kelpBackground4, seabedBackground, shallowBackground;
     private SpriteRenderer bg1s, bg2s, bg3s, bg4s;
     private CameraParallax bg1p, bg2p, bg3p, bg4p;
@@ -30,8 +30,10 @@ public class BackgroundManager : MonoBehaviour
     public void ChangeBackground(int mapNum)
     {
         // ice
+        seaSurface.SetActive(false);
         if (mapNum == 0)
         {
+            seaSurface.SetActive(true);
             bg1.SetActive(true);
             bg2.SetActive(false);
             bg3.SetActive(false);

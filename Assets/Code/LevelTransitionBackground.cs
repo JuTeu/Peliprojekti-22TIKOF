@@ -21,9 +21,21 @@ public class LevelTransitionBackground : MonoBehaviour
         background.enabled = toggle;
         if (!toggle)
         {
-            bgMusic.Play();
-            musicFade.Play("fadeIn");
+            ChangeSong(GameManager.currentFloor);
+            Fade("fadeIn");
         }
+    }
+    
+    public void ChangeSong(int song)
+    {
+        bgMusic.Stop();
+        bgMusic.clip = audioClips[song];
+        bgMusic.Play();
+    }
+
+    public void Fade(string type)
+    {
+        musicFade.Play(type);
     }
 
     public void ChangeBackground(int type)
@@ -46,10 +58,10 @@ public class LevelTransitionBackground : MonoBehaviour
                 background.sprite = deep;
                 break;
         }
-        bgMusic.Stop();
+        /*bgMusic.Stop();
         if (type < 4)
         {
             bgMusic.clip = audioClips[type + 1];
-        }
+        }*/
     }
 }

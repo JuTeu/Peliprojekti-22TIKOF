@@ -12,8 +12,8 @@ public class LevelTransitionMenuBehaviour : MonoBehaviour
     [SerializeField] GameObject noDamageObj, allCorrectObj;
     [SerializeField] TextMeshProUGUI timeText, timeTextDropShadow, healthText, healthTextDropShadow, scoreText, scoreTextDropShadow, noDamageText, noDamageTextDropShadow, allCorrectText, allCorrectTextDropShadow;
     [SerializeField] Sprite bearNeutral, bearHappy;
-    bool allCorrect, unhurt;
-    int time, health, points, score, noDamageBonus = 3000, allCorrectBonus = 5000, floor = GameManager.currentFloor;
+    bool allCorrect, unhurt, skipTally = false;
+    int time, health, points, score, noDamageBonus = 1500, allCorrectBonus = 5000, floor = GameManager.currentFloor;
     float spawnRoomLocation;
     RectTransform mainTransform, hpBar, pauseButton, paperCount;
     GameObject player, trophy, bear;
@@ -38,7 +38,7 @@ public class LevelTransitionMenuBehaviour : MonoBehaviour
 
         allCorrect = GameManager.correctAnswers >= GameManager.chestsInLevel;
         unhurt = GameManager.unhurt;
-        time = 1000;
+        time = GameManager.timeBonus > 0f ? (int) GameManager.timeBonus : 0;
         health = (int) (player.GetComponent<PlayerHealth>().healthAmount * 10);
         score = GameManager.score;
         if (GameManager.currentFloor + 1 == 1)
@@ -78,44 +78,56 @@ public class LevelTransitionMenuBehaviour : MonoBehaviour
         else if (GameManager.currentFloor > 0) TunnelTransition();
 
     }
+
+    public void PressTouchedScreen()
+    {
+        if (tallyDelay > 0f) skipTally = true;
+    }
+
     void Tallying()
     {
         tallyDelay += Time.deltaTime;
-        if (tallyDelay > tallyDelayOld + 0.07f)
+        if (tallyDelay > tallyDelayOld + 0.07f || skipTally)
         {
-            tallyDelayOld = tallyDelay;
-            if (time > 0)
+            do
             {
-                points = time < 20 ? time : 20;
-                time -= points;
-                score += points;
-            }
-            else if (health > 0)
-            {
-                points = health < 20 ? health : 20;
-                health -= points;
-                score += points;
-            }
-            else if (allCorrect && allCorrectBonus > 0)
-            {
-                points = allCorrectBonus < 40 ? allCorrectBonus : 40;
-                allCorrectBonus -= points;
-                score += points;
-            }
-            else if (unhurt && noDamageBonus > 0)
-            {
-                points = noDamageBonus < 40 ? noDamageBonus : 40;
-                noDamageBonus -= points;
-                score += points;
-            }
-            else
-            {
-                GameManager.score = score;
-                if (GameManager.healBetweenLevels) player.GetComponent<PlayerHealth>().Heal(100f);
-                tallyingFinished = true;
-                GameObject.Find("PaperCount").GetComponent<UIPaperCount>().AddScore(0);
-                sequence = 18f;
-            }
+                tallyDelayOld = tallyDelay;
+                if (time > 0)
+                {
+                    points = time < 20 ? time : 20;
+                    time -= points;
+                    score += points;
+                }
+                else if (health > 0)
+                {
+                    points = health < 20 ? health : 20;
+                    health -= points;
+                    score += points;
+                }
+                else if (allCorrect && allCorrectBonus > 0)
+                {
+                    points = allCorrectBonus < 40 ? allCorrectBonus : 40;
+                    allCorrectBonus -= points;
+                    score += points;
+                }
+                else if (unhurt && noDamageBonus > 0)
+                {
+                    points = noDamageBonus < 40 ? noDamageBonus : 40;
+                    noDamageBonus -= points;
+                    score += points;
+                }
+                else
+                {
+                    GameManager.score = score;
+                    if (GameManager.healBetweenLevels) player.GetComponent<PlayerHealth>().Heal(100f);
+                    tallyingFinished = true;
+                    GameObject.Find("PaperCount").GetComponent<UIPaperCount>().AddScore(0);
+                    sequence = 18f;
+                    if (GameManager.currentFloor + 1 == 4) background.Fade("fadeOut");
+                    else if (GameManager.currentFloor == 0) playerRigidbody.position = new Vector2(59f + (floor * 50), 257f);
+                    GameManager.timeBonus = 1200f;
+                }
+            } while (!tallyingFinished && skipTally);
             RefreshMenu();
             if (!tallyingFinished && sequence > 10) sequence = 11f; 
         }
@@ -186,6 +198,8 @@ public class LevelTransitionMenuBehaviour : MonoBehaviour
             sequenceOrder = 1;
             background.EnableBackground(true);
             background.ChangeBackground(GameManager.currentFloor);
+            background.ChangeSong(5);
+            background.Fade("fadeIn");
             player.transform.position = new Vector2(59f + (floor * 50), 330f);
             playerRigidbody.rotation = -180f;
             player.GetComponent<Animator>().Play("DownSwim");
@@ -205,16 +219,21 @@ public class LevelTransitionMenuBehaviour : MonoBehaviour
             {
                 //Tää on syvältä
                 background.EnableBackground(false);
+                background.ChangeSong(4);
                 GameManager.cameraMode = 0;
                 Camera.main.gameObject.GetComponent<Camera>().orthographicSize = GameManager.cameraPlaySize;
                 GameManager.PlayerClipping(true);
-                playerRigidbody.position = new Vector2(spawnRoomLocation, -25f);
+                playerRigidbody.position = new Vector2(spawnRoomLocation, -20f);
                 playerRigidbody.velocity = new Vector2(0f, -5f);
                 hpBar.anchoredPosition = new Vector2(-130, -135);
                 pauseButton.anchoredPosition = new Vector2(60, -60);
                 paperCount.anchoredPosition = new Vector2(-130, -60);
                 GameManager.PauseWorld(false);
                 GameManager.ChangeLightSize(0, 50, 10);
+            }
+            else
+            {
+                background.Fade("fadeOut");
             }
             GameManager.GenerateMap(GameManager.currentFloor + 1);
         }
@@ -281,6 +300,8 @@ public class LevelTransitionMenuBehaviour : MonoBehaviour
             sequenceOrder = 1;
             background.EnableBackground(true);
             background.ChangeBackground(GameManager.currentFloor);
+            background.ChangeSong(5);
+            background.Fade("fadeIn");
             player.transform.parent = null;
             trophy.transform.position = new Vector2(59f + (floor * 50), 250f);
             player.transform.parent = trophy.transform;
@@ -398,6 +419,8 @@ public class LevelTransitionMenuBehaviour : MonoBehaviour
             sequenceOrder = 1;
             background.EnableBackground(true);
             background.ChangeBackground(GameManager.currentFloor);
+            background.ChangeSong(5);
+            background.Fade("fadeIn");
             player.transform.position = new Vector2(59f + (floor * 50), 330f);
             playerRigidbody.rotation = -180f;
             player.GetComponent<Animator>().Play("DownSwim");
@@ -407,9 +430,9 @@ public class LevelTransitionMenuBehaviour : MonoBehaviour
         }
         if (sequence > 20 && sequenceOrder == 1)
         {
-            playerRigidbody.position = new Vector2(59f + (floor * 50), 255f);
             exponentialSequence = 0f;
             sequenceOrder = 2;
+            background.Fade("fadeOut");
             GameManager.ChangeLightSize(50, 0, 10);
             GameManager.GenerateMap(GameManager.currentFloor + 1);
         }

@@ -295,14 +295,14 @@ public class MapGeneratorGameObject : MonoBehaviour
         cameraObject.cameraBounds.SetMinMax(new Vector3(cameraMinX, cameraMinY, -10), new Vector3(cameraMaxX, cameraMaxY, -10));
 
         GameManager.levelIsGenerated = true;
-        if (mapNum == deep) GameObject.FindWithTag("Player").transform.position = new Vector2(0, -25);
+        if (mapNum == deep) GameObject.FindWithTag("Player").transform.position = new Vector2(0, -20);
         Invoke("QuickFix", 6.5f);
     }
     void QuickFix()
     {
         if (!GameManager.playerOnScreen)
         {
-            if (GameManager.currentFloor != 1) GameObject.FindWithTag("Player").transform.position = new Vector2(0, -25);
+            if (GameManager.currentFloor != 1) GameObject.FindWithTag("Player").transform.position = new Vector2(0, -20);
         }
         if (SceneManager.GetSceneByName("LevelTransitionMenu").isLoaded) GameManager.CloseLevelTransitionMenu();
     }

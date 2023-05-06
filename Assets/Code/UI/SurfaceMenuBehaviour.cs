@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.UI;
 using TMPro;
 
@@ -9,6 +10,7 @@ public class SurfaceMenuBehaviour : MonoBehaviour
     [SerializeField] GameObject leftButton, rightButton, totalScore, jumpButton, equipmentButton, openShopButton, talkButton, equipmentScreen, equipmentBack, equipmentLeft, equipmentRight, equipmentFlipperButton, equipmentFlipperIcon, shopScreen, shopBack, shopLeft, shopRight, shopBuy, shopHatIcon, equipmentHatIcon, settingsScreen, settingsBack, quitButton, muteButton, muteButtonIcon;
     [SerializeField] TextMeshProUGUI scoreText, highScoreText, hatNameText, shopHatNameText, shopBuyText, shopPriceText, shopDescription;
     [SerializeField] Sprite musicButtonOn, musicButtonOff;
+    [SerializeField] AudioMixer audioMix;
     RectTransform leftButtonT, rightButtonT, totalScoreT, jumpButtonT, equipmentButtonT, openShopButtonT, talkButtonT, equipmentScreenT, shopScreenT, settingsScreenT;
     Button leftButtonB, rightButtonB, totalScoreB, jumpButtonB, equipmentButtonB, openShopButtonB, talkButtonB, equipmentBackB, equipmentLeftB, equipmentRightB, equipmentFlipperButtonB, shopBackB, shopLeftB, shopRightB, shopBuyB, settingsBackB, quitButtonB, muteButtonB;
     RectTransform hpBar, pauseButton, paperCount;
@@ -51,6 +53,7 @@ public class SurfaceMenuBehaviour : MonoBehaviour
         muteButtonIconI = muteButtonIcon.GetComponent<Image>();
         musicMuted = (GameManager.unlocks & 0b_100_0000_0000) == 0b_100_0000_0000;
         muteButtonIconI.sprite = musicMuted ? musicButtonOff : musicButtonOn;
+        audioMix.SetFloat("Music", musicMuted ? -80f : 0f);
 
         leftButtonB = leftButton.GetComponent<Button>();
         rightButtonB = rightButton.GetComponent<Button>();
@@ -447,12 +450,14 @@ public class SurfaceMenuBehaviour : MonoBehaviour
             musicMuted = false;
             muteButtonIconI.sprite = musicButtonOn;
             GameManager.unlocks ^= 0b_100_0000_0000;
+            audioMix.SetFloat("Music", 0f);
         }
         else
         {
             musicMuted = true;
             muteButtonIconI.sprite = musicButtonOff;
             GameManager.unlocks |= 0b_100_0000_0000;
+            audioMix.SetFloat("Music", -80f);
         }
         GameManager.Save();
     }
@@ -792,6 +797,7 @@ public class SurfaceMenuBehaviour : MonoBehaviour
             playerAnimator.Play("Jump");
             armAnimator.Play("Jump");
             hatAnimator.Play("Jump");
+            GameManager.timeBonus = 1100f;
         }
         if (sequence > 42f && !playerJumped2)
         {

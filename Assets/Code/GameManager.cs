@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour
     public static bool playerClipping = true;
     public static int score;
 
-    public static float damageMultiplier = 1f, healingMultiplier = 1f, scoreMultiplier = 1f, speedMultiplier = 1f;
+    public static float damageMultiplier = 1f, healingMultiplier = 1f, scoreMultiplier = 1f, speedMultiplier = 1f, timeBonus;
     public static bool healBetweenLevels = true;
 
     // Pysyvät tallennuksesta toiseen
@@ -53,10 +53,13 @@ public class GameManager : MonoBehaviour
         Instance = this;
         Screen.sleepTimeout = SleepTimeout.NeverSleep;
         score = 0;
-        //equippedHat = 2;
         BeginGame();
     }
 
+    void Update()
+    {
+        if (timeBonus > 0 && playerInControl) timeBonus -= Time.deltaTime;
+    }
     public static void Save()
     {
         PlayerPrefs.SetInt("TotalScore", totalScore);
