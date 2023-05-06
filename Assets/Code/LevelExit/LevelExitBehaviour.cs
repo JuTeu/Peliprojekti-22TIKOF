@@ -108,7 +108,22 @@ public class LevelExitBehaviour : MonoBehaviour
                 GameManager.PauseWorld(true);
                 if (GameManager.currentFloor == 4) Debug.Log("Oot kaikista paras ihminen ikinä");
                 
-                if (GameManager.currentFloor == 4)
+                if (GameManager.currentFloor == 0)
+                {
+                    if (GameManager.questionsAnswered >= GameManager.chestsInLevel)
+                    {
+                        GameObject.Find("IceFan").GetComponent<Animator>().Play("Broken");
+                        GameObject.Find("IceFanBubbles").GetComponent<ParticleSystem>().Stop();
+                        GameObject.Find("IceFanBubbles").GetComponent<ParticleSystem>().Clear();
+                    }
+                    else
+                    {
+                        GameObject.Find("IceFan").GetComponent<Animator>().Play("Working");
+                        GameObject.Find("IceFanBubbles").GetComponent<ParticleSystem>().Simulate(1f);
+                        GameObject.Find("IceFanBubbles").GetComponent<ParticleSystem>().Play();
+                    }
+                }
+                else if (GameManager.currentFloor == 4)
                 {
                     GameManager.unlocks = GameManager.unlocks | 0b_10;
                     GameManager.Save();

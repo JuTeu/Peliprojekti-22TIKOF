@@ -8,19 +8,29 @@ public class QuestionManager : MonoBehaviour
     [SerializeField] private QuestionData questionData;
     private List<Question> questions;
     private Question selectedQuestion;
+    private int questionId = 0;
     private bool newQuestion = true;
 
     // Start is called before the first frame update
     void Start()
     {
         questions = questionData.questions;
+        if (GameManager.alreadyAnsweredQuestions == null) GameManager.alreadyAnsweredQuestions = new bool[questions.Count];
         SelectQuestion();
     }
 
     void SelectQuestion()
     {
-        int val = Random.Range(0, questions.Count);
-        selectedQuestion = questions[val];
+        bool validQuestion = false;
+        int tries = 0;
+        while (!validQuestion)
+        {
+            questionId = Random.Range(0, questions.Count);
+            tries++;
+            if (tries > 1000) GameManager.alreadyAnsweredQuestions = new bool[questions.Count];
+            validQuestion = !GameManager.alreadyAnsweredQuestions[questionId];
+        }
+        selectedQuestion = questions[questionId];
 
         questionUI.SetQuestion(selectedQuestion);
         if (newQuestion)
@@ -41,6 +51,7 @@ public class QuestionManager : MonoBehaviour
         {
             correctAns = true;
             GameManager.correctAnswers++;
+            GameManager.alreadyAnsweredQuestions[questionId] = true;
             GameObject.Find("PaperCount").GetComponent<UIPaperCount>().AddScore(1000);
         }
         else
