@@ -50,7 +50,6 @@ public class GameManager : MonoBehaviour
         highScore = PlayerPrefs.GetInt("HighScore", 0);
         unlocks = PlayerPrefs.GetInt("Unlocks", 0);
         equippedHat = PlayerPrefs.GetInt("EquippedHat", 0);
-        
         Instance = this;
         Screen.sleepTimeout = SleepTimeout.NeverSleep;
         score = 0;

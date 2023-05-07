@@ -341,6 +341,7 @@ public class SurfaceMenuBehaviour : MonoBehaviour
         GameManager.scoreMultiplier = 1f;
         GameManager.speedMultiplier = 1f;
         GameManager.healBetweenLevels = true;
+        GameObject.Find("HatParticles").GetComponent<ParticleSystem>().Stop();
 
         if (GameManager.equippedHat == 0)
         {
@@ -378,6 +379,7 @@ public class SurfaceMenuBehaviour : MonoBehaviour
         {
             hatNameText.text = "Kultapytty";
             equipmentHatIconI.sprite = Resources.LoadAll<Sprite>("golden_useless_hat")[5];
+            GameObject.Find("HatParticles").GetComponent<ParticleSystem>().Play();
         }
         GameObject.FindWithTag("Player").transform.Find("Hat").gameObject.GetComponent<HatSetter>().SetHatType();
         GameObject.FindWithTag("Player").transform.Find("Hat").gameObject.GetComponent<HatSetter>().SetHat(5);
