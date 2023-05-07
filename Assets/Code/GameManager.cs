@@ -50,7 +50,7 @@ public class GameManager : MonoBehaviour
         highScore = PlayerPrefs.GetInt("HighScore", 0);
         unlocks = PlayerPrefs.GetInt("Unlocks", 0);
         equippedHat = PlayerPrefs.GetInt("EquippedHat", 0);
-
+        
         Instance = this;
         Screen.sleepTimeout = SleepTimeout.NeverSleep;
         score = 0;
@@ -132,6 +132,7 @@ public class GameManager : MonoBehaviour
     public static void CloseLevelTransitionMenu()
     {
         SceneManager.UnloadSceneAsync("LevelTransitionMenu");
+        if (currentFloor != 0) GameObject.Find("Hat").GetComponent<CompassHat>().SetArrows();
     }
     
     public static void RefreshSeabedObjects()
@@ -183,6 +184,7 @@ public class GameManager : MonoBehaviour
 
     public static void BeginGame()
     {
+        GameObject.Find("Hat").GetComponent<CompassHat>().HideAllArrows();
         GameObject.Find("Bear").GetComponent<AudioSource>().Play();
         GameObject.Find("RegularEndingTrophy").GetComponent<SpriteRenderer>().enabled = (unlocks & 0b_10) == 0b_10;
         correctAnswersTotal = 0;

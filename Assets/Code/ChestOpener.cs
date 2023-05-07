@@ -16,6 +16,7 @@ public class ChestOpener : MonoBehaviour
     private CharacterController playerController;
     private Vector2 playerDesiredPosition;
 
+    public int chestId = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -35,19 +36,17 @@ public class ChestOpener : MonoBehaviour
         if (collision.tag == "Player" && !opened)
         {
             opened = true;
-            //QuestionBG.SetActive(true);
+            GameObject.Find("Hat").GetComponent<CompassHat>().HideArrow(chestId);
             
             player = collision.gameObject;
             playerRigidbody = player.GetComponent<Rigidbody2D>();
             playerAnimator = player.GetComponent<PlayerAnimator>();
             playerController = player.GetComponent<CharacterController>();
-            //playerSprite.flipX = false;
             playerAnimator.Flip(false);
             playerEntered = true;
             GameManager.PauseWorld(true);
             playerController.currentAnim = 1;
             playerAnimator.Play("MiddleUpSwim");
-            //GameManager.OpenQuestionMenu();
         }
     }
 

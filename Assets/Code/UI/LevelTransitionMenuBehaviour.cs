@@ -202,7 +202,7 @@ public class LevelTransitionMenuBehaviour : MonoBehaviour
             background.Fade("fadeIn");
             player.transform.position = new Vector2(59f + (floor * 50), 330f);
             playerRigidbody.rotation = -180f;
-            player.GetComponent<Animator>().Play("DownSwim");
+            playerAnimator.Play("DownSwim");
             GameManager.cameraMode = 2;
             Camera.main.gameObject.GetComponent<Camera>().orthographicSize = 10f;
             GameManager.ChangeLightSize(0, 50, 10);
@@ -253,11 +253,11 @@ public class LevelTransitionMenuBehaviour : MonoBehaviour
         {
             sequenceOrder = 4;
             GameManager.PlayerClipping(true);
-            player.GetComponent<Animator>().Play("DownSwim");
+            playerAnimator.Play("DownSwim");
         }
         if (sequence > 24.3f && sequenceOrder == 4)
         {
-            player.GetComponent<Animator>().Play("DownSwimIdle");
+            playerAnimator.Play("DownSwimIdle");
             GameManager.CloseLevelTransitionMenu();
         }
     }
@@ -423,7 +423,7 @@ public class LevelTransitionMenuBehaviour : MonoBehaviour
             background.Fade("fadeIn");
             player.transform.position = new Vector2(59f + (floor * 50), 330f);
             playerRigidbody.rotation = -180f;
-            player.GetComponent<Animator>().Play("DownSwim");
+            playerAnimator.Play("DownSwim");
             GameManager.cameraMode = 2;
             Camera.main.gameObject.GetComponent<Camera>().orthographicSize = 10f;
             GameManager.ChangeLightSize(0, 50, 10);
@@ -452,11 +452,11 @@ public class LevelTransitionMenuBehaviour : MonoBehaviour
         {
             sequenceOrder = 4;
             GameManager.PlayerClipping(true);
-            player.GetComponent<Animator>().Play("DownSwim");
+            playerAnimator.Play("DownSwim");
         }
         if (sequence > 24.3f && sequenceOrder == 4)
         {
-            player.GetComponent<Animator>().Play("DownSwimIdle");
+            playerAnimator.Play("DownSwimIdle");
             GameManager.CloseLevelTransitionMenu();
         }
     }

@@ -166,7 +166,7 @@ public class CharacterController : MonoBehaviour
             }
         }
 
-        rb.AddForce(movementVector * speed);
+        rb.AddForce(movementVector * speed * GameManager.speedMultiplier);
         movingForwards = Vector2.SignedAngle(rb.velocity.normalized, movementVector.normalized) < 30f;
         if (rb.velocity.sqrMagnitude > 120f && movingForwards)
         {

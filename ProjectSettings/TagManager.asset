@@ -10,6 +10,7 @@ TagManager:
   - SeabedObject
   - SpeedBoost
   - PaperLocked
+  - CompassArrow
   layers:
   - Default
   - TransparentFX

@@ -41,7 +41,7 @@ public class MapGeneratorGameObject : MonoBehaviour
     }
     IEnumerator BuildMap(int mapNum)
     {
-        map.gameObject.GetComponent<TilemapRenderer>().sortingOrder = mapNum == 4 ? 6 : 8;
+        map.gameObject.GetComponent<TilemapRenderer>().sortingOrder = mapNum == 4 ? 2 : 8;
         GameManager.currentFloor = mapNum;
         GameManager.questionsAnswered = 0;
         GameManager.unhurt = true;

@@ -100,6 +100,7 @@ public class LevelExitBehaviour : MonoBehaviour
         if(collision.gameObject.tag == "Player")
         {
             musicFade.Play("fadeOut");
+            GameObject.Find("Hat").GetComponent<CompassHat>().HideAllArrows();
             player = collision.gameObject;
             playerRigidbody = player.GetComponent<Rigidbody2D>();
             playerAnimator = player.GetComponent<PlayerAnimator>();

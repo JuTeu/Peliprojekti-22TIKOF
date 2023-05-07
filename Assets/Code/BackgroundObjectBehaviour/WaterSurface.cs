@@ -20,6 +20,7 @@ public class WaterSurface : MonoBehaviour
             anim.Play("Splash");
             splash.Play();
             GameObject.Find("Bear").GetComponent<AudioSource>().Stop();
+            GameObject.Find("Hat").GetComponent<CompassHat>().SetArrows();
         }
     }
 

@@ -277,8 +277,8 @@ public class SurfaceMenuBehaviour : MonoBehaviour
             else
             {
                 shopBuyText.text = "Osta";
-                shopPriceText.text = "TYÖN ALLA";
-                shopBuyB.interactable = false;
+                shopPriceText.text = "50 000";
+                shopBuyB.interactable = true;
             }
         }
         else if (shopSelectedHat == 3)
