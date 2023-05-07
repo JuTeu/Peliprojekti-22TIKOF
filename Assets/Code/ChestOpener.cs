@@ -37,7 +37,6 @@ public class ChestOpener : MonoBehaviour
         {
             opened = true;
             GameObject.Find("Hat").GetComponent<CompassHat>().HideArrow(chestId);
-            
             player = collision.gameObject;
             playerRigidbody = player.GetComponent<Rigidbody2D>();
             playerAnimator = player.GetComponent<PlayerAnimator>();

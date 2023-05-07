@@ -11,6 +11,7 @@ public class SurfaceMenuBehaviour : MonoBehaviour
     [SerializeField] TextMeshProUGUI scoreText, highScoreText, hatNameText, shopHatNameText, shopBuyText, shopPriceText, shopDescription;
     [SerializeField] Sprite musicButtonOn, musicButtonOff;
     [SerializeField] AudioMixer audioMix;
+    UISounds sound;
     RectTransform leftButtonT, rightButtonT, totalScoreT, jumpButtonT, equipmentButtonT, openShopButtonT, talkButtonT, equipmentScreenT, shopScreenT, settingsScreenT;
     Button leftButtonB, rightButtonB, totalScoreB, jumpButtonB, equipmentButtonB, openShopButtonB, talkButtonB, equipmentBackB, equipmentLeftB, equipmentRightB, equipmentFlipperButtonB, shopBackB, shopLeftB, shopRightB, shopBuyB, settingsBackB, quitButtonB, muteButtonB;
     RectTransform hpBar, pauseButton, paperCount;
@@ -21,6 +22,13 @@ public class SurfaceMenuBehaviour : MonoBehaviour
     bool sequenceStopped = false;
     bool flipperEquipped, musicMuted;
     float sequence, exponentialSequence = 0f;
+
+
+
+    const float maxVolume = -5f;
+
+
+
     int menuAnimId = 0;
     int currentMenu = 0;
 
@@ -34,6 +42,9 @@ public class SurfaceMenuBehaviour : MonoBehaviour
         scoreText.text = GameManager.totalScore + "";
         highScoreText.text = GameManager.highScore + "";
         GameManager.score = 0;
+
+        sound = GameObject.Find("UISounds").GetComponent<UISounds>();
+
         leftButtonT = leftButton.GetComponent<RectTransform>();
         rightButtonT = rightButton.GetComponent<RectTransform>();
         totalScoreT = totalScore.GetComponent<RectTransform>();
@@ -53,7 +64,7 @@ public class SurfaceMenuBehaviour : MonoBehaviour
         muteButtonIconI = muteButtonIcon.GetComponent<Image>();
         musicMuted = (GameManager.unlocks & 0b_100_0000_0000) == 0b_100_0000_0000;
         muteButtonIconI.sprite = musicMuted ? musicButtonOff : musicButtonOn;
-        audioMix.SetFloat("Music", musicMuted ? -80f : 0f);
+        audioMix.SetFloat("Music", musicMuted ? -80f : maxVolume);
 
         leftButtonB = leftButton.GetComponent<Button>();
         rightButtonB = rightButton.GetComponent<Button>();
@@ -141,11 +152,13 @@ public class SurfaceMenuBehaviour : MonoBehaviour
 
     public void StartGame()
     {
+        sound.PlaySound("Click");
         DoMenuAnim(1);
     }
 
     public void PressLeft()
     {
+        sound.PlaySound("Click");
         if (currentMenu == 0)
         {
             DoMenuAnim(2);
@@ -154,6 +167,7 @@ public class SurfaceMenuBehaviour : MonoBehaviour
 
     public void PressRight()
     {
+        sound.PlaySound("Click");
         if (currentMenu == 0)
         {
             DoMenuAnim(8);
@@ -168,6 +182,7 @@ public class SurfaceMenuBehaviour : MonoBehaviour
 
     public void PressCloseSettings()
     {
+        sound.PlaySound("Click");
         settingsBackB.interactable = false;
         muteButtonB.interactable = false;
         quitButtonB.interactable = false;
@@ -175,10 +190,12 @@ public class SurfaceMenuBehaviour : MonoBehaviour
     }
     public void PressQuit()
     {
+        sound.PlaySound("Click");
         Application.Quit();
     }
     public void PressOpenShop()
     {
+        sound.PlaySound("Click");
         openShopButtonB.interactable = false;
         talkButtonB.interactable = false;
         leftButtonB.interactable = false;
@@ -189,6 +206,7 @@ public class SurfaceMenuBehaviour : MonoBehaviour
 
     public void PressCloseShop()
     {
+        sound.PlaySound("Click");
         shopBackB.interactable = false;
         shopLeftB.interactable = false;
         shopRightB.interactable = false;
@@ -198,6 +216,7 @@ public class SurfaceMenuBehaviour : MonoBehaviour
 
     public void PressLeftShop()
     {
+        sound.PlaySound("Click");
         shopSelectedHat -= 1;
         if (shopSelectedHat == -1) shopSelectedHat = 4;
         RefreshShopScreen();
@@ -205,6 +224,7 @@ public class SurfaceMenuBehaviour : MonoBehaviour
 
     public void PressRightShop()
     {
+        sound.PlaySound("Click");
         shopSelectedHat += 1;
         if (shopSelectedHat == 5) shopSelectedHat = 0;
         RefreshShopScreen();
@@ -212,6 +232,7 @@ public class SurfaceMenuBehaviour : MonoBehaviour
 
     public void PressBuyShop()
     {
+        sound.PlaySound("Click");
         int[] prices = new int[] {5000, 30000, 50000, 100000, 999999};
         int[] hatIds = new int[] {0b_10_0000, 0b_100_0000, 0b_1000_0000, 0b_1_0000_0000, 0b_10_0000_0000};
         if (GameManager.totalScore >= prices[shopSelectedHat])
@@ -321,6 +342,7 @@ public class SurfaceMenuBehaviour : MonoBehaviour
 
     public void PressEquipment()
     {
+        sound.PlaySound("Click");
         leftButtonB.interactable = false;
         rightButtonB.interactable = false;
         jumpButtonB.interactable = false;
@@ -389,11 +411,13 @@ public class SurfaceMenuBehaviour : MonoBehaviour
 
     public void PressCloseEquipment()
     {
+        sound.PlaySound("Click");
         DoMenuAnim(5);
     }
 
     public void PressLeftEquipment()
     {
+        sound.PlaySound("Click");
         int testIfNewHats = GameManager.equippedHat;
         int newHat = 0;
         if ((GameManager.unlocks & 0b_10_0000) == 0b_10_0000 && GameManager.equippedHat > 1) newHat = 1;
@@ -416,6 +440,7 @@ public class SurfaceMenuBehaviour : MonoBehaviour
 
     public void PressRightEquipment()
     {
+        sound.PlaySound("Click");
         int testIfNewHats = GameManager.equippedHat;
         int newHat = GameManager.equippedHat;
         if ((GameManager.unlocks & 0b_10_0000_0000) == 0b_10_0000_0000 && GameManager.equippedHat < 5) newHat = 5;
@@ -430,6 +455,7 @@ public class SurfaceMenuBehaviour : MonoBehaviour
     
     public void PressFlipper()
     {
+        sound.PlaySound("Click");
         if (flipperEquipped)
         {
             flipperEquipped = false;
@@ -447,12 +473,13 @@ public class SurfaceMenuBehaviour : MonoBehaviour
 
     public void PressMute()
     {
+        sound.PlaySound("Click");
         if (musicMuted)
         {
             musicMuted = false;
             muteButtonIconI.sprite = musicButtonOn;
             GameManager.unlocks ^= 0b_100_0000_0000;
-            audioMix.SetFloat("Music", 0f);
+            audioMix.SetFloat("Music", maxVolume);
         }
         else
         {
@@ -547,6 +574,7 @@ public class SurfaceMenuBehaviour : MonoBehaviour
 
         if (exponentialSequence > 10000f)
         {
+            sound.PlaySound("Swipe");
             leftButtonT.anchoredPosition = new Vector2(80, 0);
             rightButtonT.anchoredPosition = new Vector2(-80, 0);
             totalScoreT.anchoredPosition = new Vector2(0, -100);
@@ -568,6 +596,7 @@ public class SurfaceMenuBehaviour : MonoBehaviour
 
         if (exponentialSequence > 10000f)
         {
+            sound.PlaySound("Swipe");
             shopScreenT.anchoredPosition = new Vector2(0, 0);
             shopBackB.interactable = true;
             shopLeftB.interactable = true;
@@ -585,6 +614,7 @@ public class SurfaceMenuBehaviour : MonoBehaviour
 
         if (exponentialSequence > 10000f)
         {
+            sound.PlaySound("Swipe");
             equipmentButtonB.interactable = true;
             openShopButtonB.interactable = true;
             talkButtonB.interactable = true;
@@ -602,6 +632,7 @@ public class SurfaceMenuBehaviour : MonoBehaviour
 
         if (exponentialSequence > 10000f)
         {
+            sound.PlaySound("Swipe");
             settingsScreenT.anchoredPosition = new Vector2(0, 0);
             settingsBackB.interactable = true;
             muteButtonB.interactable = true;
@@ -618,6 +649,7 @@ public class SurfaceMenuBehaviour : MonoBehaviour
 
         if (exponentialSequence > 10000f)
         {
+            sound.PlaySound("Swipe");
             equipmentButtonB.interactable = true;
             jumpButtonB.interactable = true;
             leftButtonB.interactable = true;
@@ -634,6 +666,7 @@ public class SurfaceMenuBehaviour : MonoBehaviour
 
         if (exponentialSequence > 10000f)
         {
+            sound.PlaySound("Swipe");
             equipmentScreenT.anchoredPosition = new Vector2(0, 0);
             equipmentBackB.interactable = true;
             equipmentLeftB.interactable = true;
@@ -651,6 +684,7 @@ public class SurfaceMenuBehaviour : MonoBehaviour
 
         if (exponentialSequence > 10000f)
         {
+            sound.PlaySound("Swipe");
             equipmentButtonB.interactable = true;
             if (currentMenu == 0)
             {
@@ -685,6 +719,7 @@ public class SurfaceMenuBehaviour : MonoBehaviour
 
             if (exponentialSequence > 10000f)
             {
+                sound.PlaySound("Swipe");
                 openShopButtonT.anchoredPosition = new Vector2(0, 260);
                 talkButtonT.anchoredPosition = new Vector2(0, 150);
             }
@@ -719,6 +754,7 @@ public class SurfaceMenuBehaviour : MonoBehaviour
     }
     public void Talk() 
     {
+        sound.PlaySound("Click");
         GameManager.OpenDialogue();
     }
 
@@ -736,6 +772,7 @@ public class SurfaceMenuBehaviour : MonoBehaviour
 
             if (exponentialSequence > 10000f)
             {
+                sound.PlaySound("Swipe");
                 jumpButtonT.anchoredPosition = new Vector2(0, 200);
             }
         }

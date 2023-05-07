@@ -8,6 +8,8 @@ public class LevelExitBehaviour : MonoBehaviour
     [SerializeField] GameObject deepCaveFinalReward, rope, bubble, arrow, kelpDoor, dynamite, dynamiteBubble, chain1, chain2, endLock;
     SpriteRenderer deepCaveFinalRewardSprite;
     Animator chain1Animator, chain2Animator, lockAnimator;
+    AudioSource source;
+    [SerializeField] AudioClip bubbling, kelpOpen, explosion;
     CharacterController characterController;
     Collider2D exitCollider;
     GameObject player;
@@ -19,12 +21,16 @@ public class LevelExitBehaviour : MonoBehaviour
     void Start()
     {
         musicFade = GameObject.Find("LevelTransitionBackground").GetComponent<Animator>();
+        source = GetComponent<AudioSource>();
         exitCollider = GetComponent<Collider2D>();
         if (GameManager.currentFloor == 0)
         {
             bubble.SetActive(true);
             characterController = GameObject.FindWithTag("Player").GetComponent<CharacterController>();
             boostSkipable = true;
+            source.clip = bubbling;
+            source.loop = true;
+            source.Play();
         }
         else if (GameManager.currentFloor == 1)
         {
@@ -61,14 +67,19 @@ public class LevelExitBehaviour : MonoBehaviour
         {
             bubble.GetComponent<ParticleSystem>().Stop();
             bubble.GetComponent<Collider2D>().enabled = false;
+            source.loop = false;
         }
         else if (GameManager.currentFloor == 1)
         {
             kelpDoor.GetComponent<Animator>().Play("Open");
+            source.clip = kelpOpen;
+            source.Play();
         }
         else if (GameManager.currentFloor == 3)
         {
             dynamite.GetComponent<Animator>().Play("Explode");
+            source.clip = explosion;
+            source.Play();
         }
         else if (GameManager.currentFloor == 4)
         {

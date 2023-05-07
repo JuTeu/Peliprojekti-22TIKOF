@@ -9,6 +9,7 @@ public class PauseMenuBehaviour : MonoBehaviour
     private float exponentialSequence = 0f;
     private bool sequenceStopped, exiting = false;
     private RectTransform rt;
+    private UISounds sound;
     
     private bool clipping = GameManager.playerClipping;
     private bool invlunerablity = GameManager.playerIsInvulnerable;
@@ -19,6 +20,7 @@ public class PauseMenuBehaviour : MonoBehaviour
     {
         score.text = GameManager.score + "";
         rt = GetComponent<RectTransform>();
+        sound = GameObject.Find("UISounds").GetComponent<UISounds>();
         rt.anchoredPosition = new Vector2(-1000, 0);
         if (clipping == false)
         {
@@ -32,6 +34,7 @@ public class PauseMenuBehaviour : MonoBehaviour
     
     public void Close()
     {
+        sound.PlaySound("Click");
         sequenceStopped = false;
         exiting = true;
         sequence = 0f;
@@ -100,6 +103,7 @@ public class PauseMenuBehaviour : MonoBehaviour
 
     public void ReturnToSurface()
     {
+        sound.PlaySound("Click");
         GameManager.ReturnToSurfaceButton();
     }
 
@@ -129,6 +133,7 @@ public class PauseMenuBehaviour : MonoBehaviour
 
             if (exponentialSequence > 10000f)
             {
+                sound.PlaySound("Swipe");
                 rt.anchoredPosition = new Vector2(0, 0);
                 sequenceStopped = true;
             }
@@ -141,6 +146,7 @@ public class PauseMenuBehaviour : MonoBehaviour
 
             if (exponentialSequence > 10000f)
             {
+                sound.PlaySound("Swipe");
                 GameManager.ClosePauseMenu();
             }
         }

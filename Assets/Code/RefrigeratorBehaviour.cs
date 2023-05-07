@@ -21,14 +21,17 @@ public class RefrigeratorBehaviour : MonoBehaviour
     private PlayerHealth playerHealth;
     private CharacterController playerController;
     private float sequence = 0f;
+    private int sequenceOrder = 0;
     private float doorRotation = 0f;
     private Vector3 hinge;
     private Vector2 refrigeratorCentre;
+    private AudioSource chargingSound;
 
     void Start()
     {
         doorSprite = door.GetComponent<SpriteRenderer>();
         effectSprite = effect.GetComponent<SpriteRenderer>();
+        chargingSound = GetComponent<AudioSource>();
         cable.SetPosition(0, cable.gameObject.transform.position);
         cable.SetPosition(1, cableEnd);
 
@@ -94,7 +97,11 @@ public class RefrigeratorBehaviour : MonoBehaviour
                 doorSprite.sprite = doorFront;
             }
         }
-
+        if (sequence > 2.15f && sequenceOrder == 0)
+        {
+            chargingSound.Play();
+            sequenceOrder = 1;
+        }
         if (sequence > 2.15f)
         {
             effectSprite.color = new Color(1f, 1f, 1f, Mathf.Sin(32 * sequence) / 2 + 0.5f); 
@@ -105,11 +112,14 @@ public class RefrigeratorBehaviour : MonoBehaviour
 
         if (sequence > 4f)
         {
+            chargingSound.Stop();
+            sequenceOrder = 0;
             GetComponent<SpriteRenderer>().sprite = bodyOff;
             door.transform.RotateAround(hinge, Vector3.up, 25f);
             playerEntered = false;
             playerRigidbody.velocity = new Vector2(0.1f, 0.1f);
             GameManager.PauseWorld(false);
+            
             effectSprite.color = new Color(1f, 1f, 1f, 0f);
             doorSprite.sortingOrder = -1;
         }
