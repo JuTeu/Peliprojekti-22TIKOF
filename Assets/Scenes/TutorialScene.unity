@@ -375,8 +375,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: "Sait k\xE4ytt\xF6\xF6si r\xE4pyl\xE4t, joilla voit uida lujempaa. Tuplaklikkaa
-    n\xE4ytt\xF6\xE4 uidessasi, jotta saat boostin k\xE4ytt\xF6\xF6si.   \n(klikkaa
-    n\xE4ytt\xF6\xE4 jatkaaksesi)"
+    n\xE4ytt\xF6\xE4 uidessasi, jotta voit uida nopeasti k\xE4ytt\xF6\xF6si.   \n(klikkaa
+    jatkaaksesi)"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 574d03e3b2c9861e89117b14e11ba677, type: 2}
   m_sharedMaterial: {fileID: -2852909050737294892, guid: 574d03e3b2c9861e89117b14e11ba677, type: 2}

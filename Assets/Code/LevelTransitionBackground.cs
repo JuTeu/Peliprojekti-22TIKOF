@@ -16,10 +16,10 @@ public class LevelTransitionBackground : MonoBehaviour
         background.enabled = false;
     }
 
-    public void EnableBackground(bool toggle)
+    public void EnableBackground(bool toggle, bool noMusic = false)
     {
         background.enabled = toggle;
-        if (!toggle)
+        if (!toggle && !noMusic)
         {
             ChangeSong(GameManager.currentFloor);
             Fade("fadeIn");

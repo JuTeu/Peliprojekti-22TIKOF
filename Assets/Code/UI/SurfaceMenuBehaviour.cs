@@ -7,13 +7,13 @@ using TMPro;
 
 public class SurfaceMenuBehaviour : MonoBehaviour
 {
-    [SerializeField] GameObject leftButton, rightButton, totalScore, jumpButton, equipmentButton, openShopButton, talkButton, equipmentScreen, equipmentBack, equipmentLeft, equipmentRight, equipmentFlipperButton, equipmentFlipperIcon, shopScreen, shopBack, shopLeft, shopRight, shopBuy, shopHatIcon, equipmentHatIcon, settingsScreen, settingsBack, quitButton, muteButton, muteButtonIcon;
+    [SerializeField] GameObject leftButton, rightButton, totalScore, jumpButton, equipmentButton, openShopButton, talkButton, equipmentScreen, equipmentBack, equipmentLeft, equipmentRight, equipmentFlipperButton, equipmentFlipperIcon, shopScreen, shopBack, shopLeft, shopRight, shopBuy, shopHatIcon, equipmentHatIcon, settingsScreen, settingsBack, quitButton, muteButton, muteButtonIcon, guideButton, liscencesButton, creditsButton, guideScreen, guideBackButton, creditsScreen, creditsBackButton, liscencesScreen, liscencesBackButton;
     [SerializeField] TextMeshProUGUI scoreText, highScoreText, hatNameText, shopHatNameText, shopBuyText, shopPriceText, shopDescription;
     [SerializeField] Sprite musicButtonOn, musicButtonOff;
     [SerializeField] AudioMixer audioMix;
     UISounds sound;
-    RectTransform leftButtonT, rightButtonT, totalScoreT, jumpButtonT, equipmentButtonT, openShopButtonT, talkButtonT, equipmentScreenT, shopScreenT, settingsScreenT;
-    Button leftButtonB, rightButtonB, totalScoreB, jumpButtonB, equipmentButtonB, openShopButtonB, talkButtonB, equipmentBackB, equipmentLeftB, equipmentRightB, equipmentFlipperButtonB, shopBackB, shopLeftB, shopRightB, shopBuyB, settingsBackB, quitButtonB, muteButtonB;
+    RectTransform leftButtonT, rightButtonT, totalScoreT, jumpButtonT, equipmentButtonT, openShopButtonT, talkButtonT, equipmentScreenT, shopScreenT, settingsScreenT, guideScreenT, creditsScreenT, liscencesScreenT;
+    Button leftButtonB, rightButtonB, totalScoreB, jumpButtonB, equipmentButtonB, openShopButtonB, talkButtonB, equipmentBackB, equipmentLeftB, equipmentRightB, equipmentFlipperButtonB, shopBackB, shopLeftB, shopRightB, shopBuyB, settingsBackB, quitButtonB, muteButtonB, guideButtonB, liscencesButtonB, creditsButtonB, guideBackButtonB, creditsBackButtonB, liscencesBackButtonB;
     RectTransform hpBar, pauseButton, paperCount;
     Image equipmentFlipperIconI, shopHatIconI, equipmentHatIconI, muteButtonIconI;
     Rigidbody2D playerRigidbody;
@@ -55,6 +55,9 @@ public class SurfaceMenuBehaviour : MonoBehaviour
         equipmentScreenT = equipmentScreen.GetComponent<RectTransform>();
         shopScreenT = shopScreen.GetComponent<RectTransform>();
         settingsScreenT = settingsScreen.GetComponent<RectTransform>();
+        guideScreenT = guideScreen.GetComponent<RectTransform>();
+        creditsScreenT = creditsScreen.GetComponent<RectTransform>();
+        liscencesScreenT = liscencesScreen.GetComponent<RectTransform>();
 
         equipmentFlipperIconI = equipmentFlipperIcon.GetComponent<Image>();
         flipperEquipped = (GameManager.unlocks & 0b_1_0000) == 0b_1_0000;
@@ -83,6 +86,12 @@ public class SurfaceMenuBehaviour : MonoBehaviour
         settingsBackB = settingsBack.GetComponent<Button>();
         quitButtonB = quitButton.GetComponent<Button>();
         muteButtonB = muteButton.GetComponent<Button>();
+        guideButtonB = guideButton.GetComponent<Button>();
+        liscencesButtonB = liscencesButton.GetComponent<Button>();
+        creditsButtonB = creditsButton.GetComponent<Button>();
+        guideBackButtonB = guideBackButton.GetComponent<Button>();
+        creditsBackButtonB = creditsBackButton.GetComponent<Button>();
+        liscencesBackButtonB = liscencesBackButton.GetComponent<Button>();
 
         leftButtonB.interactable = false;
         rightButtonB.interactable = false;
@@ -101,7 +110,10 @@ public class SurfaceMenuBehaviour : MonoBehaviour
         settingsBackB.interactable = false;
         quitButtonB.interactable = false;
         muteButtonB.interactable = false;
-        
+        guideButtonB.interactable = false;
+        liscencesButtonB.interactable = false;
+        creditsButtonB.interactable = false;
+        liscencesBackButtonB.interactable = false;
 
         leftButtonT.anchoredPosition = new Vector2(-1000, 0);
         rightButtonT.anchoredPosition = new Vector2(1000, 0);
@@ -116,6 +128,9 @@ public class SurfaceMenuBehaviour : MonoBehaviour
         equipmentScreenT.anchoredPosition = new Vector2(-1000, 0);
         shopScreenT.anchoredPosition = new Vector2(-1000, 0);
         settingsScreenT.anchoredPosition = new Vector2(1000, 0);
+        guideScreenT.anchoredPosition = new Vector2(-1000, 0);
+        creditsScreenT.anchoredPosition = new Vector2(-1000, 0);
+        liscencesScreenT.anchoredPosition = new Vector2(-1000, 0);
 
         hpBar = GameObject.Find("HPBar").GetComponent<RectTransform>();
         pauseButton = GameObject.Find("PauseButton").GetComponent<RectTransform>();
@@ -186,6 +201,9 @@ public class SurfaceMenuBehaviour : MonoBehaviour
         settingsBackB.interactable = false;
         muteButtonB.interactable = false;
         quitButtonB.interactable = false;
+        guideButtonB.interactable = false;
+        liscencesButtonB.interactable = false;
+        creditsButtonB.interactable = false;
         DoMenuAnim(9);
     }
     public void PressQuit()
@@ -491,6 +509,66 @@ public class SurfaceMenuBehaviour : MonoBehaviour
         GameManager.Save();
     }
 
+    public void PressGuide()
+    {
+        sound.PlaySound("Click");
+        settingsBackB.interactable = false;
+        muteButtonB.interactable = false;
+        quitButtonB.interactable = false;
+        guideButtonB.interactable = false;
+        liscencesButtonB.interactable = false;
+        creditsButtonB.interactable = false;
+        sequenceStopped = false;
+        DoMenuAnim(10);
+    }
+
+    public void PressCloseGuide()
+    {
+        sound.PlaySound("Click");
+        guideBackButtonB.interactable = false;
+        DoMenuAnim(11);
+    }
+
+    public void PressCredits()
+    {
+        sound.PlaySound("Click");
+        settingsBackB.interactable = false;
+        muteButtonB.interactable = false;
+        quitButtonB.interactable = false;
+        guideButtonB.interactable = false;
+        liscencesButtonB.interactable = false;
+        creditsButtonB.interactable = false;
+        sequenceStopped = false;
+        DoMenuAnim(14);
+    }
+
+    public void PressCloseCredits()
+    {
+        sound.PlaySound("Click");
+        creditsBackButtonB.interactable = false;
+        DoMenuAnim(15);
+    }
+
+    public void PressLiscences()
+    {
+        sound.PlaySound("Click");
+        settingsBackB.interactable = false;
+        muteButtonB.interactable = false;
+        quitButtonB.interactable = false;
+        guideButtonB.interactable = false;
+        liscencesButtonB.interactable = false;
+        creditsButtonB.interactable = false;
+        sequenceStopped = false;
+        DoMenuAnim(12);
+    }
+
+    public void PressCloseLiscences()
+    {
+        sound.PlaySound("Click");
+        liscencesBackButtonB.interactable = false;
+        DoMenuAnim(13);
+    }
+
     void MenuAnimation()
     {
         if (menuAnimId == 0)
@@ -532,6 +610,30 @@ public class SurfaceMenuBehaviour : MonoBehaviour
         else if (menuAnimId == 9)
         {
             CloseTutorialAndSettings();
+        }
+        else if (menuAnimId == 10)
+        {
+            OpenGuide();
+        }
+        else if (menuAnimId == 11)
+        {
+            CloseGuide();
+        }
+        else if (menuAnimId == 12)
+        {
+            OpenLiscences();
+        }
+        else if (menuAnimId == 13)
+        {
+            CloseLiscences();
+        }
+        else if (menuAnimId == 14)
+        {
+            OpenCredits();
+        }
+        else if (menuAnimId == 15)
+        {
+            CloseCredits();
         }
     }
 
@@ -618,7 +720,7 @@ public class SurfaceMenuBehaviour : MonoBehaviour
             equipmentButtonB.interactable = true;
             openShopButtonB.interactable = true;
             talkButtonB.interactable = true;
-            leftButtonB.interactable = true;
+            //leftButtonB.interactable = true;
             rightButtonB.interactable = true;
             sequenceStopped = true;
         }
@@ -637,6 +739,9 @@ public class SurfaceMenuBehaviour : MonoBehaviour
             settingsBackB.interactable = true;
             muteButtonB.interactable = true;
             quitButtonB.interactable = true;
+            guideButtonB.interactable = true;
+            liscencesButtonB.interactable = true;
+            creditsButtonB.interactable = true;
             sequenceStopped = true;
         }
     }
@@ -654,6 +759,108 @@ public class SurfaceMenuBehaviour : MonoBehaviour
             jumpButtonB.interactable = true;
             leftButtonB.interactable = true;
             rightButtonB.interactable = true;
+            sequenceStopped = true;
+        }
+    }
+
+    void OpenGuide()
+    {
+        sequence += 50 * Time.deltaTime;
+        exponentialSequence = Mathf.Pow(2, sequence);
+        guideScreenT.anchoredPosition = new Vector2(-1000 + exponentialSequence / 10, 0);
+
+        if (exponentialSequence > 10000f)
+        {
+            sound.PlaySound("Swipe");
+            guideScreenT.anchoredPosition = new Vector2(0, 0);
+            guideBackButtonB.interactable = true;
+            sequenceStopped = true;
+        }
+    }
+
+    void CloseGuide()
+    {
+        sequence += 50 * Time.deltaTime;
+        exponentialSequence = Mathf.Pow(2, sequence);
+        guideScreenT.anchoredPosition = new Vector2(0 + exponentialSequence / 10, 0);
+
+        if (exponentialSequence > 10000f)
+        {
+            sound.PlaySound("Swipe");
+            settingsBackB.interactable = true;
+            muteButtonB.interactable = true;
+            quitButtonB.interactable = true;
+            guideButtonB.interactable = true;
+            liscencesButtonB.interactable = true;
+            creditsButtonB.interactable = true;
+            sequenceStopped = true;
+        }
+    }
+
+    void OpenLiscences()
+    {
+        sequence += 50 * Time.deltaTime;
+        exponentialSequence = Mathf.Pow(2, sequence);
+        liscencesScreenT.anchoredPosition = new Vector2(-1000 + exponentialSequence / 10, 0);
+
+        if (exponentialSequence > 10000f)
+        {
+            sound.PlaySound("Swipe");
+            liscencesScreenT.anchoredPosition = new Vector2(0, 0);
+            liscencesBackButtonB.interactable = true;
+            sequenceStopped = true;
+        }
+    }
+
+    void CloseLiscences()
+    {
+        sequence += 50 * Time.deltaTime;
+        exponentialSequence = Mathf.Pow(2, sequence);
+        liscencesScreenT.anchoredPosition = new Vector2(0 + exponentialSequence / 10, 0);
+
+        if (exponentialSequence > 10000f)
+        {
+            sound.PlaySound("Swipe");
+            settingsBackB.interactable = true;
+            muteButtonB.interactable = true;
+            quitButtonB.interactable = true;
+            guideButtonB.interactable = true;
+            liscencesButtonB.interactable = true;
+            creditsButtonB.interactable = true;
+            sequenceStopped = true;
+        }
+    }
+
+    void OpenCredits()
+    {
+        sequence += 50 * Time.deltaTime;
+        exponentialSequence = Mathf.Pow(2, sequence);
+        creditsScreenT.anchoredPosition = new Vector2(-1000 + exponentialSequence / 10, 0);
+
+        if (exponentialSequence > 10000f)
+        {
+            sound.PlaySound("Swipe");
+            creditsScreenT.anchoredPosition = new Vector2(0, 0);
+            creditsBackButtonB.interactable = true;
+            sequenceStopped = true;
+        }
+    }
+
+    void CloseCredits()
+    {
+        sequence += 50 * Time.deltaTime;
+        exponentialSequence = Mathf.Pow(2, sequence);
+        creditsScreenT.anchoredPosition = new Vector2(0 + exponentialSequence / 10, 0);
+
+        if (exponentialSequence > 10000f)
+        {
+            sound.PlaySound("Swipe");
+            settingsBackB.interactable = true;
+            muteButtonB.interactable = true;
+            quitButtonB.interactable = true;
+            guideButtonB.interactable = true;
+            liscencesButtonB.interactable = true;
+            creditsButtonB.interactable = true;
             sequenceStopped = true;
         }
     }
@@ -694,7 +901,7 @@ public class SurfaceMenuBehaviour : MonoBehaviour
             }
             if (currentMenu == 1)
             {
-                leftButtonB.interactable = true;
+                //leftButtonB.interactable = true;
                 rightButtonB.interactable = true;
                 talkButtonB.interactable = true;
                 openShopButtonB.interactable = true;
@@ -744,7 +951,7 @@ public class SurfaceMenuBehaviour : MonoBehaviour
             playerAnimator.Play("Idle");
             armAnimator.Play("Idle");
             hatAnimator.Play("Idle");
-            leftButtonB.interactable = true;
+            //leftButtonB.interactable = true;
             rightButtonB.interactable = true;
             equipmentButtonB.interactable = true;
             openShopButtonB.interactable = true;

@@ -300,7 +300,7 @@ public class LevelTransitionMenuBehaviour : MonoBehaviour
             sequenceOrder = 1;
             background.EnableBackground(true);
             background.ChangeBackground(GameManager.currentFloor);
-            background.ChangeSong(5);
+            background.ChangeSong(6);
             background.Fade("fadeIn");
             player.transform.parent = null;
             trophy.transform.position = new Vector2(59f + (floor * 50), 250f);
@@ -323,7 +323,7 @@ public class LevelTransitionMenuBehaviour : MonoBehaviour
         }
         if (sequence > 23 && sequenceOrder == 2)
         {
-            background.EnableBackground(false);
+            background.EnableBackground(false, true);
             playerAnimator.Flip(false);
             bear.transform.localPosition = new Vector2(55f, -0.38f);
             bear.GetComponent<SpriteRenderer>().sprite = bearNeutral;
