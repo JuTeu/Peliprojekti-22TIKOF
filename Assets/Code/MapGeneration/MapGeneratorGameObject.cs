@@ -279,6 +279,7 @@ public class MapGeneratorGameObject : MonoBehaviour
         }
         else if (mapNum == seabed)
         {
+            seabedMap.GetComponent<Tilemap>().CompressBounds();
             GameManager.levelBounds = seabedMap.GetComponent<Tilemap>().localBounds;
         }
 
