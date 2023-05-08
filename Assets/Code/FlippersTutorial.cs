@@ -3,25 +3,24 @@ using UnityEngine.SceneManagement;
 
 public class FlippersTutorial : MonoBehaviour
 {
-    private bool isInTutorial = false;
+  //  private bool isInTutorial = false;
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Player") && !isInTutorial)
-        {
-            GetComponent<Renderer>().enabled = false;
-            
-            isInTutorial = true;
+        if (other.CompareTag("Player"))
+        {            
+          //  isInTutorial = true;
 
             // Pause the game
-            Time.timeScale = 0f;
+          //  Time.timeScale = 0f;
 
             // Load the TutorialScene
-            if ((GameManager.unlocks & 0b_1000) == 0b_0000)
+          //  if ((GameManager.unlocks & 0b_1000) == 0b_0000)
             SceneManager.LoadSceneAsync("TutorialScene", LoadSceneMode.Additive);
 
             GameManager.unlocks = GameManager.unlocks | 0b_1_1000;
             GameManager.Save();
+            gameObject.SetActive(false);
             // Set the flag to indicate that the tutorial has been shown
             //PlayerPrefs.SetInt("flippersTutorialShown", 1);
         }
@@ -38,7 +37,7 @@ public class FlippersTutorial : MonoBehaviour
         }
     }*/
 
-    private void Update()
+/*    private void Update()
     {
         // Check if the game is currently paused
         if (Time.timeScale == 0f)
@@ -50,7 +49,7 @@ public class FlippersTutorial : MonoBehaviour
                 Time.timeScale = 1f;
             }
         }
-    }
+    } */
 }
 
 

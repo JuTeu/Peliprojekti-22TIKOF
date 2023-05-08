@@ -106,7 +106,8 @@ public class CameraMovement : MonoBehaviour
         }
         else if (GameManager.cameraMode == 131)
         {
-            levelExit.position = new Vector2(-47.2f, -41.6f);
+            levelExit = transform;
+            levelExit.position = new Vector2(-9f, -85f);
             sequence = 0f;
             GameObject.Find("Darkness").GetComponent<SpriteRenderer>().enabled = false;
             GameManager.cameraMode = 132;
