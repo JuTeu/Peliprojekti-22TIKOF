@@ -183,6 +183,7 @@ public class GameManager : MonoBehaviour
 
     public static void BeginGame()
     {
+        GameObject.Find("LevelTransitionBackground").GetComponent<Animator>().Play("fadeOut");
         GameObject.Find("Hat").GetComponent<CompassHat>().HideAllArrows();
         GameObject.Find("Bear").GetComponent<AudioSource>().Play();
         GameObject.Find("RegularEndingTrophy").GetComponent<SpriteRenderer>().enabled = (unlocks & 0b_10) == 0b_10;

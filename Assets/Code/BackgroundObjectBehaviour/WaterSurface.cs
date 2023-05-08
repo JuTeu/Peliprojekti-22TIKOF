@@ -19,6 +19,8 @@ public class WaterSurface : MonoBehaviour
         {
             anim.Play("Splash");
             splash.Play();
+            GameObject.Find("LevelTransitionBackground").GetComponent<LevelTransitionBackground>().ChangeSong(0);
+            GameObject.Find("LevelTransitionBackground").GetComponent<Animator>().Play("fadeIn");
             GameObject.Find("Bear").GetComponent<AudioSource>().Stop();
             GameObject.Find("Hat").GetComponent<CompassHat>().SetArrows();
         }
