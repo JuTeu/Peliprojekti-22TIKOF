@@ -7,7 +7,7 @@ public class FlippersTutorial : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Player") && !isInTutorial && !PlayerPrefs.HasKey("flippersTutorialShown"))
+        if (other.CompareTag("Player") && !isInTutorial)
         {
             GetComponent<Renderer>().enabled = false;
             
@@ -17,14 +17,17 @@ public class FlippersTutorial : MonoBehaviour
             Time.timeScale = 0f;
 
             // Load the TutorialScene
+            if ((GameManager.unlocks & 0b_1000) == 0b_0000)
             SceneManager.LoadSceneAsync("TutorialScene", LoadSceneMode.Additive);
 
+            GameManager.unlocks = GameManager.unlocks | 0b_1_1000;
+            GameManager.Save();
             // Set the flag to indicate that the tutorial has been shown
-            PlayerPrefs.SetInt("flippersTutorialShown", 1);
+            //PlayerPrefs.SetInt("flippersTutorialShown", 1);
         }
     }
 
-    private void OnTriggerExit2D(Collider2D other)
+    /*private void OnTriggerExit2D(Collider2D other)
     {
         if (other.CompareTag("Player") && isInTutorial)
         {
@@ -33,7 +36,7 @@ public class FlippersTutorial : MonoBehaviour
             // Unload the TutorialScene
             SceneManager.UnloadSceneAsync("TutorialScene");
         }
-    }
+    }*/
 
     private void Update()
     {

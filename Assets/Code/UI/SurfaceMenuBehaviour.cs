@@ -25,7 +25,7 @@ public class SurfaceMenuBehaviour : MonoBehaviour
 
 
 
-    const float maxVolume = -5f;
+    const float maxVolume = -8f;
 
 
 

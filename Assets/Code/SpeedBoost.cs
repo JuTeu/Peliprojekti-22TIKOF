@@ -14,8 +14,8 @@ public class SpeedBoost : MonoBehaviour
             characterController.SetSpeed(characterController.speed + boostAmount);*/
 
             //GameManager.flippers = 2;
-            GameManager.unlocks = GameManager.unlocks | 0b_1_1000;
-            GameManager.Save();
+            //GameManager.unlocks = GameManager.unlocks | 0b_1_1000;
+            //GameManager.Save();
         }
     }
 }
