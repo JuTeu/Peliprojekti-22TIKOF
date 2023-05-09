@@ -66,6 +66,7 @@ public class GameManager : MonoBehaviour
         PlayerPrefs.SetInt("HighScore", highScore);
         PlayerPrefs.SetInt("Unlocks", unlocks);
         PlayerPrefs.SetInt("EquippedHat", equippedHat);
+        PlayerPrefs.Save();
     }
 
     public static void OpenQuestionMenu()
@@ -125,7 +126,7 @@ public class GameManager : MonoBehaviour
 
     public static void OpenLevelTransitionMenu()
     {
-        SceneManager.LoadSceneAsync("LevelTransitionMenu", LoadSceneMode.Additive);
+        if (!SceneManager.GetSceneByName("LevelTransitionMenu").isLoaded) SceneManager.LoadSceneAsync("LevelTransitionMenu", LoadSceneMode.Additive);
     }
 
     public static void CloseLevelTransitionMenu()

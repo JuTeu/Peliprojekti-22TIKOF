@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class LevelExitBehaviour : MonoBehaviour
 {
@@ -108,7 +109,7 @@ public class LevelExitBehaviour : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.tag == "Player")
+        if(collision.gameObject.tag == "Player" && !SceneManager.GetSceneByName("LevelTransitionMenu").isLoaded)
         {
             musicFade.Play("fadeOut");
             GameObject.Find("Hat").GetComponent<CompassHat>().HideAllArrows();
